@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semester 7 B.Tech Study Portal — Exam Study Guides</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --primary-hover: #1d4ed8;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+    color: #ffffff;
+    padding: 3.25rem 1.5rem;
+    text-align: center;
+    border-bottom: 4px solid #60a5fa;
+  }
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  header h1 {
+    margin: 0 0 0.6rem 0;
+    font-size: 2.2rem;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    margin: 0 auto;
+    max-width: 680px;
+    color: #dbeafe;
+    font-size: 1.05rem;
+  }
+  .search-wrap {
+    margin: 1.75rem auto 0 auto;
+    max-width: 520px;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 0.8rem 1.1rem;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text);
+    font-size: 0.96rem;
+    outline: none;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2);
+  }
+  .search-wrap input:focus {
+    border-color: #93c5fd;
+  }
+  main {
+    flex: 1;
+    padding: 2.5rem 0 3.5rem 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(30, 58, 138, 0.12);
+  }
+  .card-top {
+    margin-bottom: 1.25rem;
+  }
+  .badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .code-badge {
+    background: #eff6ff;
+    color: var(--primary);
+    border: 1px solid #bfdbfe;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+  }
+  .unit-badge {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .card h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.35rem;
+    color: var(--text);
+  }
+  .card p {
+    margin: 0 0 1rem 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .topics {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    border-top: 1px solid var(--border);
+    padding-top: 0.85rem;
+    font-size: 0.86rem;
+    color: #334155;
+  }
+  .topics li {
+    margin-bottom: 0.35rem;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+  .topics li::before {
+    content: "\2022";
+    color: #2563eb;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+  .btn-group {
+    display: flex;
+    gap: 0.65rem;
+  }
+  .btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.68rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+  }
+  .btn-secondary {
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+  }
+  .btn-secondary:hover {
+    background: #e2e8f0;
+  }
+  .setup-note {
+    margin-top: 2.5rem;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    padding: 1.1rem 1.4rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .setup-note code {
+    background: #f1f5f9;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    color: #be123c;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  footer {
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>B.Tech Semester 7 &mdash; Exam Study Portal</h1>
+    <p>Complete, offline-ready university exam study guides covering General, Important (IMP), and Twisted question banks with diagrams, formulas, and quick-revision sheets.</p>
+    <div class="search-wrap">
+      <input type="search" id="subjectFilter" placeholder="Filter subjects by name, code, or topic (e.g., Kubernetes, PCA, LL(1))..." aria-label="Filter subjects">
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="grid" id="cardsGrid">
+
+    <!-- Card 1: Cloud Computing -->
+    <article class="card">
+      <div class="card-top">
+        <div class="badge-row">
+          <span class="code-badge">BETCE17336 / BETCE17326</span>
+          <span class="unit-badge">5 Units &bull; 184 Questions</span>
+        </div>
+        <h2>Cloud Computing</h2>
+        <p>Comprehensive solutions across General, IMP, and Twisted question banks with architecture diagrams and case studies.</p>
+        <ul class="topics">
+          <li>NIST Characteristics, SPI Models (IaaS/PaaS/SaaS) &amp; Deployment</li>
+          <li>Hypervisors, VMs vs. Containers, Storage &amp; Live Migration</li>
+          <li>Cloud APIs/SDKs, Serverless (FaaS), Kubernetes &amp; CI/CD</li>
+          <li>IAM, Encryption, SLAs, GRC &amp; Shared Responsibility</li>
+          <li>Big Data, Cloud-IoT, Edge/Fog, Auto Scaling &amp; 6 Rs Migration</li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <a href="CC.html" class="btn btn-primary">Open Study Guide</a>
+        <a href="CC.html#unit-1" class="btn btn-secondary">Quick Start</a>
+      </div>
+    </article>
+
+    <!-- Card 2: Machine Learning -->
+    <article class="card">
+      <div class="card-top">
+        <div class="badge-row">
+          <span class="code-badge">BETCE17335</span>
+          <span class="unit-badge">5 Units &bull; 160 Questions</span>
+        </div>
+        <h2>Machine Learning</h2>
+        <p>Exam-ready answers with step-by-step probability &amp; statistics numericals, derivations, and ML pipeline guides.</p>
+        <ul class="topics">
+          <li>Supervised, Unsupervised, Reinforcement Learning &amp; Preprocessing</li>
+          <li>Probability Numericals, Distributions, CLT, CV &amp; Hypothesis Testing</li>
+          <li>Regression, SVM, Decision Trees, KNN, Naive Bayes, K-Means &amp; PCA</li>
+          <li>Perceptron Delta Rule, Activations, CNN, RNN &amp; LSTM Gates</li>
+          <li>NumPy, Pandas, Scikit-learn, Data Splitting &amp; Model Drift</li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <a href="ML.html" class="btn btn-primary">Open Study Guide</a>
+        <a href="ML.html#unit-1" class="btn btn-secondary">Quick Start</a>
+      </div>
+    </article>
+
+    <!-- Card 3: Compiler Design -->
+    <article class="card">
+      <div class="card-top">
+        <div class="badge-row">
+          <span class="code-badge">BETCE17334</span>
+          <span class="unit-badge">5 Units &bull; All Banks</span>
+        </div>
+        <h2>Compiler Design</h2>
+        <p>Complete 5-mark and 10-mark answers featuring automata constructions, parsing tables, DAGs, and TAC traces.</p>
+        <ul class="topics">
+          <li>Compiler Phases, Input Buffering, RE &rarr; NFA &rarr; DFA &amp; Lex/Yacc</li>
+          <li>CFG, Left Recursion/Factoring, LL(1), Shift-Reduce, SLR, CLR &amp; LALR</li>
+          <li>SDD/SDTS, S/L-Attributed, Type Checking, Symbol Tables &amp; Frames</li>
+          <li>AST, DAG, Quadruples/Triples, Backpatching &amp; Control-Flow TAC</li>
+          <li>Basic Blocks, CFG, Loop/Peephole Optimization, Data-Flow &amp; Code Gen</li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <a href="CD.html" class="btn btn-primary">Open Study Guide</a>
+        <a href="CD.html#unit-1" class="btn btn-secondary">Quick Start</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="setup-note">
+    <strong>Website Folder Setup:</strong> Place <code>index.html</code> in the same directory alongside <code>CC.html</code>, <code>ML.html</code>, and <code>CD.html</code>. You can host this folder directly on GitHub Pages, Netlify, Vercel, or open <code>index.html</code> locally offline.
+  </div>
+</main>
+
+<footer>
+  B.Tech Computer Engineering (Semester 7) &bull; Offline-Ready Static Study Portal
+</footer>
+
+<script>
+  const filterInput = document.getElementById('subjectFilter');
+  const cards = document.querySelectorAll('.card');
+
+  filterInput.addEventListener('input', () => {
+    const q = filterInput.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const match = !q || card.innerText.toLowerCase().includes(q);
+      card.classList.toggle('hidden', !match);
+    });
+  });
+</script>
+</body>
+</html>

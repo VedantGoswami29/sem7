@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compiler Design (BETCE17334) - Complete University Exam Study Guide</title>
+<style>
+    :root {
+        --primary: #1e3a8a;
+        --primary-light: #2563eb;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --border: #e2e8f0;
+        --accent-bg: #eff6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+    }
+    header.hero {
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+        color: #ffffff;
+        padding: 2rem 1.5rem;
+        border-bottom: 4px solid #60a5fa;
+    }
+    .hero-inner { max-width: 1180px; margin: 0 auto; }
+    .hero h1 { margin: 0 0 0.4rem 0; font-size: 1.85rem; }
+    .hero p { margin: 0; color: #dbeafe; font-size: 0.98rem; }
+    .stats-bar { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
+    .stat-pill {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 0.28rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+    .controls-bar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.75rem 1.5rem;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+    .controls-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .nav-links a {
+        text-decoration: none;
+        color: var(--primary);
+        background: var(--accent-bg);
+        border: 1px solid #bfdbfe;
+        padding: 0.32rem 0.65rem;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+    .nav-links a:hover { background: var(--primary); color: #ffffff; }
+    .filter-group { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    input[type="search"], select {
+        padding: 0.42rem 0.7rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        background: #ffffff;
+    }
+    input[type="search"] { min-width: 240px; }
+    button.print-btn {
+        background: #0f172a;
+        color: #ffffff;
+        border: none;
+        padding: 0.44rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    main { max-width: 1180px; margin: 1.5rem auto 3rem auto; padding: 0 1.5rem; }
+    .unit-section { margin-bottom: 3rem; }
+    .unit-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid var(--primary);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+    .unit-header h2 { margin: 0; color: var(--primary); font-size: 1.45rem; }
+    .unit-count {
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--muted);
+        background: #e2e8f0;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+    }
+    .quick-rev-box {
+        background: linear-gradient(to right, #fefce8, #fffbeb);
+        border: 1px solid #fde047;
+        border-left: 5px solid #eab308;
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    .qr-title { font-weight: 700; color: #854d0e; font-size: 1rem; margin-bottom: 0.5rem; }
+    .quick-rev-box ul { margin: 0; padding-left: 1.25rem; font-size: 0.9rem; color: #422006; }
+    .q-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.4rem 1.6rem;
+        margin-bottom: 1.4rem;
+        box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+    }
+    .q-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-bottom: 0.5rem; }
+    .q-num {
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: #334155;
+        background: #f1f5f9;
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+        border: 1px solid #cbd5e1;
+    }
+    .badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+        text-transform: uppercase;
+    }
+    .badge-general { background: #e0f2fe; color: #0369a1; }
+    .badge-important { background: #fef3c7; color: #b45309; }
+    .badge-twisted { background: #fae8ff; color: #86198f; }
+    .marks-5 { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .marks-10 { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .q-title { margin: 0 0 0.85rem 0; font-size: 1.18rem; color: #0f172a; }
+    .q-originals {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #3b82f6;
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.1rem;
+        font-size: 0.86rem;
+    }
+    .orig-label { font-weight: 700; color: #1e3a8a; margin-bottom: 0.35rem; }
+    .q-originals ul { margin: 0; padding-left: 1.2rem; color: #334155; }
+    .dup-note { margin-top: 0.45rem; font-size: 0.82rem; color: #475569; font-style: italic; }
+    .q-answer h4 {
+        color: var(--primary);
+        margin: 1.1rem 0 0.45rem 0;
+        font-size: 1.02rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.2rem;
+    }
+    .q-answer h4:first-child { margin-top: 0; }
+    .q-answer p, .q-answer ul, .q-answer ol { font-size: 0.94rem; }
+    .formula-box {
+        background: #f1f5f9;
+        border-left: 4px solid #1e3a8a;
+        padding: 0.65rem 0.95rem;
+        margin: 0.65rem 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+    }
+    code {
+        background: #f1f5f9;
+        padding: 0.12rem 0.35rem;
+        border-radius: 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.86em;
+        color: #be123c;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 0.85rem 0 1rem 0; font-size: 0.88rem; }
+    th, td { border: 1px solid #cbd5e1; padding: 0.55rem 0.7rem; text-align: left; vertical-align: top; }
+    th { background: #1e3a8a; color: #ffffff; font-weight: 600; }
+    tr:nth-child(even) td { background: #f8fafc; }
+    .svg-container {
+        margin: 0.85rem 0 1rem 0;
+        padding: 0.65rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .gfg-ref {
+        margin-top: 1rem;
+        padding-top: 0.65rem;
+        border-top: 1px dashed #cbd5e1;
+        font-size: 0.84rem;
+        color: var(--muted);
+    }
+    .gfg-ref a { color: #047857; font-weight: 600; text-decoration: none; }
+    .gfg-ref a:hover { text-decoration: underline; }
+    footer {
+        text-align: center;
+        padding: 1.5rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+        border-top: 1px solid var(--border);
+        background: #ffffff;
+    }
+    .hidden { display: none !important; }
+    @media print {
+        @page { size: A4 portrait; margin: 14mm 12mm; }
+        body { background: #ffffff; font-size: 10pt; }
+        .controls-bar, button.print-btn { display: none !important; }
+        header.hero { background: #1e3a8a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 1rem; }
+        .q-card { box-shadow: none; border: 1px solid #94a3b8; page-break-inside: avoid; break-inside: avoid; }
+        .unit-section { page-break-before: always; break-before: page; }
+        .unit-section:first-of-type { page-break-before: avoid; break-before: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="hero-inner">
+        <h1>Compiler Design (BETCE17334) &mdash; Complete University Exam Study Guide</h1>
+        <p>Gyanmanjari Innovative University &bull; B.Tech CE/CSE (Semester 7) &bull; General, Important &amp; Twisted Question Banks</p>
+        <div class="stats-bar">
+            <span class="stat-pill">5 Units Covered</span>
+            <span class="stat-pill">All 5-Mark &amp; 10-Mark Questions Mapped</span>
+            <span class="stat-pill">Automata, Parsing Tables, DAGs &amp; TAC Traces</span>
+            <span class="stat-pill">Unit Quick-Revision Sheets</span>
+        </div>
+    </div>
+</header>
+
+<div class="controls-bar">
+    <div class="controls-inner">
+        <nav class="nav-links" aria-label="Unit Navigation">
+            <a href="#unit-1">Unit 1: Lexical &amp; FA</a>
+            <a href="#unit-2">Unit 2: Parsing (LL/LR)</a>
+            <a href="#unit-3">Unit 3: SDT &amp; Runtime</a>
+            <a href="#unit-4">Unit 4: Intermediate Code</a>
+            <a href="#unit-5">Unit 5: Optimization &amp; Code Gen</a>
+        </nav>
+        <div class="filter-group">
+            <input type="search" id="searchInput" placeholder="Search questions, algorithms, grammars..." aria-label="Search questions">
+            <select id="catFilter" aria-label="Filter by category">
+                <option value="all">All Categories</option>
+                <option value="general">General Bank</option>
+                <option value="important">IMP Bank</option>
+                <option value="twisted">Twisted Bank</option>
+            </select>
+            <select id="marksFilter" aria-label="Filter by marks">
+                <option value="all">All Marks (5 &amp; 10)</option>
+                <option value="5">5-Mark Answers</option>
+                <option value="10">10-Mark Answers</option>
+            </select>
+            <button class="print-btn" onclick="window.print()">&#128424; Print / Save A4 PDF</button>
+        </div>
+    </div>
+</div>
+
+<main id="contentArea">
+    
+    <section id="unit-1" class="unit-section">
+        <div class="unit-header">
+            <h2>Unit 1: Compiler Structure, Lexical Analysis & Finite Automata</h2>
+            <span class="unit-count">5 Master Topics &bull; Complete 5M &amp; 10M Coverage</span>
+        </div>
+
+        <div class="quick-rev-box">
+            <div class="qr-title">&#9889; Unit 1 Quick Revision: Compiler Phases, Lexical Analysis & Finite Automata (Last-Minute Exam Cheat Sheet)</div>
+            <ul><li><strong>6 Compiler Phases:</strong> Lexical Analysis &rarr; Syntax Analysis &rarr; Semantic Analysis (Front-End) &rarr; Intermediate Code Gen &rarr; Code Optimization &rarr; Target Code Gen (Back-End) + Symbol Table &amp; Error Handler.</li><li><strong>Token vs. Lexeme vs. Pattern:</strong> Pattern = Regex rule; Lexeme = actual matched character sequence; Token = <code>&lt;token-name, attribute&gt;</code>.</li><li><strong>Input Buffering:</strong> Two-buffer scheme ($N=4096$) with <code>eof</code> sentinels and <code>lexemeBegin</code> / <code>forward</code> pointers.</li><li><strong>Regex &rarr; Minimized DFA:</strong> Thompson's Construction ($\epsilon$-NFA) &rarr; Subset Construction (DFA, $O(n)$ scan) &rarr; Hopcroft Partition Refinement (Minimized DFA).</li><li><strong>Lex &amp; Yacc:</strong> Lex generates <code>lex.yy.c</code> (<code>yylex()</code> scanner); Yacc generates <code>y.tab.c</code> (<code>yyparse()</code> LALR parser).</li></ul>
+        </div>
+    
+        <article class="q-card" id="u1-t1" data-unit="1" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Structure &amp; Phases of a Compiler (Front-End, Back-End, Passes &amp; Error Propagation)</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-1 (10M) Q1: Draw and explain the complete Structure of a Compiler, showing all phases and passes.</li><li>General Unit-1 (10M) Q2: Explain all the Compiler Phases in detail with suitable examples.</li><li>General Unit-1 (5M) Q2: Explain the Phases of a Compiler with a neat block diagram.</li><li>General Unit-1 (5M) Q3: Write a short note on Front-end and Back-end of a Compiler.</li><li>IMP Unit-1 (10M) Q4: Draw the complete compiler structure and explain how an error in lexical analysis affects subsequent phases.</li><li>IMP Unit-1 (5M) Q8: Compare the responsibilities of the Front-End and Back-End when compiling a Java program.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates General (10M) Q1–Q2, General (5M) Q2–Q3, and IMP (10M) Q4 &amp; (5M) Q8.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Complete Structure of a Compiler (Analysis–Synthesis Model)</h4>
+        <p>A <strong>Compiler</strong> translates a high-level source program into an equivalent low-level target machine program while reporting syntax and semantic errors. It consists of <strong>six sequential phases</strong> supported by two cross-cutting modules—the <strong>Symbol Table Manager</strong> and <strong>Error Handler</strong>—divided into a language-dependent <strong>Front-End (Analysis)</strong> and a machine-dependent <strong>Back-End (Synthesis)</strong>.</p>
+
+        <div class="svg-container">
+            <svg viewBox="0 0 760 215" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <g text-anchor="middle" font-size="10.5" font-weight="bold">
+                    <rect x="10" y="75" width="85" height="50" rx="5" fill="#f1f5f9" stroke="#475569"/><text x="52" y="98" fill="#0f172a">Source</text><text x="52" y="113" fill="#475569" font-size="9">position=init+rate*60</text>
+                    <rect x="115" y="75" width="85" height="50" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="157" y="98" fill="#1e3a8a">1. Lexical</text><text x="157" y="113" fill="#1e40af" font-size="9">Analyzer</text>
+                    <rect x="215" y="75" width="85" height="50" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="257" y="98" fill="#1e3a8a">2. Syntax</text><text x="257" y="113" fill="#1e40af" font-size="9">Analyzer</text>
+                    <rect x="315" y="75" width="85" height="50" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="357" y="98" fill="#1e3a8a">3. Semantic</text><text x="357" y="113" fill="#1e40af" font-size="9">Analyzer</text>
+                    <rect x="415" y="75" width="90" height="50" rx="5" fill="#dcfce7" stroke="#16a34a"/><text x="460" y="98" fill="#14532d">4. Interm.</text><text x="460" y="113" fill="#166534" font-size="9">Code Gen</text>
+                    <rect x="520" y="75" width="85" height="50" rx="5" fill="#dcfce7" stroke="#16a34a"/><text x="562" y="98" fill="#14532d">5. Code</text><text x="562" y="113" fill="#166534" font-size="9">Optimizer</text>
+                    <rect x="620" y="75" width="85" height="50" rx="5" fill="#1e3a8a"/><text x="662" y="98" fill="#fff">6. Target</text><text x="662" y="113" fill="#dbeafe" font-size="9">Code Gen</text>
+
+                    <rect x="115" y="12" width="590" height="32" rx="5" fill="#fef3c7" stroke="#d97706"/><text x="410" y="32" fill="#92400e">Symbol Table Management (Identifiers, Types, Scopes, Offsets)</text>
+                    <rect x="115" y="160" width="590" height="32" rx="5" fill="#fee2e2" stroke="#dc2626"/><text x="410" y="180" fill="#991b1b">Error Detection &amp; Recovery Handler</text>
+                </g>
+            </svg>
+        </div>
+
+        <h4>2. Step-by-Step Phase Trace on <code>position = initial + rate * 60</code></h4>
+        <ol>
+            <li><strong>Lexical Analysis (Scanner):</strong> Groups characters into tokens: <code>&lt;id,1&gt; &lt;=&gt; &lt;id,2&gt; &lt;+&gt; &lt;id,3&gt; &lt;*&gt; &lt;60&gt;</code>.</li>
+            <li><strong>Syntax Analysis (Parser):</strong> Builds a hierarchical <strong>Parse Tree / AST</strong> verifying grammatical rules (operator precedence: <code>*</code> before <code>+</code>).</li>
+            <li><strong>Semantic Analysis:</strong> Checks type compatibility and inserts coercion: <code>inttofloat(60)</code> if <code>rate</code> is <code>float</code>.</li>
+            <li><strong>Intermediate Code Generation:</strong> Produces machine-independent Three-Address Code (TAC): <code>t1 = inttofloat(60); t2 = id3 * t1; t3 = id2 + t2; id1 = t3</code>.</li>
+            <li><strong>Code Optimization:</strong> Eliminates redundant instructions: <code>t1 = id3 * 60.0; id1 = id2 + t1</code>.</li>
+            <li><strong>Target Code Generation:</strong> Allocates registers and emits assembly: <code>LDF R2, id3; MULF R2, R2, #60.0; LDF R1, id2; ADDF R1, R1, R2; STF id1, R1</code>.</li>
+        </ol>
+
+        <h4>3. Passes, Front-End vs. Back-End &amp; Lexical Error Impact</h4>
+        <ul>
+            <li><strong>Compiler Pass:</strong> One complete traversal over the source or intermediate representation (e.g., Front-End Pass 1 + Back-End Pass 2).</li>
+            <li><strong>Front-End vs. Back-End (Java Example):</strong> Front-End (<code>javac</code>) performs lexical, syntax, and semantic analysis to generate platform-independent <strong>Java Bytecode (.class)</strong>; Back-End (JVM JIT) optimizes bytecode and generates native x86/ARM machine instructions.</li>
+            <li><strong>Impact of Lexical Errors (IMP Q4):</strong> If the lexer misclassifies tokens or drops characters, the parser receives malformed token streams causing cascading syntax errors, semantic type-lookup failures, and invalid intermediate code.</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/phases-of-a-compiler/" target="_blank" rel="noopener noreferrer">Phases of a Compiler - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u1-t2" data-unit="1" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.2</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Lexical Analyzer, Tokens/Lexemes/Patterns, Input Buffering &amp; Compiler vs. Interpreter</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-1 (10M) Q3: Discuss the working of a Lexical Analyzer and explain its interaction with the symbol table and parser.</li><li>General Unit-1 (10M) Q4: Explain Input Buffering Schemes in lexical analysis with neat diagrams.</li><li>General Unit-1 (5M) Q1: Differentiate between a Compiler and an Interpreter with suitable examples.</li><li>General Unit-1 (5M) Q4: Explain the role and functions of a Lexical Analyzer.</li><li>General Unit-1 (5M) Q5: What is Input Buffering? Explain its need in lexical analysis.</li><li>General Unit-1 (5M) Q6: Define Token, Lexeme, and Pattern with examples.</li><li>IMP Unit-1 (10M) Q5 &amp; Q6: Suppose a lexical analyzer incorrectly classifies keywords as identifiers; Compare C (compiled) and Python (interpreted).</li><li>IMP Unit-1 (5M) Q1, Q2, Q3, Q5: Compiler vs Interpreter; Removing lexical analyzer; Token stream for int total = a + 10; Single vs Double buffering.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Merges General (10M) Q3–Q4, General (5M) Q1, Q4–Q6, and IMP (10M) Q5–Q6 &amp; (5M) Q1–Q3, Q5.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Token, Lexeme, Pattern &amp; Token Stream Example (IMP 5M Q3)</h4>
+        <ul>
+            <li><strong>Token:</strong> A pair <code>&lt;token-name, attribute-value&gt;</code> representing a lexical category (e.g., <code>keyword</code>, <code>id</code>, <code>operator</code>).</li>
+            <li><strong>Lexeme:</strong> The actual sequence of source characters matching a pattern (e.g., <code>total</code>, <code>10</code>).</li>
+            <li><strong>Pattern:</strong> A regular expression rule describing the valid strings for a token (e.g., <code>[a-zA-Z_][a-zA-Z0-9_]*</code>).</li>
+            <li><strong>Trace for <code>int total = a + 10</code>:</strong> <code>int</code> (Keyword), <code>total</code> (Identifier), <code>=</code> (Assignment Op), <code>a</code> (Identifier), <code>+</code> (Arithmetic Op), <code>10</code> (Integer Constant).</li>
+        </ul>
+
+        <h4>2. Lexical Analyzer Interaction &amp; Input Buffering (Two-Buffer Scheme with Sentinels)</h4>
+        <p>The Parser calls <code>getNextToken()</code>; the Lexer reads characters using a <strong>Two-Buffer Scheme</strong> (each buffer of size $N = 4096$ bytes terminated by an <code>eof</code> <strong>sentinel</strong>) with two pointers: <code>lexemeBegin</code> and <code>forward</code>. Using sentinels reduces end-of-buffer checks from two tests per character to one, avoiding the lookahead truncation problem of a single buffer (IMP 5M Q5).</p>
+
+        <h4>3. Compiler vs. Interpreter (C vs. Python)</h4>
+        <table>
+            <thead>
+                <tr><th>Feature</th><th>Compiler (e.g., C / GCC)</th><th>Interpreter (e.g., CPython)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Translation Unit</strong></td><td>Translates entire source program at once into machine code</td><td>Translates and executes source code line-by-line / bytecode</td></tr>
+                <tr><td><strong>Execution Speed</strong></td><td>Very fast native execution; slower initial build</td><td>Slower runtime execution; immediate startup</td></tr>
+                <tr><td><strong>Error Reporting</strong></td><td>Lists all compile-time errors together before execution</td><td>Stops immediately at the first runtime/syntax error encountered</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/introduction-of-lexical-analysis/" target="_blank" rel="noopener noreferrer">Lexical Analysis &amp; Input Buffering - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u1-t3" data-unit="1" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.3</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Regular Expressions, Thompson&#x27;s RE-to-NFA, Subset Construction (NFA-to-DFA) &amp; DFA Minimization</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-1 (10M) Q5–Q12: Token specification via RE &amp; FA; RE to NFA; (a+b)*abb to NFA; Subset construction NFA to DFA; Convert given NFA to DFA; DFA Minimization; RE vs NFA vs DFA; Complete pipeline RE -&gt; NFA -&gt; DFA -&gt; Minimized DFA.</li><li>General Unit-1 (5M) Q7–Q10, Q13, Q14: RE specification; Token recognition; NFA vs DFA; FA components; RE for Identifiers, Integers, Floats; Applications of FA.</li><li>IMP Unit-1 (10M) Q1, Q2, Q7, Q8, Q9: RE &amp; NFA for #name123; (a+b)*abb to NFA &amp; DFA; DFA minimization; FA/RE/Lexer interconnection; Calculator lexer.</li><li>IMP Unit-1 (5M) Q4, Q6, Q9: Why DFA is preferred over NFA; RE for identifiers/keywords/constants; Importance of DFA minimization.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Covers all automata theory &amp; regular expression construction questions in General and IMP Unit-1.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Regular Expressions for Common Tokens (General 5M Q13 &amp; IMP 10M Q1, Q9)</h4>
+        <ul>
+            <li><strong>Identifiers:</strong> <code>[a-zA-Z_][a-zA-Z0-9_]*</code> &nbsp;|&nbsp; <strong>Special variable <code>#name123</code> (IMP Q1):</strong> <code>#[a-zA-Z]+[0-9]+</code></li>
+            <li><strong>Integers:</strong> <code>[+-]?[0-9]+</code> &nbsp;|&nbsp; <strong>Floating-Point Numbers:</strong> <code>[+-]?[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?</code></li>
+            <li><strong>Calculator Operators (IMP Q9):</strong> <code>[+\-*/]</code></li>
+        </ul>
+
+        <h4>2. Complete Pipeline Example: <code>(a+b)*abb</code> &rarr; NFA (Thompson) &rarr; DFA (Subset Construction) &rarr; Minimized DFA</h4>
+        <ol>
+            <li><strong>Step 1 – Thompson's Construction (RE &rarr; $\epsilon$-NFA):</strong> Builds $\epsilon$-transitions for union <code>(a|b)</code>, Kleene closure <code>*</code> loop from end back to start, and sequential concatenation <code>a &rarr; b &rarr; b</code> across states $0$ through $10$ (accepting state $\{10\}$).</li>
+            <li><strong>Step 2 – Subset Construction ($\epsilon$-NFA &rarr; DFA):</strong> Compute $\epsilon\text{-closure}$ states:
+                <ul>
+                    <li>$A = \epsilon\text{-closure}(0) = \{0, 1, 2, 4, 7\}$ (Start State). On $a \rightarrow B = \{1, 2, 3, 4, 6, 7, 8\}$; on $b \rightarrow A$.</li>
+                    <li>From $B$: on $a \rightarrow B$; on $b \rightarrow C = \{1, 2, 4, 5, 6, 7, 9\}$.</li>
+                    <li>From $C$: on $a \rightarrow B$; on $b \rightarrow D = \{1, 2, 4, 5, 6, 7, 10\}$ (Accepting State).</li>
+                    <li>From $D$: on $a \rightarrow B$; on $b \rightarrow A$.</li>
+                </ul>
+            </li>
+            <li><strong>Step 3 – DFA Minimization (Hopcroft's Partition Refinement):</strong> Partition into Accepting $\{D\}$ and Non-Accepting $\{A, B, C\}$. Splitting on input $b$ separates $C$ (goes to $D$) from $\{A, B\}$; splitting on $a$ separates $A$ (goes to $B$) from $B$ (loops to $B$). All 4 states $\{A, B, C, D\}$ are distinct—yielding the minimal 4-state DFA!</li>
+        </ol>
+
+        <h4>3. Why DFA is Preferred Over NFA &amp; Minimization Benefits (IMP 5M Q4 &amp; Q9)</h4>
+        <p>An NFA allows multiple transitions per symbol and $\epsilon$-moves, requiring $O(|S|^2 \cdot n)$ backtracking simulation, whereas a <strong>DFA</strong> has at most one deterministic transition per symbol, recognizing tokens in strict <strong>$O(n)$ linear time</strong> (one lookup per character). <strong>DFA Minimization</strong> merges indistinguishable states, shrinking transition tables in compiler memory and L1 CPU cache.</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/theory-of-computation/conversion-from-nfa-to-dfa/" target="_blank" rel="noopener noreferrer">RE to NFA, Subset Construction &amp; DFA Minimization - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u1-t4" data-unit="1" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.4</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Lex &amp; Yacc Architecture, Compiler Construction Tools &amp; Lexical Error Recovery (Panic Mode)</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-1 (10M) Q13: Write detailed notes on Lex and Yacc, their architecture, features, and applications.</li><li>General Unit-1 (10M) Q14 &amp; Q15: Error Recovery Techniques in lexical analysis (Panic Mode); Design a lexical analyzer for a simple language.</li><li>General Unit-1 (5M) Q11, Q12, Q15: Short note on Lex and Yacc; Panic Mode Recovery; Compiler construction tools.</li><li>IMP Unit-1 (10M) Q3 &amp; Q10: Repeated lexical errors &amp; Panic Mode Recovery; Manual tasks without Lex and Yacc.</li><li>IMP Unit-1 (5M) Q7 &amp; Q10: Handling invalid symbol &#x27;@&#x27; via panic mode; How Lex and Yacc reduce effort.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates General (10M) Q13–Q15, General (5M) Q11–Q12, Q15, and IMP (10M) Q3, Q10 &amp; (5M) Q7, Q10.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Lex &amp; Yacc Architecture and Workflow</h4>
+        <ul>
+            <li><strong>Lex (Lexical Analyzer Generator):</strong> Takes a <code>.l</code> specification file containing Regular Expressions + C actions, compiles it into <code>lex.yy.c</code> containing a minimized DFA transition table and <code>yylex()</code> function.</li>
+            <li><strong>Yacc (Yet Another Compiler-Compiler):</strong> Takes a <code>.y</code> Context-Free Grammar file and generates an LALR(1) parser in <code>y.tab.c</code> with <code>yyparse()</code>, which repeatedly invokes <code>yylex()</code> to build ASTs or generate code.</li>
+            <li><strong>Without Lex &amp; Yacc (IMP 10M Q10):</strong> Developers must manually write regex-to-DFA converters, buffer management, FIRST/FOLLOW calculators, and LALR state tables—increasing development time and bug rates dramatically.</li>
+        </ul>
+
+        <h4>2. Lexical Error Recovery Techniques &amp; Panic Mode on <code>"@"</code> (IMP 5M Q7)</h4>
+        <ul>
+            <li><strong>Panic Mode Recovery:</strong> When the lexer encounters an illegal character like <code>"@"</code> that matches no pattern, it deletes successive characters from the remaining input until it reaches a well-formed token delimiter (such as whitespace, <code>;</code>, or <code>)</code>), reports one clean error, and resumes scanning—preventing infinite error cascades (IMP 10M Q3).</li>
+            <li><strong>Other Techniques:</strong> Deleting an extraneous character, inserting a missing character, replacing an incorrect character, or transposing two adjacent characters.</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/lex-program-to-identify-and-count-positive-and-negative-numbers/" target="_blank" rel="noopener noreferrer">Lex and Yacc &amp; Lexical Error Recovery - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u1-t5" data-unit="1" data-cats="twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.5</span>
+                    <span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">[PDF Appendix Note: Twisted Unit-1 Items] Android Architecture, Components, SDK, Studio &amp; Intents</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>Twisted Unit-1 (10M) Q1–Q6: Android OS open/flexible justification; Guiding beginner Android app; Layered Android architecture; Android components (Activity, Service, BroadcastReceiver, ContentProvider); Importance of architecture; App with background processing, UI &amp; data sharing.</li><li>Twisted Unit-1 (5M) Q1–Q5: Why Android preferred; Android Studio 5 features; Role of Android SDK; Activity vs Service; Intents communication.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Preserves all 11 questions printed under Twisted Unit-1 in Combined_3.pdf so no PDF question is omitted.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <p><em>Note: In the attached question-bank PDF, Twisted Unit-1 contains Android Development questions. Complete exam-ready answers are provided below:</em></p>
+        <ul>
+            <li><strong>Layered Android Architecture (10M Q1, Q3, Q5):</strong> (1) <em>Linux Kernel</em> (drivers, memory, power, security), (2) <em>HAL (Hardware Abstraction Layer)</em>, (3) <em>Android Runtime (ART) &amp; Native C/C++ Libraries</em>, (4) <em>Java/Kotlin Application Framework</em> (Activity Manager, Window Manager, Content Providers), and (5) <em>System &amp; User Applications</em>. Open-source AOSP licensing enables OEM customization and flexibility.</li>
+            <li><strong>Four Core App Components &amp; Intents (10M Q4, Q6 &amp; 5M Q4, Q5):</strong> <strong>Activity</strong> (single UI screen), <strong>Service</strong> (long-running background tasks without UI), <strong>BroadcastReceiver</strong> (responds to system-wide events like battery low), and <strong>ContentProvider</strong> (structured cross-app data sharing). <strong>Intents</strong> act as asynchronous messaging objects binding components together (Explicit Intents for internal screens; Implicit Intents for system actions).</li>
+            <li><strong>Android SDK &amp; Android Studio (10M Q2 &amp; 5M Q1–Q3):</strong> <em>Android SDK</em> provides API libraries, ADB debugger, emulator, and build tools; <em>Android Studio</em> provides Gradle build automation, Layout Editor, Logcat, APK Analyzer, and Profiler.</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/android/android-architecture/" target="_blank" rel="noopener noreferrer">Android Architecture and Core Components - GeeksforGeeks</a></div>
+        </article>
+        </section>
+    <section id="unit-2" class="unit-section">
+        <div class="unit-header">
+            <h2>Unit 2: Syntax Analysis (Top-Down & Bottom-Up Parsing)</h2>
+            <span class="unit-count">6 Master Topics &bull; Complete 5M &amp; 10M Coverage</span>
+        </div>
+
+        <div class="quick-rev-box">
+            <div class="qr-title">&#9889; Unit 2 Quick Revision: Parsing (LL(1), Shift-Reduce, SLR, CLR, LALR) (Last-Minute Exam Cheat Sheet)</div>
+            <ul><li><strong>Grammar Transformations:</strong> Always eliminate <strong>Left Recursion FIRST</strong> ($A \rightarrow \beta A', A' \rightarrow \alpha A' \mid \epsilon$), then perform <strong>Left Factoring</strong>.</li><li><strong>LL(1) Parsing:</strong> Top-down predictive parser (no backtracking) using <code>FIRST</code> and <code>FOLLOW</code> sets; requires unambiguous, non-left-recursive, left-factored grammar.</li><li><strong>Bottom-Up Shift-Reduce:</strong> Prunes <strong>Handles</strong> via reverse rightmost derivation. Actions: Shift, Reduce, Accept, Error.</li><li><strong>LR Hierarchy:</strong> $SLR(1) \subset LALR(1) \subset CLR(1)$. LALR merges CLR states with identical LR(0) cores, keeping small table size with high parsing power.</li></ul>
+        </div>
+    
+        <article class="q-card" id="u2-t1" data-unit="2" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Context-Free Grammars (CFG), Derivations, Parse Trees &amp; Grammar Ambiguity</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-2 (10M) Q1: Explain Context-Free Grammar (CFG) with suitable examples. Discuss derivation, parse tree, and ambiguity in detail.</li><li>General Unit-2 (5M) Q1–Q4: Define CFG; Leftmost vs Rightmost derivation; Parse tree; Ambiguity in grammar.</li><li>IMP Unit-2 (10M) Q1 &amp; (5M) Q1–Q4: CFG, derivations, parse trees, and ambiguity with examples.</li><li>Twisted Unit-2 (10M) Q5 &amp; (5M) Q4–Q6: Derive leftmost/rightmost derivations from parse tree; Ambiguity vs Nondeterminism; Two parse trees same leftmost derivation?; Why ambiguity is undesirable.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates General, IMP, and Twisted Unit-2 questions on CFG, derivations, parse trees, and ambiguity.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Context-Free Grammar (CFG)</h4>
+        <p>A <strong>CFG</strong> is a 4-tuple $G = (V, T, P, S)$ where $V$ is a finite set of non-terminals, $T$ is a finite set of terminals ($V \cap T = \emptyset$), $P$ is a finite set of production rules $A \rightarrow \alpha$ ($A \in V, \alpha \in (V \cup T)^*$), and $S \in V$ is the start symbol.</p>
+        <p><strong>Example Expression Grammar:</strong> $E \rightarrow E + E \mid E * E \mid (E) \mid \text{id}$.</p>
+
+        <h4>2. Leftmost vs. Rightmost Derivation &amp; Parse Trees</h4>
+        <ul>
+            <li><strong>Leftmost Derivation (LMD):</strong> Replaces the leftmost non-terminal at every step. For <code>id + id * id</code>: $E \Rightarrow E + E \Rightarrow \text{id} + E \Rightarrow \text{id} + E * E \Rightarrow \text{id} + \text{id} * E \Rightarrow \text{id} + \text{id} * \text{id}$.</li>
+            <li><strong>Rightmost Derivation (RMD / Canonical Derivation):</strong> Replaces the rightmost non-terminal at every step.</li>
+            <li><strong>Parse Tree:</strong> Graphical tree representation of a derivation where root is $S$, interior nodes are non-terminals, and leaves read left-to-right yield the derived string.</li>
+        </ul>
+
+        <h4>3. Ambiguity in Grammars &amp; Twisted Questions (Twisted 5M Q4–Q6)</h4>
+        <ul>
+            <li><strong>Definition:</strong> A CFG is <strong>ambiguous</strong> if there exists at least one string $w \in L(G)$ that has <strong>two or more distinct Parse Trees</strong> (equivalently, two distinct leftmost derivations). For <code>id + id * id</code> under $E \rightarrow E+E \mid E*E \mid \text{id}$, one tree groups <code>(id + id) * id</code> and another groups <code>id + (id * id)</code>.</li>
+            <li><strong>Why Undesirable (Twisted 5M Q6):</strong> Ambiguity gives a single program multiple conflicting meanings (violating operator precedence/associativity), making deterministic compilation impossible.</li>
+            <li><strong>Can two different parse trees produce the same LMD? (Twisted 5M Q5):</strong> <strong>No</strong>—there is a strict one-to-one bijection between Parse Trees and Leftmost Derivations.</li>
+            <li><strong>Ambiguity vs. Nondeterminism (Twisted 5M Q4):</strong> <em>Ambiguity</em> means multiple parse trees exist for one string (inherent semantic conflict); <em>Nondeterminism</em> means a top-down parser cannot choose a unique production with 1-token lookahead (e.g., common prefixes $A \rightarrow \alpha\beta_1 \mid \alpha\beta_2$), even when the grammar is completely unambiguous!</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/classification-of-context-free-grammars/" target="_blank" rel="noopener noreferrer">Context-Free Grammars, Derivations &amp; Ambiguity - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u2-t2" data-unit="2" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.2</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Elimination of Left Recursion &amp; Left Factoring (Algorithms, Examples &amp; Ordering)</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-2 (10M) Q2 &amp; Q3: Left recursion elimination algorithm; Left factoring and conversion.</li><li>General Unit-2 (5M) Q5–Q7: Define left recursion; Steps for eliminating left recursion; Define left factoring.</li><li>IMP Unit-2 (10M) Q2 &amp; (5M) Q5–Q6: Elimination of left recursion and left factoring with examples.</li><li>Twisted Unit-2 (10M) Q2 &amp; (5M) Q1–Q3, Q7: Which transformation first (left recursion vs common prefixes)?; Left-factored still non-LL(1)?; Ambiguous implies left recursive?; No left recursion implies predictive parsable?; Problem if left recursion not removed.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Covers all General, IMP, and Twisted Unit-2 questions on Left Recursion and Left Factoring.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Left Recursion &amp; Elimination Algorithm</h4>
+        <p>A grammar is <strong>left-recursive</strong> if a non-terminal $A$ derives a string starting with itself ($A \Rightarrow^+ A\alpha$). Left recursion causes top-down Recursive Descent parsers to loop infinitely (Twisted 5M Q7).</p>
+        <ul>
+            <li><strong>Immediate Left Recursion Rule:</strong> Replace $A \rightarrow A\alpha_1 \mid A\alpha_2 \mid \beta_1 \mid \beta_2$ with:
+                $$A \rightarrow \beta_1 A' \mid \beta_2 A'$$
+                $$A' \rightarrow \alpha_1 A' \mid \alpha_2 A' \mid \epsilon$$</li>
+            <li><strong>Example:</strong> $E \rightarrow E + T \mid T$ becomes $E \rightarrow T E'$, $E' \rightarrow + T E' \mid \epsilon$.</li>
+        </ul>
+
+        <h4>2. Left Factoring</h4>
+        <p><strong>Left Factoring</strong> rewrites productions sharing a common prefix $A \rightarrow \alpha\beta_1 \mid \alpha\beta_2$ into $A \rightarrow \alpha A'$ and $A' \rightarrow \beta_1 \mid \beta_2$, deferring the decision until enough tokens are seen.</p>
+
+        <h4>3. Twisted Conceptual Questions (Twisted 10M Q2 &amp; 5M Q1–Q3)</h4>
+        <ul>
+            <li><strong>Which Transformation First? (Twisted 10M Q2):</strong> <strong>Eliminate Left Recursion FIRST, then apply Left Factoring</strong>, because left-recursion removal introduces new right-recursive productions that may expose new common prefixes.</li>
+            <li><strong>Can a left-factored, non-left-recursive grammar still fail LL(1)? (Twisted 5M Q1 &amp; Q3):</strong> <strong>Yes!</strong> If the grammar is ambiguous (e.g., dangling-else) or has FIRST/FOLLOW conflicts on nullable productions, it remains non-LL(1).</li>
+            <li><strong>Is every ambiguous grammar left-recursive? (Twisted 5M Q2):</strong> <strong>No</strong> (e.g., $S \rightarrow aSbS \mid bSaS \mid \epsilon$ is ambiguous without left recursion).</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/removing-direct-and-indirect-left-recursion-in-a-grammar/" target="_blank" rel="noopener noreferrer">Eliminating Left Recursion and Left Factoring - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u2-t3" data-unit="2" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.3</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Top-Down Parsing: Recursive Descent, FIRST/FOLLOW, Predictive LL(1) Parsing &amp; Top-Down vs. Bottom-Up</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-2 (10M) Q4–Q6, Q15: Recursive Descent Parsing; Predictive Parsing &amp; table construction; LL(1) grammars &amp; conditions; Top-Down vs Bottom-Up Parsing.</li><li>General Unit-2 (5M) Q8–Q12, Q26–Q27: Recursive Descent; Predictive Parsing; LL(1) grammar; Advantages of LL(1); Parsing table; LL(1) vs LR; Advantages of Bottom-Up.</li><li>IMP Unit-2 (10M) Q3–Q4 &amp; (5M) Q7–Q10, Q19: Predictive parsing &amp; LL(1) table; LL(1) conditions; Top-Down vs Bottom-Up.</li><li>Twisted Unit-2 (10M) Q1, Q3, Q4, Q6 &amp; (5M) Q8–Q9, Q19–Q20: Unambiguous non-LL(1) grammar; LL(1) recursive descent without backtracking; Predictive table conflicts; Two grammars same language; FIRST/FOLLOW importance; Empty table entry.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-2 Top-Down / LL(1) / Bottom-Up comparison questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Recursive Descent &amp; Predictive LL(1) Parsing</h4>
+        <p><strong>Recursive Descent Parsing</strong> uses a set of mutually recursive procedures (one per non-terminal). When the grammar is <strong>LL(1)</strong> (Left-to-right scan, Leftmost derivation, 1-token lookahead), a <strong>Predictive Parser</strong> uses an explicit stack and a 2D parsing table $M[A, a]$ to parse deterministically <strong>with zero backtracking</strong> (agreeing with Twisted 10M Q3).</p>
+
+        <h4>2. Conditions for a Grammar to be LL(1)</h4>
+        <p>For every pair of distinct productions $A \rightarrow \alpha \mid \beta$: (1) $\text{FIRST}(\alpha) \cap \text{FIRST}(\beta) = \emptyset$; (2) at most one of $\alpha, \beta$ can derive $\epsilon$; and (3) if $\beta \Rightarrow^* \epsilon$, then $\text{FIRST}(\alpha) \cap \text{FOLLOW}(A) = \emptyset$.</p>
+
+        <h4>3. LL(1) Parsing Table Example ($E \rightarrow TE', E' \rightarrow +TE' \mid \epsilon, T \rightarrow FT', T' \rightarrow *FT' \mid \epsilon, F \rightarrow (E) \mid \text{id}$)</h4>
+        <table>
+            <thead>
+                <tr><th>Non-Terminal</th><th><code>id</code></th><th><code>+</code></th><th><code>*</code></th><th><code>(</code></th><th><code>)</code></th><th><code>$</code></th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>$E$</strong></td><td>$E \rightarrow TE'$</td><td>&mdash;</td><td>&mdash;</td><td>$E \rightarrow TE'$</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td><strong>$E'$</strong></td><td>&mdash;</td><td>$E' \rightarrow +TE'$</td><td>&mdash;</td><td>&mdash;</td><td>$E' \rightarrow \epsilon$</td><td>$E' \rightarrow \epsilon$</td></tr>
+                <tr><td><strong>$T$</strong></td><td>$T \rightarrow FT'$</td><td>&mdash;</td><td>&mdash;</td><td>$T \rightarrow FT'$</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td><strong>$T'$</strong></td><td>&mdash;</td><td>$T' \rightarrow \epsilon$</td><td>$T' \rightarrow *FT'$</td><td>&mdash;</td><td>$T' \rightarrow \epsilon$</td><td>$T' \rightarrow \epsilon$</td></tr>
+                <tr><td><strong>$F$</strong></td><td>$F \rightarrow \text{id}$</td><td>&mdash;</td><td>&mdash;</td><td>$F \rightarrow (E)$</td><td>&mdash;</td><td>&mdash;</td></tr>
+            </tbody>
+        </table>
+        <p><em>Note (Twisted 5M Q20):</em> Reaching an empty cell $M[A, a] = \text{error}$ immediately signals a <strong>syntax error</strong>.</p>
+
+        <h4>4. Top-Down vs. Bottom-Up Parsing (General 10M Q15 &amp; IMP 5M Q19)</h4>
+        <table>
+            <thead>
+                <tr><th>Feature</th><th>Top-Down Parsing (LL)</th><th>Bottom-Up Parsing (LR)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Tree Construction</strong></td><td>Starts from Start Symbol $S$ down to leaves</td><td>Starts from input leaves up to Start Symbol $S$</td></tr>
+                <tr><td><strong>Derivation Used</strong></td><td>Leftmost Derivation (LMD)</td><td>Reverse of Rightmost Derivation (RMD)</td></tr>
+                <tr><td><strong>Left Recursion</strong></td><td>Cannot handle left-recursive grammars</td><td>Handles left-recursive grammars naturally</td></tr>
+                <tr><td><strong>Grammar Power</strong></td><td>Smaller class ($LL(1) \subset LR(1)$)</td><td>Handles almost all deterministic CFGs</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/construction-of-ll1-parsing-table/" target="_blank" rel="noopener noreferrer">LL(1) Parsing Table Construction &amp; Predictive Parsing - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u2-t4" data-unit="2" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.4</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Bottom-Up Parsing: Shift-Reduce Parsing, Handles, Conflicts &amp; Operator Precedence Parsing</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-2 (10M) Q7 &amp; Q8: Shift-Reduce Parsing &amp; actions; Operator Precedence Parsing.</li><li>General Unit-2 (5M) Q13–Q16, Q29–Q30: Shift-Reduce Parsing; Four actions; Operator Precedence; Precedence relations; Handle; Handle Pruning.</li><li>IMP Unit-2 (10M) Q5–Q6 &amp; (5M) Q11–Q12, Q20: Shift-Reduce Parsing; Operator-Precedence Parsing; Handle &amp; Handle Pruning.</li><li>Twisted Unit-2 (10M) Q7, Q8, Q14 &amp; (5M) Q10–Q12: Shift-reduce handle trace; Shift-reduce conflict resolution; Undefined relational operator reaction; Why operator precedence is limited.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Covers all Shift-Reduce, Handle Pruning, and Operator Precedence questions across all 3 banks.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Shift-Reduce Parsing, Handles &amp; Four Actions</h4>
+        <p><strong>Shift-Reduce Parsing</strong> constructs a parse tree bottom-up by shifting input symbols onto a stack until the top of the stack matches the right-hand side of a production (called a <strong>Handle</strong>), then replacing (pruning) that handle with the left-hand non-terminal (<strong>Handle Pruning</strong>).</p>
+        <ul>
+            <li><strong>Four Actions:</strong> (1) <strong>Shift</strong> next input token onto stack; (2) <strong>Reduce</strong> handle $\beta$ on top of stack to $A$; (3) <strong>Accept</strong> when stack holds <code>$S</code> and input is <code>$</code>; (4) <strong>Error</strong> when no valid move exists.</li>
+            <li><strong>Shift-Reduce Conflict Resolution (Twisted 10M Q8):</strong> Occurs when the parser cannot decide whether to shift another token or reduce (e.g., dangling-else). Resolved by specifying operator precedence/associativity rules (in Yacc: <code>%left</code>, <code>%right</code>) or resolving the dangling-else by preferring <em>Shift</em> (binding <code>else</code> to nearest <code>if</code>).</li>
+        </ul>
+
+        <h4>2. Operator Precedence Parsing &amp; Twisted Cases (Twisted 10M Q14 &amp; 5M Q12)</h4>
+        <p>An <strong>Operator Grammar</strong> has no $\epsilon$-productions and no two adjacent non-terminals. It uses three precedence relations between terminals $a$ and $b$: $a \lessdot b$ ($a$ yields precedence to $b$), $a \doteq b$ (equal precedence, e.g., <code>(</code> and <code>)</code>), and $a \gtrdot b$ ($a$ takes precedence over $b$—triggers handle reduction).</p>
+        <ul>
+            <li><strong>Undefined Relational Operator Entry (Twisted 10M Q14):</strong> If the parser encounters an empty cell between two relational operators (e.g., <code>a &lt; b &lt; c</code>), it invokes a syntax error handler reporting non-associativity of relational operators.</li>
+            <li><strong>Why Not Suitable for All CFGs (Twisted 5M Q12):</strong> Cannot handle grammars with $\epsilon$-productions, adjacent non-terminals, or tokens having dual unary/binary roles (like unary minus vs. binary minus).</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/shift-reduce-parser-compiler/" target="_blank" rel="noopener noreferrer">Shift-Reduce &amp; Operator Precedence Parsing - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u2-t5" data-unit="2" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.5</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">LR Parsers: Canonical LR(0) Items, SLR(1), Canonical LR(1) &amp; LALR(1) Parsing</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-2 (10M) Q9–Q13: Canonical Collection of LR(0) Items; Compare SLR, Canonical LR, LALR; SLR Parsing; Canonical LR Parsing; LALR Parsing.</li><li>General Unit-2 (5M) Q17–Q22, Q28: LR(0) item; Canonical Collection; SLR, CLR, LALR definitions; SLR vs LALR; Parser Generators.</li><li>IMP Unit-2 (10M) Q7–Q11 &amp; (5M) Q13–Q15: LR(0) items; SLR; CLR; Compare SLR, CLR, LALR; LALR.</li><li>Twisted Unit-2 (10M) Q9–Q12, Q15 &amp; (5M) Q13–Q16: SLR parsability check; Conflict in SLR but not LR(1); LALR state merging; Memory/power comparison; Why modern tools use LALR.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all LR(0), SLR, CLR, and LALR questions across General, IMP, and Twisted banks.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. LR(0) Items, Closure &amp; Goto</h4>
+        <p>An <strong>LR(0) Item</strong> is a production with a dot (<code>&bull;</code>) indicating how much of the RHS has been seen (e.g., $A \rightarrow X \cdot YZ$). Using <code>CLOSURE(I)</code> and <code>GOTO(I, X)</code> on the augmented grammar $S' \rightarrow S$, we construct the <strong>Canonical Collection of LR(0) Item Sets</strong> (DFA of viable prefixes).</p>
+
+        <h4>2. Comparison of SLR(1), Canonical LR(1), and LALR(1) Parsers</h4>
+        <table>
+            <thead>
+                <tr><th>Feature</th><th>SLR(1)</th><th>Canonical LR(1) / CLR</th><th>LALR(1)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Item Structure</strong></td><td>LR(0) items; reduces on entire $\text{FOLLOW}(A)$</td><td>LR(1) items $[A \rightarrow \alpha \cdot \beta, a]$ with exact 1-token lookahead</td><td>Merges CLR states sharing identical LR(0) cores (unions lookaheads)</td></tr>
+                <tr><td><strong>Table Size / States</strong></td><td>Small (few hundred states)</td><td>Very Large (thousands of states—high memory)</td><td>Compact (same state count as SLR)</td></tr>
+                <tr><td><strong>Parsing Power</strong></td><td>Least powerful ($SLR(1) \subset LALR(1)$)</td><td>Most powerful deterministic LR parser</td><td>Intermediate ($LALR(1) \subset CLR(1)$); handles nearly all real languages</td></tr>
+                <tr><td><strong>Conflicts</strong></td><td>May suffer Shift-Reduce / Reduce-Reduce conflicts</td><td>No false reduce conflicts</td><td>Never introduces Shift-Reduce conflicts (rare Reduce-Reduce only)</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Why Modern Parser Generators (Yacc/Bison) Use LALR(1) (Twisted 10M Q10, Q11, Q15):</strong> SLR places reductions on <em>all</em> symbols in $\text{FOLLOW}(A)$ even when a specific state cannot legally precede that lookahead, causing spurious conflicts. CLR fixes this using exact 1-token lookaheads, and <strong>LALR(1)</strong> merges CLR states with identical cores—preserving almost full CLR parsing power at a fraction of the memory footprint.</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/slr-clr-and-lalr-parsers-set-3/" target="_blank" rel="noopener noreferrer">SLR, CLR and LALR Parsers in Compiler Design - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u2-t6" data-unit="2" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.6</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Syntax Error Recovery Strategies: Panic Mode, Phrase-Level, Error Productions &amp; Global Correction</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-2 (10M) Q14 &amp; (5M) Q23–Q25: Error Recovery Techniques in Parsing (Panic Mode, Phrase-Level, Error Productions).</li><li>IMP Unit-2 (10M) Q12 &amp; (5M) Q16–Q18: Error Recovery Techniques in Parsing.</li><li>Twisted Unit-2 (10M) Q13 &amp; (5M) Q17–Q18: Multi-error recovery strategy; Fastest recovery method; Can a parser recover from every error?</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-2 syntax error recovery questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <ul>
+            <li><strong>1. Panic Mode Recovery (Fastest &amp; Most Widely Used — Twisted 5M Q17):</strong> Discards input tokens one at a time until a designated <strong>synchronizing token</strong> (such as <code>;</code>, <code>}</code>, or <code>end</code>) is found, pops stack states until parsing can resume cleanly, and guarantees termination without infinite loops.</li>
+            <li><strong>2. Phrase-Level Recovery:</strong> Performs local correction on the remaining input (e.g., inserting a missing semicolon or replacing a comma with a semicolon) and continues parsing; requires careful design to avoid infinite insertion loops.</li>
+            <li><strong>3. Error Productions:</strong> Augments the grammar with explicit rules capturing common programmer mistakes (e.g., <code>stmt &rarr; expr</code> missing <code>;</code>) to emit user-friendly diagnostic messages.</li>
+            <li><strong>4. Global Correction:</strong> Finds the minimal edit-distance parse tree for an erroneous string (theoretically optimal but too slow $O(n^3)$ for practical compilers).</li>
+            <li><strong>Can a parser recover from every syntax error? (Twisted 5M Q18):</strong> <strong>No</strong>—severely corrupted code with cascading unclosed braces or structural mangling may force the parser to skip large blocks or abort once sync tokens are exhausted.</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/error-handling-in-compiler-design/" target="_blank" rel="noopener noreferrer">Error Handling and Recovery in Parsing - GeeksforGeeks</a></div>
+        </article>
+        </section>
+    <section id="unit-3" class="unit-section">
+        <div class="unit-header">
+            <h2>Unit 3: Syntax-Directed Translation, Semantic Analysis & Runtime Environment</h2>
+            <span class="unit-count">3 Master Topics &bull; Complete 5M &amp; 10M Coverage</span>
+        </div>
+
+        <div class="quick-rev-box">
+            <div class="qr-title">&#9889; Unit 3 Quick Revision: SDD, Semantic Analysis & Runtime Environments (Last-Minute Exam Cheat Sheet)</div>
+            <ul><li><strong>Attributes:</strong> <em>Synthesized</em> = bottom-up from children (S-attributed uses ONLY synthesized &rarr; ideal for LR parsers); <em>Inherited</em> = top-down/left-sibling (L-attributed &rarr; ideal for LL parsers).</li><li><strong>Type Checking:</strong> <em>Coercion</em> = implicit widening (<code>int &rarr; float</code>). <em>Structural Equivalence</em> checks identical structure; <em>Name Equivalence</em> requires identical declared type names.</li><li><strong>Storage Allocation:</strong> <em>Static</em> (no recursion), <em>Stack</em> (LIFO Activation Records, supports recursion), <em>Heap</em> (dynamic arbitrary lifetimes).</li><li><strong>Parameter Passing:</strong> Call-by-Value (copies value), Call-by-Reference (passes address), Call-by-Result (copy-out), Call-by-Name (macro substitution).</li></ul>
+        </div>
+    
+        <article class="q-card" id="u3-t1" data-unit="3" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Syntax-Directed Definitions (SDD), S-Attributed vs. L-Attributed Definitions &amp; SDTS</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-3 (10M) Q1–Q6: Inherited vs Synthesized attributes; Evaluation of SDD at parse tree nodes; Evaluation orders; SDTS implementation; Bottom-up evaluation of S-attributed definitions; S-attributed vs L-attributed definitions.</li><li>General Unit-3 (5M) Q1–Q7, Q30: Definitions of inherited/synthesized attributes, SDD, evaluation order, SDTS, S-attributed, L-attributed, role of semantic rules.</li><li>IMP Unit-3 (10M) Q1–Q5 &amp; (5M) Q1–Q6: Attributes, SDD evaluation, SDTS, S-attributed vs L-attributed, bottom-up evaluation.</li><li>Twisted Unit-3 (10M) Q1–Q5 &amp; (5M) Q1–Q4, Q19: No parent-to-child data; Evaluation order challenges; Code gen during parsing via SDTS; Why S-attributed suits bottom-up parsing; Nested declarations; Can synthesized depend on parent?; Single left-to-right traversal; All inherited S-attributed?; SDTS vs SDD; Why L-attributed is more powerful.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-3 questions on attributes, SDDs, SDTS, S-attributed, and L-attributed definitions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Synthesized vs. Inherited Attributes (General 10M Q1 &amp; Twisted 10M Q1, 5M Q1)</h4>
+        <ul>
+            <li><strong>Synthesized Attribute:</strong> Computed at a parse-tree node strictly from the attribute values of its <strong>children</strong> and the node itself (bottom-up information flow). <em>Cannot</em> depend on parent or sibling nodes (Twisted 5M Q1). Suitable when no parent-to-child data passing is needed (Twisted 10M Q1).</li>
+            <li><strong>Inherited Attribute:</strong> Computed at a parse-tree node from the attribute values of its <strong>parent</strong> and/or <strong>left siblings</strong> (top-down / sideways flow, e.g., distributing declaration type <code>float</code> across an identifier list <code>a, b, c</code>).</li>
+        </ul>
+
+        <h4>2. S-Attributed vs. L-Attributed Definitions (General 10M Q5–Q6, Twisted 10M Q4, 5M Q3, Q19)</h4>
+        <table>
+            <thead>
+                <tr><th>Feature</th><th>S-Attributed Definition</th><th>L-Attributed Definition</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Attributes Allowed</strong></td><td>Uses <strong>ONLY synthesized</strong> attributes</td><td>Uses synthesized + restricted inherited attributes (depending only on parent or <em>left</em> siblings)</td></tr>
+                <tr><td><strong>Evaluation Order</strong></td><td>Pure bottom-up (post-order traversal)</td><td>Depth-first left-to-right traversal</td></tr>
+                <tr><td><strong>Best Parsing Match</strong></td><td>Ideal for <strong>Bottom-Up (LR)</strong> parsers via value stack</td><td>Ideal for <strong>Top-Down (LL)</strong> parsers</td></tr>
+                <tr><td><strong>Expressive Power</strong></td><td>Strict subset ($\text{S-Attributed} \subset \text{L-Attributed}$)</td><td>More powerful (supports context propagation like types &amp; labels)</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Twisted Checks:</strong> If all attributes are inherited, it is <strong>NOT S-attributed</strong> (Twisted 5M Q3). Cyclic dependencies in general SDDs prevent single-pass left-to-right evaluation (Twisted 5M Q2). An <strong>SDTS (Syntax-Directed Translation Scheme)</strong> embeds executable semantic actions <code>{ ... }</code> directly inside grammar RHS positions, whereas an SDD specifies declarative equations (Twisted 5M Q4).</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/syntax-directed-translation-in-compiler-design/" target="_blank" rel="noopener noreferrer">Syntax-Directed Translation (SDD &amp; SDTS) - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u3-t2" data-unit="3" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.2</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Semantic Analysis: Type Systems, Type Checking, Type Equivalence, Conversions &amp; Symbol Table</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-3 (10M) Q7–Q12: Type systems; Simple type checker; Equivalence of type expressions; Type conversion techniques; Symbol table organization; Source language issues.</li><li>General Unit-3 (5M) Q8–Q16: Semantic analysis, type system, type checking, type expressions, type equivalence, coercion, symbol table &amp; functions, source language issues.</li><li>IMP Unit-3 (10M) Q6–Q8 &amp; (5M) Q7–Q13: Type systems, simple type checker, symbol table management, type equivalence, type conversion, source language issues.</li><li>Twisted Unit-3 (10M) Q6–Q8, Q13–Q15 &amp; (5M) Q5–Q8, Q15, Q17, Q20: int x = 3.14 type check; Structural vs Name equivalence; Nested scope symbol table; Importance of semantic analysis; Semantic rules for int/float arithmetic; Implicit int-to-float; Linear list symbol table overhead.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-3 Semantic Analysis, Type Checking, and Symbol Table questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Semantic Analysis, Type Systems &amp; Type Checking (Twisted 10M Q6, Q13, Q14)</h4>
+        <p><strong>Semantic Analysis</strong> verifies context-sensitive meaning beyond syntax (undeclared variables, type mismatches, array bounds, argument counts). A <strong>Type System</strong> assigns type expressions (e.g., <code>int</code>, <code>float</code>, <code>array(10, int)</code>, <code>pointer(T)</code>) to constructs.</p>
+        <ul>
+            <li><strong>Type Conversions (Widening vs. Narrowing / Coercion):</strong> Automatic implicit conversion is called <strong>Coercion</strong> (e.g., widening <code>int</code> to <code>float</code> in <code>3 + 4.5</code> without data loss). In <code>int x = 3.14;</code> (Twisted 10M Q6), assigning a <code>float</code> to an <code>int</code> is a <strong>narrowing conversion</strong> that truncates the fractional part <code>.14</code>—triggering a compiler type warning or error unless explicitly cast <code>(int)3.14</code>.</li>
+            <li><strong>Arithmetic Type Rule (Twisted 10M Q14):</strong> <code>E &rarr; E1 + E2 { if (E1.type == int && E2.type == int) E.type = int; else E.type = float; }</code>.</li>
+        </ul>
+
+        <h4>2. Type Equivalence: Structural vs. Name Equivalence (Twisted 10M Q7 &amp; 5M Q6)</h4>
+        <ul>
+            <li><strong>Structural Equivalence:</strong> Two types are equivalent if they have identical internal structure and field types (even with different names).</li>
+            <li><strong>Name Equivalence:</strong> Two types are equivalent <em>only</em> if they share the exact same declared type name (used in C/Java for <code>struct</code>/<code>class</code>—so two identical structs with different names are distinct types, Twisted 5M Q6).</li>
+        </ul>
+
+        <h4>3. Symbol Table Organization &amp; Nested Scopes (Twisted 10M Q8 &amp; 5M Q7, Q17)</h4>
+        <p>A <strong>Symbol Table</strong> stores identifier names, types, scopes, memory offsets, and function signatures. Lookup occurs far more frequently than insertion (every variable reference vs. one declaration, Twisted 5M Q7). Linear lists take $O(n)$ per lookup (slow for large programs, Twisted 5M Q17); production compilers use <strong>Chained Hash Tables</strong> linked via parent-scope pointers (LeBlanc-Cook symbol table stack) achieving $O(1)$ average lookup across nested lexical blocks.</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/type-checking-in-compiler-design/" target="_blank" rel="noopener noreferrer">Type Checking &amp; Symbol Table Management - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u3-t3" data-unit="3" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.3</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Runtime Storage Organization (Static, Stack, Heap), Activation Records, Access Links &amp; Parameter Passing</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-3 (10M) Q13–Q18: Storage organization; Static, Stack, Heap allocation; Activation records with diagram; Non-local names in nested scopes; Parameter passing mechanisms; Compare call-by-value, call-by-reference, call-by-result, call-by-name.</li><li>General Unit-3 (5M) Q17–Q29: Storage organization, static/stack/heap, activation record &amp; fields, non-local names, access links, parameter passing methods, stack advantages.</li><li>IMP Unit-3 (10M) Q9–Q12 &amp; (5M) Q14–Q20: Storage strategies, activation records, parameter passing, non-local names.</li><li>Twisted Unit-3 (10M) Q9–Q12 &amp; (5M) Q9–Q14, Q16, Q18: Compare Static/Stack/Heap; Recursive activation records; Access links &amp; Displays; Parameter passing output effect; Why stack supports recursion; Heap vs Stack; Unchanged actual parameter; Call-by-reference efficiency; Unremoved activation records.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-3 Runtime Environment &amp; Parameter Passing questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Storage Allocation Strategies: Static, Stack &amp; Heap (Twisted 10M Q9 &amp; 5M Q9–Q10, Q16)</h4>
+        <table>
+            <thead>
+                <tr><th>Strategy</th><th>Allocation Time</th><th>Supports Recursion?</th><th>Dynamic Size / Lifetime?</th><th>Efficiency</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Static Allocation</strong></td><td>Compile time (fixed addresses)</td><td><strong>No</strong> (only 1 copy of locals)</td><td>No (sizes must be known at compile time)</td><td>Fastest (zero runtime overhead)</td></tr>
+                <tr><td><strong>Stack Allocation</strong></td><td>Runtime (LIFO push/pop on call/return)</td><td><strong>Yes</strong> (new frame per recursive call)</td><td>LIFO lifetime bound to function call</td><td>Very fast (pointer bump); prevents memory leaks</td></tr>
+                <tr><td><strong>Heap Allocation</strong></td><td>Runtime (<code>malloc</code>/<code>new</code> &amp; <code>free</code>/GC)</td><td>Yes</td><td><strong>Yes</strong> (arbitrary out-of-order lifetimes)</td><td>Slower (fragmentation &amp; GC overhead)</td></tr>
+            </tbody>
+        </table>
+
+        <h4>2. Activation Record (Stack Frame) &amp; Access Links (General 10M Q15–Q16 &amp; Twisted 10M Q10–Q11)</h4>
+        <div class="svg-container">
+            <svg viewBox="0 0 640 165" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <g font-size="10.5" font-weight="bold" text-anchor="middle">
+                    <rect x="180" y="10" width="280" height="22" fill="#dbeafe" stroke="#2563eb"/><text x="320" y="25" fill="#1e3a8a">Returned Value &amp; Actual Parameters</text>
+                    <rect x="180" y="32" width="280" height="22" fill="#fef3c7" stroke="#d97706"/><text x="320" y="47" fill="#92400e">Optional Control Link (Dynamic Link to Caller Frame)</text>
+                    <rect x="180" y="54" width="280" height="22" fill="#dcfce7" stroke="#16a34a"/><text x="320" y="69" fill="#14532d">Optional Access Link (Static Link for Non-Local Names)</text>
+                    <rect x="180" y="76" width="280" height="22" fill="#f1f5f9" stroke="#475569"/><text x="320" y="91" fill="#0f172a">Saved Machine Status (Return Address, Registers)</text>
+                    <rect x="180" y="98" width="280" height="22" fill="#eff6ff" stroke="#3b82f6"/><text x="320" y="113" fill="#1e3a8a">Local Variables</text>
+                    <rect x="180" y="120" width="280" height="22" fill="#fae8ff" stroke="#9333ea"/><text x="320" y="135" fill="#581c87">Temporaries</text>
+                </g>
+            </svg>
+        </div>
+        <p><strong>Accessing Non-Local Names (Twisted 10M Q11):</strong> In block-structured languages with nested procedures, <strong>Access Links (Static Links)</strong> point directly to the activation record of the lexically enclosing parent procedure (chasing $n_p - n_x$ links for nesting depth difference), or a <strong>Display</strong> array caches frame pointers by nesting level for $O(1)$ access.</p>
+
+        <h4>3. Parameter Passing Mechanisms (General 10M Q17–Q18 &amp; Twisted 10M Q12, 5M Q13–Q14)</h4>
+        <table>
+            <thead>
+                <tr><th>Mechanism</th><th>How It Works</th><th>Effect on Caller's Actual Argument</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Call-by-Value</strong></td><td>Copies actual argument's r-value into formal parameter</td><td><strong>Unchanged</strong> (Twisted 5M Q13); safe but costly for huge structs</td></tr>
+                <tr><td><strong>Call-by-Reference</strong></td><td>Passes memory address (l-value) of actual argument</td><td><strong>Modified immediately</strong>; fast $O(1)$ pointer pass for large arrays (Twisted 5M Q14)</td></tr>
+                <tr><td><strong>Call-by-Result (Copy-Out)</strong></td><td>Formal parameter initialized uninitialized; copied back on return</td><td>Overwritten with final formal value upon function exit</td></tr>
+                <tr><td><strong>Call-by-Name</strong></td><td>Textual macro-like substitution re-evaluated on every use</td><td>Evaluated dynamically in caller's environment each time referenced</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/activation-records-in-compiler-design/" target="_blank" rel="noopener noreferrer">Runtime Storage Allocation &amp; Activation Records - GeeksforGeeks</a></div>
+        </article>
+        </section>
+    <section id="unit-4" class="unit-section">
+        <div class="unit-header">
+            <h2>Unit 4: Intermediate Code Generation</h2>
+            <span class="unit-count">3 Master Topics &bull; Complete 5M &amp; 10M Coverage</span>
+        </div>
+
+        <div class="quick-rev-box">
+            <div class="qr-title">&#9889; Unit 4 Quick Revision: Intermediate Code Generation (TAC, DAG & Backpatching) (Last-Minute Exam Cheat Sheet)</div>
+            <ul><li><strong>TAC Representations:</strong> <em>Quadruples</em> <code>(op, arg1, arg2, res)</code>; <em>Triples</em> <code>(op, arg1, arg2)</code> (no temp names, positional indices); <em>Indirect Triples</em> (pointer table solves code movement).</li><li><strong>DAG:</strong> Shares common subexpression nodes to eliminate redundant calculations.</li><li><strong>Backpatching:</strong> Resolves forward jumps in single-pass compilers using <code>truelist</code>, <code>falselist</code>, <code>nextlist</code>, <code>merge()</code>, and <code>backpatch()</code>.</li><li><strong>Switch-Case:</strong> Sequential tests (&lt;5 cases), Jump Table (dense cases), Binary Search Tree (sparse cases).</li></ul>
+        </div>
+    
+        <article class="q-card" id="u4-t1" data-unit="4" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Intermediate Representations: AST, DAG, Three-Address Code (TAC), Quadruples, Triples &amp; Indirect Triples</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-4 (10M) Q1 &amp; Q2: Syntax Tree, DAG, TAC for a := b * -c + b * -c; Quadruples, Triples, Indirect Triples for x = (a+b)*(c+d)-(a+b).</li><li>General Unit-4 (5M) Q1–Q5: Syntax Tree vs AST; DAG vs Syntax Tree; Three-Address Code (TAC) &amp; 4 statement types; Quadruples vs Triples; Indirect Triples.</li><li>IMP Unit-4 (10M) Q1 &amp; (5M) Q1, Q3, Q4: DAG + Quadruples/Triples/Indirect Triples for x=(a+b)*(c+d)-(a+b); Compare Quadruples, Triples, Indirect Triples; Syntax Tree vs DAG for a + a*(b-c); TAC types.</li><li>Twisted Unit-4 (10M) Q1, Q5 &amp; (5M) Q1, Q2: Optimized DAG &amp; Quadruple temp recycling for a=(a+b)*-(c+d)+(a+b)*-(c+d); Triples without temp variables for x=(a+b)*(c-d); AST vs Parse Tree; Triple optimization movement overhead.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-4 AST, DAG, TAC, Quadruples, Triples, and Indirect Triples questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Three-Address Code (TAC), AST &amp; DAG</h4>
+        <p><strong>Three-Address Code (TAC)</strong> is a linearized intermediate representation where every instruction has at most <strong>three operands</strong> (two sources + one result, e.g., <code>x = y op z</code>). Common TAC types: binary assignments (<code>x = y + z</code>), unary assignments (<code>x = -y</code>), copy statements (<code>x = y</code>), unconditional/conditional jumps (<code>goto L</code>, <code>if x relop y goto L</code>), and indexed/pointer operations.</p>
+        <ul>
+            <li><strong>AST vs. Parse Tree &amp; DAG (Twisted 5M Q1):</strong> An <strong>AST</strong> strips redundant punctuation/parentheses from a Parse Tree. A <strong>Directed Acyclic Graph (DAG)</strong> merges identical subtrees (common subexpressions) into shared nodes. An AST is structurally identical to a DAG <em>only when the expression contains zero repeated subexpressions</em>.</li>
+            <li><strong>Worked Example 1 — <code>a := b * -c + b * -c</code> (General 10M Q1):</strong> In the DAG, <code>uminus(c)</code> and <code>*(b, uminus(c))</code> are created <strong>only once</strong> and shared by both inputs of <code>+</code>, reducing TAC to: <code>t1 = -c; t2 = b * t1; t3 = t2 + t2; a = t3</code>.</li>
+        </ul>
+
+        <h4>2. Tabular Representations for <code>x = (a + b) * (c + d) - (a + b)</code> (General 10M Q2 &amp; IMP 10M Q1)</h4>
+        <p>TAC: <code>(0) t1 = a + b</code> &rarr; <code>(1) t2 = c + d</code> &rarr; <code>(2) t3 = t1 * t2</code> &rarr; <code>(3) t4 = t3 - t1</code> &rarr; <code>(4) x = t4</code>.</p>
+        <table>
+            <thead>
+                <tr><th>#</th><th>Quadruples (op, arg1, arg2, result)</th><th>Triples (op, arg1, arg2)</th><th>Indirect Triples (Pointer &rarr; Triple)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>(0)</strong></td><td><code>(+, a, b, t1)</code></td><td><code>(+, a, b)</code></td><td><code>Ptr[0] &rarr; (0)</code></td></tr>
+                <tr><td><strong>(1)</strong></td><td><code>(+, c, d, t2)</code></td><td><code>(+, c, d)</code></td><td><code>Ptr[1] &rarr; (1)</code></td></tr>
+                <tr><td><strong>(2)</strong></td><td><code>(*, t1, t2, t3)</code></td><td><code>(*, (0), (1))</code></td><td><code>Ptr[2] &rarr; (2)</code></td></tr>
+                <tr><td><strong>(3)</strong></td><td><code>(-, t3, t1, t4)</code></td><td><code>(-, (2), (0))</code></td><td><code>Ptr[3] &rarr; (3)</code></td></tr>
+                <tr><td><strong>(4)</strong></td><td><code>(=, t4, &mdash;, x)</code></td><td><code>(=, x, (3))</code></td><td><code>Ptr[4] &rarr; (4)</code></td></tr>
+            </tbody>
+        </table>
+        <p><strong>Comparison &amp; Twisted Insight (Twisted 10M Q5 &amp; 5M Q2):</strong> <em>Triples</em> avoid generating temporary variable names by referencing instruction indices <code>(0), (1)</code> directly (proving Twisted 10M Q5 is possible without temps!). However, reordering instructions during optimization breaks positional indices in Triples—which <strong>Indirect Triples</strong> solve by reordering the lightweight pointer array while keeping triple indices fixed.</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/three-address-code-compiler/" target="_blank" rel="noopener noreferrer">Three-Address Code, DAG, Quadruples &amp; Triples - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u4-t2" data-unit="4" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.2</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Boolean Expressions, Short-Circuit Evaluation, Control Flow Statements &amp; Backpatching</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-4 (10M) Q3, Q4 &amp; (5M) Q6: Short-circuit boolean translation for a&lt;b OR c&lt;d AND e&lt;f; Control flow SDT &amp; TAC for while(a&lt;b){ if(c&gt;d) x=y+z; else x=y-z; }; Backpatching.</li><li>IMP Unit-4 (10M) Q2, Q3 &amp; (5M) Q2: Control flow SDT &amp; TAC for while(i&lt;10){ if(a&gt;b) x=y+z else x=y-z; }; Short-circuit boolean translation; Backpatching in single-pass compiler.</li><li>Twisted Unit-4 (10M) Q2 &amp; (5M) Q3, Q4: Backpatching with break in while(x&gt;0){ if(x==5) break; else x--; }; Strict vs short-circuit boolean evaluation; Why backpatching is essential for while loops.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General, IMP, and Twisted Unit-4 Boolean, Control Flow, and Backpatching questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Backpatching in Single-Pass Compilers (General 5M Q6, IMP 5M Q2 &amp; Twisted 5M Q4)</h4>
+        <p><strong>Backpatching</strong> enables single-pass intermediate code generation for forward jumps whose target label addresses are not yet known when the jump instruction is emitted. The compiler maintains three lists of unresolved jump indices—<code>truelist</code>, <code>falselist</code>, and <code>nextlist</code>—and uses <code>makelist(i)</code>, <code>merge(p1, p2)</code>, and <code>backpatch(p, L)</code> to fill in target addresses once label <code>L</code> is reached.</p>
+
+        <h4>2. Short-Circuit Boolean Translation: <code>a &lt; b OR c &lt; d AND e &lt; f</code> (General 10M Q3 &amp; IMP 10M Q3)</h4>
+        <p>Because <code>AND</code> has higher precedence than <code>OR</code>, if <code>a &lt; b</code> is true, evaluation jumps immediately to <code>L_true</code> without evaluating the rest:</p>
+        <div class="formula-box">
+          100: if a &lt; b goto L_true<br>
+          101: goto 102<br>
+          102: if c &lt; d goto 104<br>
+          103: goto L_false<br>
+          104: if e &lt; f goto L_true<br>
+          105: goto L_false
+        </div>
+        <p><em>Strict vs. Short-Circuit (Twisted 5M Q3):</em> Strict evaluation computes boolean temporaries <code>t1 = A; t2 = B; t3 = t1 or t2</code> before branching, evaluating both operands even when <code>A</code> is already true.</p>
+
+        <h4>3. Control Flow TAC for <code>while (a &lt; b) { if (c &gt; d) x = y + z; else x = y - z; }</code> (General 10M Q4 &amp; IMP 10M Q2)</h4>
+        <div class="formula-box">
+          L1: if a &lt; b goto L2<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;goto L_end<br>
+          L2: if c &gt; d goto L3<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;goto L4<br>
+          L3: t1 = y + z<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x = t1<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;goto L1<br>
+          L4: t2 = y - z<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x = t2<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;goto L1<br>
+          L_end:
+        </div>
+        <p><em>Handling <code>break</code> (Twisted 10M Q2):</em> The <code>break</code> statement emits an unconditional jump whose index is merged directly into the enclosing loop's <code>breaklist</code> and backpatched to <code>L_end</code> upon loop exit.</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/backpatching-in-compiler-design/" target="_blank" rel="noopener noreferrer">Backpatching &amp; Boolean Control-Flow Translation - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u4-t3" data-unit="4" data-cats="general important twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.3</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Switch-Case Translation Strategies, Procedure Calls in TAC &amp; Declaration Offset Allocation</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-4 (10M) Q5, Q6 &amp; (5M) Q7: Translation of Switch/Case statements (jump tables, sequential, binary search); Procedure calls in TAC (result = swap(matrix[i][j], val)); Declarations &amp; relative address allocation.</li><li>IMP Unit-4 (10M) Q4, Q5 &amp; (5M) Q5: Switch-Case strategies; Procedure calls in TAC; Declarations &amp; relative address offsets.</li><li>Twisted Unit-4 (10M) Q3, Q4 &amp; (5M) Q5: Sparse 50-case switch (1, 500, 2000, 99999); Recursive fact(3) TAC trace; Nested struct Node field offsets.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates General, IMP, and Twisted Unit-4 questions on Switch-Case, Procedure Calls, and Declarations.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Switch-Case Translation Strategies (Dense vs. Sparse Cases — Twisted 10M Q3)</h4>
+        <ul>
+          <li><strong>1. Sequential Conditional Tests (&lt; 5 cases):</strong> Emits linear chain <code>if x == v1 goto L1; if x == v2 goto L2; ... goto L_default</code>.</li>
+          <li><strong>2. Indexed Jump Table (Dense cases, e.g., 1..20):</strong> Allocates an array of label addresses <code>JTable[x - min]</code> for $O(1)$ constant-time indirect jump.</li>
+          <li><strong>3. Balanced Binary Search Tree / Hash Dispatch (Sparse 50 cases like 1, 500, 2000, 99999 — Twisted 10M Q3):</strong> A Jump Table for range 1..99999 would waste ~100,000 mostly empty entries! Modern compilers sort the 50 case constants and emit a balanced binary search tree of comparisons, executing in $O(\log_2 50) \approx 6$ comparisons with zero wasted memory.</li>
+        </ul>
+
+        <h4>2. Procedure Calls &amp; Array Addressing: <code>result = swap(matrix[i][j], val)</code> (General 10M Q6 &amp; Twisted 10M Q4)</h4>
+        <div class="formula-box">
+          t1 = i * num_cols<br>
+          t2 = t1 + j<br>
+          t3 = t2 * 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// byte offset assuming 4-byte int<br>
+          t4 = matrix[t3]<br>
+          param t4<br>
+          param val<br>
+          t5 = call swap, 2<br>
+          result = t5
+        </div>
+        <p><em>Recursive <code>fact(3)</code> Trace (Twisted 10M Q4):</em> Emits <code>param 3; t1 = call fact, 1</code> &rarr; inside <code>fact(3)</code>: <code>param 2; t2 = call fact, 1</code> &rarr; inside <code>fact(2)</code>: <code>param 1; t3 = call fact, 1</code> &rarr; base case <code>return 1</code> unwinds stack frames computing <code>2*1=2</code> then <code>3*2=6</code>.</p>
+
+        <h4>3. Declarations &amp; Struct Offsets (General 5M Q7, IMP 5M Q5 &amp; Twisted 5M Q5)</h4>
+        <p>Using a global <code>offset</code> pointer initialized to $0$, each declaration allocates <code>id.offset = offset; offset += id.width</code>. For <code>struct Node { int data; struct Node* next; }</code> on a 64-bit system: <code>data</code> gets offset <code>0</code> (4 bytes), 4 bytes alignment padding are inserted, and pointer <code>next</code> gets offset <code>8</code> (8 bytes; total struct size = 16 bytes).</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/intermediate-code-generation-in-compiler-design/" target="_blank" rel="noopener noreferrer">Switch Statements, Procedure Calls &amp; Declarations in ICG - GeeksforGeeks</a></div>
+        </article>
+        </section>
+    <section id="unit-5" class="unit-section">
+        <div class="unit-header">
+            <h2>Unit 5: Code Optimization, Data-Flow Analysis & Code Generation</h2>
+            <span class="unit-count">4 Master Topics &bull; Complete 5M &amp; 10M Coverage</span>
+        </div>
+
+        <div class="quick-rev-box">
+            <div class="qr-title">&#9889; Unit 5 Quick Revision: Code Optimization, Data-Flow & Target Code Generation (Last-Minute Exam Cheat Sheet)</div>
+            <ul><li><strong>Basic Blocks &amp; CFG:</strong> Partitioned via Leaders (first stmt, jump targets, stmts after jumps).</li><li><strong>Loop &amp; Peephole Optimizations:</strong> Code Motion, Induction Variable Elimination, Strength Reduction; Peephole applies local algebraic &amp; redundant load/store cleanup.</li><li><strong>Data-Flow Equations:</strong> Reaching Definitions (Forward, $\cup$), Live Variables (Backward, $\cup$), Available Expressions (Forward, $\cap$).</li><li><strong>Code Generator:</strong> Uses Register &amp; Address Descriptors, Next-Use info, and <code>getReg()</code> to emit low-cost target instructions.</li></ul>
+        </div>
+    
+        <article class="q-card" id="u5-t1" data-unit="5" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Code Optimization: Basic Blocks, Control Flow Graphs (CFG), DAG Optimization, Loop &amp; Peephole Optimizations</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-5 (10M) Q3, Q4 &amp; (5M) Q1–Q5, Q8: Basic Blocks &amp; CFG construction; DAG Basic Block optimization (a=b+c; d=b+c; e=a+d; b=e*c; d=b+c); Machine-Independent vs Machine-Dependent optimization; Loop optimizations (Code Motion, Induction Variable Elimination, Strength Reduction); Basic Block leader algorithm; Flow Graph; Peephole Optimization; LLVM &amp; GCC modularity.</li><li>IMP Unit-5 (10M) Q1, Q2 &amp; (5M) Q1, Q2, Q4: Basic Block &amp; CFG for prod=0 loop; DAG optimization of same basic block; Leader algorithm; Loop optimization; Peephole optimization.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates all General and IMP Unit-5 Code Optimization, Basic Block, CFG, and DAG questions.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Leader Algorithm &amp; Basic Block Partitioning (General 10M Q3 &amp; IMP 10M Q1)</h4>
+        <p>A <strong>Basic Block</strong> is a maximal sequence of consecutive TAC instructions with a single entry point (first instruction) and single exit point (last instruction). <strong>Leader Rules:</strong> (1) First statement is a leader; (2) Any target of a conditional/unconditional jump is a leader; (3) Any statement immediately following a jump is a leader.</p>
+        <ul>
+          <li><strong>Trace on Matrix Initialization (General 10M Q3):</strong> Leaders are Statement <code>(1) i = 1</code>, Statement <code>(2) j = 1</code> (target of line 10), and Statement <code>(3) t1 = 10 * i</code> (target of line 8). Forms <strong>B1</strong>: <code>(1)</code> &rarr; <strong>B2</strong>: <code>(2)</code> &rarr; <strong>B3 (Inner Loop)</strong>: <code>(3)–(8)</code> with self-loop back-edge to B3 &rarr; <strong>B4 (Outer Loop)</strong>: <code>(9)–(10)</code> with back-edge to B2 &rarr; <strong>EXIT</strong>.</li>
+          <li><strong>Trace on Product Loop (IMP 10M Q1):</strong> Leaders are <code>(1) prod = 0</code> and <code>(3) t1 = 4 * i</code>. Forms <strong>Entry &rarr; B1 (1–2) &rarr; B2 (3–7)</strong> (with back-edge B2 &rarr; B2) <strong>&rarr; Exit</strong>.</li>
+        </ul>
+
+        <h4>2. Basic Block Optimization via DAG (General 10M Q4 &amp; IMP 10M Q2)</h4>
+        <p>Given: <code>(1) a = b + c; (2) d = b + c; (3) e = a + d; (4) b = e * c; (5) d = b + c;</code></p>
+        <p>In the DAG, statements (1) and (2) share a single <code>+(b0, c0)</code> node labeled <code>{a, d}</code>. Statement (3) creates <code>e = +(a, a)</code>. Statement (4) updates <code>b</code> to <code>*(e, c0)</code>, and statement (5) computes <code>d = +(b_new, c0)</code>. <strong>Optimized TAC (4 instructions instead of 5):</strong><br>
+        <code>a = b + c; e = a + a; b = e * c; d = b + c;</code> (eliminating redundant computation of <code>d</code>).</p>
+
+        <h4>3. Loop Optimization, Peephole Optimization &amp; Modern Compilers (LLVM/GCC)</h4>
+        <ul>
+          <li><strong>Loop Optimizations:</strong> <em>Code Motion</em> moves loop-invariant computations outside the loop; <em>Induction Variable Elimination</em> removes redundant loop counters; <em>Reduction in Strength</em> replaces expensive operations like <code>4 * i</code> with cheap additions <code>t = t + 4</code>.</li>
+          <li><strong>Peephole Optimization:</strong> Scans a small sliding window of target instructions to apply local improvements: (1) redundant load/store elimination, (2) unreachable code removal, (3) algebraic identities (<code>x + 0 = x</code>, <code>x * 1 = x</code>), and (4) strength reduction (<code>x * 2 &rarr; x &lt;&lt; 1</code>).</li>
+          <li><strong>LLVM &amp; GCC Modularity (General 5M Q8):</strong> Both use a three-phase retargetable architecture (Language Front-End &rarr; Common IR Optimizer [LLVM IR / GIMPLE] &rarr; Target Back-End), allowing $M$ languages and $N$ CPUs with $M + N$ components instead of $M 	imes N$.</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/code-optimization-in-compiler-design/" target="_blank" rel="noopener noreferrer">Code Optimization, Basic Blocks, CFG &amp; Peephole Optimization - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u5-t2" data-unit="5" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.2</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Data-Flow Analysis Framework: Reaching Definitions, Live Variable Analysis &amp; Available Expressions</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-5 (10M) Q1: Discuss Data-Flow Analysis in detail. Explain the concepts, data-flow equations, and applications of Reaching Definitions, Live Variable Analysis, and Available Expressions.</li><li>IMP Unit-5 (10M) Q3: Discuss Data-Flow Analysis framework in detail (direction, boundary conditions, equations for Reaching Definitions and Live Variable Analysis).</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Merges General Unit-5 (10M) Q1 and IMP Unit-5 (10M) Q3.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <table>
+            <thead>
+                <tr><th>Analysis Problem</th><th>Direction &amp; Meet ($\wedge$)</th><th>Boundary &amp; Transfer Equations</th><th>Compiler Application</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Reaching Definitions</strong></td><td>Forward ($\cup$ Union)</td><td>$OUT[Entry] = \emptyset$<br>$IN[B] = igcup_{P \in pred(B)} OUT[P]$<br>$OUT[B] = gen_B \cup (IN[B] - kill_B)$</td><td>Constant propagation &amp; uninitialized variable detection</td></tr>
+                <tr><td><strong>Live Variable Analysis</strong></td><td>Backward ($\cup$ Union)</td><td>$IN[Exit] = \emptyset$<br>$OUT[B] = igcup_{S \in succ(B)} IN[S]$<br>$IN[B] = use_B \cup (OUT[B] - def_B)$</td><td>Dead code elimination &amp; register allocation</td></tr>
+                <tr><td><strong>Available Expressions</strong></td><td>Forward ($\cap$ Intersection)</td><td>$OUT[Entry] = \emptyset$<br>$IN[B] = igcap_{P \in pred(B)} OUT[P]$<br>$OUT[B] = e\_gen_B \cup (IN[B] - e\_kill_B)$</td><td>Global Common Subexpression Elimination (GCSE)</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/data-flow-analysis-compiler/" target="_blank" rel="noopener noreferrer">Data-Flow Analysis in Compiler Design - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u5-t3" data-unit="5" data-cats="general important" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.3</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Target Code Generation: Design Issues, Next-Use Info, Register Allocation &amp; Simple Code Generator (getReg)</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>General Unit-5 (10M) Q2, Q5 &amp; (5M) Q6, Q7: Major issues in Code Generator design; Simple Code Generator algorithm, getReg function &amp; trace for x = y + z; Next-Use Information; Register Allocation vs Assignment.</li><li>IMP Unit-5 (10M) Q4, Q5 &amp; (5M) Q3, Q5: Simple Code Generator, descriptors &amp; getReg(); Principal issues in Code Generator design; Register Allocation vs Assignment; Next-Use Information.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Consolidates General Unit-5 (10M) Q2, Q5 &amp; (5M) Q6–Q7 and IMP Unit-5 (10M) Q4–Q5 &amp; (5M) Q3, Q5.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <h4>1. Major Issues in Code Generator Design (General 10M Q2 &amp; IMP 10M Q5)</h4>
+        <ul>
+          <li><strong>Input to Code Generator:</strong> Linear IR (TAC/Quadruples) assumed type-checked and bug-free.</li>
+          <li><strong>Target Machine Architecture:</strong> RISC vs. CISC instruction sets, addressing modes, register count, and instruction costs.</li>
+          <li><strong>Runtime Storage Management:</strong> Mapping variable names to static, stack, or heap addresses.</li>
+          <li><strong>Instruction Selection:</strong> Choosing fast, low-cost machine idioms (e.g., <code>INC R0</code> instead of <code>ADD R0, #1</code>).</li>
+          <li><strong>Register Allocation vs. Assignment (General 5M Q7 &amp; IMP 5M Q3):</strong> <em>Register Allocation</em> selects <strong>which</strong> variables reside in fast CPU registers; <em>Register Assignment</em> picks the <strong>specific register</strong> (e.g., <code>R1</code>) for each allocated variable (NP-complete via graph coloring).</li>
+        </ul>
+
+        <h4>2. Next-Use Information &amp; Simple Code Generator Trace for <code>x = y + z</code> (General 10M Q5 &amp; IMP 10M Q4)</h4>
+        <p><strong>Next-Use Information</strong> (computed via a backward scan over each basic block) tells the code generator whether a variable's current value will be read again before being overwritten; dead registers can be reused immediately without spilling to RAM.</p>
+        <p>Using <strong>Register Descriptors</strong> (what variable each register currently holds) and <strong>Address Descriptors</strong> (locations where a variable's current value resides), <code>getReg(x = y + z)</code> selects register <code>R</code> for <code>x</code> (reusing <code>y</code>'s register if <code>y</code> has no next-use), emits <code>MOV R, y</code> (if <code>y</code> is not already in <code>R</code>), emits <code>ADD R, z</code>, and updates descriptors so <code>x</code> is exclusively in <code>R</code>.</p>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/compiler-design/code-generator-in-compiler-design/" target="_blank" rel="noopener noreferrer">Code Generator Design, Descriptors &amp; getReg - GeeksforGeeks</a></div>
+        </article>
+        
+        <article class="q-card" id="u5-t4" data-unit="5" data-cats="twisted" data-marks="10">
+            <div class="q-header">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.4</span>
+                    <span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">[PDF Appendix Note: Twisted Unit-5 Items] Google Maps, Geocoding, App Signing, Versioning &amp; Play Store Publishing</h3>
+            </div>
+
+            <div class="q-originals">
+                <div class="orig-label">Original Question Bank Mapping:</div>
+                <ul><li>Twisted Unit-5 (10M) Q1–Q6: Google Maps dynamic markers; Geocoding vs Reverse Geocoding; Beta release signing &amp; versioning; Location permissions &amp; crash prevention; Debugging geocoding failures; Multi-region app flavors signing/versioning.</li><li>Twisted Unit-5 (5M) Q1–Q5: Google Maps vs static map; Reverse geocoding failure precautions; Importance of app signing; versionCode vs versionName; Steps to publish on Play Store.</li></ul>
+                <div class="dup-note"><strong>Cross-Bank Mapping:</strong> Preserves all 11 questions printed under Twisted Unit-5 in Combined_3.pdf so zero PDF questions are skipped.</div>
+            </div>
+
+            <div class="q-answer">
+                
+        <p><em>Note: In the attached question-bank PDF, Twisted Unit-5 contains Android Maps &amp; Publishing questions. Complete exam-ready answers are provided below:</em></p>
+        <ul>
+            <li><strong>Google Maps vs. Static Map &amp; Dynamic Markers (10M Q1, Q4 &amp; 5M Q1):</strong> Interactive Maps SDK supports zooming, panning, gesture controls, and dynamic <code>GoogleMap.addMarker(MarkerOptions())</code> clustering, whereas static maps return a single non-interactive bitmap image. Runtime location permissions (<code>ACCESS_FINE_LOCATION</code>) must be requested via <code>ActivityResultContracts.RequestPermission</code> with <code>SecurityException</code> checks to prevent crashes.</li>
+            <li><strong>Geocoding vs. Reverse Geocoding (10M Q2, Q5 &amp; 5M Q2):</strong> <em>Geocoding</em> converts a street address into <code>(latitude, longitude)</code>; <em>Reverse Geocoding</em> converts coordinates into a human-readable address via Android's <code>Geocoder</code> class. Always check <code>Geocoder.isPresent()</code>, run off the main UI thread, and handle <code>IOException</code> or empty result lists gracefully.</li>
+            <li><strong>App Signing, Versioning &amp; Play Store Publishing (10M Q3, Q6 &amp; 5M Q3–Q5):</strong> Every APK/AAB must be cryptographically signed with a developer keystore (verifying author authenticity and update integrity). <code>versionCode</code> is an internal strictly increasing integer used by Play Store for upgrades, while <code>versionName</code> is the user-visible string (e.g., <code>"2.1.0"</code>). Multi-region builds use Gradle <code>productFlavors</code> with distinct <code>applicationIdSuffix</code> and signing configs before uploading a signed Android App Bundle (<code>.aab</code>) to Google Play Console.</li>
+        </ul>
+        
+            </div>
+
+            <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a href="https://www.geeksforgeeks.org/android/google-maps-in-android/" target="_blank" rel="noopener noreferrer">Google Maps, Geocoding &amp; Android App Publishing - GeeksforGeeks</a></div>
+        </article>
+        </section>
+</main>
+
+<footer>
+    Compiler Design (BETCE17334) Exam Study Guide &bull; Gyanmanjari Innovative University (Sem-7) &bull; Complete Offline-Ready Study Guide
+</footer>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const catFilter = document.getElementById('catFilter');
+    const marksFilter = document.getElementById('marksFilter');
+    const cards = document.querySelectorAll('.q-card');
+
+    function filterCards() {
+        const query = searchInput.value.toLowerCase().trim();
+        const cat = catFilter.value;
+        const marks = marksFilter.value;
+
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            const cardCats = card.getAttribute('data-cats');
+            const cardMarks = card.getAttribute('data-marks');
+
+            const matchesQuery = !query || text.includes(query);
+            const matchesCat = cat === 'all' || cardCats.includes(cat);
+            const matchesMarks = marks === 'all' || cardMarks === marks;
+
+            if (matchesQuery && matchesCat && matchesMarks) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    }
+
+    searchInput.addEventListener('input', filterCards);
+    catFilter.addEventListener('change', filterCards);
+    marksFilter.addEventListener('change', filterCards);
+</script>
+</body>
+</html>

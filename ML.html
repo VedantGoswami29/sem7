@@ -1,0 +1,2749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning (BETCE17335) - Complete University Exam Study Guide</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --border: #e2e8f0;
+            --accent-bg: #eff6ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        header.hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+            color: #ffffff;
+            padding: 2rem 1.5rem;
+            border-bottom: 4px solid #60a5fa;
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            margin: 0 0 0.4rem 0;
+            font-size: 1.85rem;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #dbeafe;
+            font-size: 0.98rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.28rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .controls-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+        }
+
+        .controls-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            background: var(--accent-bg);
+            border: 1px solid #bfdbfe;
+            padding: 0.32rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        input[type="search"],
+        select {
+            padding: 0.42rem 0.7rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: #ffffff;
+        }
+
+        input[type="search"] {
+            min-width: 240px;
+        }
+
+        button.print-btn {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 0.44rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1180px;
+            margin: 1.5rem auto 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .unit-section {
+            margin-bottom: 3rem;
+        }
+
+        .unit-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .unit-header h2 {
+            margin: 0;
+            color: var(--primary);
+            font-size: 1.45rem;
+        }
+
+        .unit-count {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--muted);
+            background: #e2e8f0;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+        }
+
+        .quick-rev-box {
+            background: linear-gradient(to right, #fefce8, #fffbeb);
+            border: 1px solid #fde047;
+            border-left: 5px solid #eab308;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .qr-title {
+            font-weight: 700;
+            color: #854d0e;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-rev-box ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            font-size: 0.9rem;
+            color: #422006;
+        }
+
+        .q-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.4rem 1.6rem;
+            margin-bottom: 1.4rem;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+        }
+
+        .q-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .q-num {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #334155;
+            background: #f1f5f9;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-general {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-important {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .badge-twisted {
+            background: #fae8ff;
+            color: #86198f;
+        }
+
+        .marks-5 {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .marks-10 {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+
+        .q-title {
+            margin: 0 0 0.85rem 0;
+            font-size: 1.18rem;
+            color: #0f172a;
+        }
+
+        .q-originals {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #3b82f6;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.1rem;
+            font-size: 0.86rem;
+        }
+
+        .orig-label {
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.35rem;
+        }
+
+        .q-originals ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #334155;
+        }
+
+        .dup-note {
+            margin-top: 0.45rem;
+            font-size: 0.82rem;
+            color: #475569;
+            font-style: italic;
+        }
+
+        .q-answer h4 {
+            color: var(--primary);
+            margin: 1.1rem 0 0.45rem 0;
+            font-size: 1.02rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.2rem;
+        }
+
+        .q-answer h4:first-child {
+            margin-top: 0;
+        }
+
+        .q-answer p,
+        .q-answer ul,
+        .q-answer ol {
+            font-size: 0.94rem;
+        }
+
+        .formula-box {
+            background: #f1f5f9;
+            border-left: 4px solid #1e3a8a;
+            padding: 0.6rem 0.9rem;
+            margin: 0.6rem 0;
+            font-family: "Cambria Math", "Times New Roman", serif;
+            font-size: 1rem;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 0.12rem 0.35rem;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.86em;
+            color: #be123c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.85rem 0 1rem 0;
+            font-size: 0.88rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #cbd5e1;
+            padding: 0.55rem 0.7rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .svg-container {
+            margin: 0.85rem 0 1rem 0;
+            padding: 0.65rem;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .gfg-ref {
+            margin-top: 1rem;
+            padding-top: 0.65rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.84rem;
+            color: var(--muted);
+        }
+
+        .gfg-ref a {
+            color: #047857;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .gfg-ref a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            background: #ffffff;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 14mm 12mm;
+            }
+
+            body {
+                background: #ffffff;
+                font-size: 10pt;
+            }
+
+            .controls-bar,
+            button.print-btn {
+                display: none !important;
+            }
+
+            header.hero {
+                background: #1e3a8a !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 1rem;
+            }
+
+            .q-card {
+                box-shadow: none;
+                border: 1px solid #94a3b8;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .unit-section {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            .unit-section:first-of-type {
+                page-break-before: avoid;
+                break-before: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <h1>Machine Learning (BETCE17335) &mdash; Complete University Exam Study Guide</h1>
+            <p>Gyanmanjari Innovative University &bull; B.Tech Computer Engineering (Semester 7) &bull; General, IMP
+                &amp; Twisted Question Banks</p>
+            <div class="stats-bar">
+                <span class="stat-pill">5 Units Covered</span>
+                <span class="stat-pill">160 Original Questions Mapped</span>
+                <span class="stat-pill">Solved Numericals &amp; Derivations</span>
+                <span class="stat-pill">5-Mark &amp; 10-Mark Exam Answers</span>
+                <span class="stat-pill">Unit Quick-Revision Sheets</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="controls-bar">
+        <div class="controls-inner">
+            <nav class="nav-links" aria-label="Unit Navigation">
+                <a href="#unit-1">Unit 1: Intro to ML</a>
+                <a href="#unit-2">Unit 2: Probability &amp; Stats</a>
+                <a href="#unit-3">Unit 3: Supervised &amp; Unsupervised</a>
+                <a href="#unit-4">Unit 4: Neural Networks &amp; DL</a>
+                <a href="#unit-5">Unit 5: Practical ML</a>
+            </nav>
+            <div class="filter-group">
+                <input type="search" id="searchInput" placeholder="Search questions, formulas, algorithms..."
+                    aria-label="Search questions">
+                <select id="catFilter" aria-label="Filter by category">
+                    <option value="all">All Categories</option>
+                    <option value="general">General Bank</option>
+                    <option value="important">IMP Bank</option>
+                    <option value="twisted">Twisted Bank</option>
+                </select>
+                <select id="marksFilter" aria-label="Filter by marks">
+                    <option value="all">All Marks (5 &amp; 10)</option>
+                    <option value="5">5-Mark Answers</option>
+                    <option value="10">10-Mark Answers</option>
+                </select>
+                <button class="print-btn" onclick="window.print()">&#128424; Print / Save A4 PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <main id="contentArea">
+
+        <!-- ========================================================= -->
+        <!-- UNIT 1: INTRODUCTION TO MACHINE LEARNING                  -->
+        <!-- ========================================================= -->
+        <section id="unit-1" class="unit-section">
+            <div class="unit-header">
+                <h2>Unit 1: Introduction to Machine Learning</h2>
+                <span class="unit-count">4 Master Topics &bull; 16 Bank Questions Covered</span>
+            </div>
+
+            <div class="quick-rev-box">
+                <div class="qr-title">&#9889; Unit 1 Quick Revision Cheat Sheet</div>
+                <ul>
+                    <li><strong>Machine Learning (Tom Mitchell):</strong> A computer program learns from experience
+                        <em>E</em> with respect to task <em>T</em> and performance measure <em>P</em>, if its
+                        performance at <em>T</em>, as measured by <em>P</em>, improves with experience <em>E</em>.</li>
+                    <li><strong>Three Paradigms:</strong> <em>Supervised</em> (labeled data: Regression &amp;
+                        Classification), <em>Unsupervised</em> (unlabeled data: Clustering &amp; Dimensionality
+                        Reduction), <em>Reinforcement</em> (agent + environment + reward/penalty).</li>
+                    <li><strong>Traditional Programming vs. ML:</strong> Traditional = Rules + Data &rarr; Output; ML =
+                        Data + Output &rarr; Learned Rules (Model).</li>
+                    <li><strong>Data Preprocessing:</strong> Data Cleaning &rarr; Missing Values (Deletion vs.
+                        Mean/Median/KNN Imputation) &rarr; Normalization (Min-Max $[0,1]$ vs. Z-Score Standardization
+                        $\mu=0, \sigma=1$).</li>
+                </ul>
+            </div>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.1</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Machine Learning Definition, Types (Supervised, Unsupervised, Reinforcement) &amp;
+                    Traditional Programming Comparison</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (8 Questions):</div>
+                    <ul>
+                        <li>General Unit-1 Q1: What is Machine Learning?</li>
+                        <li>General Unit-1 Q2: Define Supervised Learning.</li>
+                        <li>General Unit-1 Q3: Define Unsupervised Learning.</li>
+                        <li>General Unit-1 Q4: Define Reinforcement Learning.</li>
+                        <li>IMP Unit-1 Q1: Differentiate between Supervised, Unsupervised, and Reinforcement Learning
+                            with suitable examples.</li>
+                        <li>IMP Unit-1 Q2: Explain the difference between Machine Learning and Traditional Programming.
+                        </li>
+                        <li>IMP Unit-1 Q5: Explain the types of Machine Learning with real-world examples for each type.
+                        </li>
+                        <li>Twisted Unit-1 Q2: Can a Reinforcement Learning problem be solved using Supervised Learning
+                            techniques? Justify your answer.</li>
+                        <li>Twisted Unit-1 Q5: In what scenario would traditional programming still be preferred over
+                            Machine Learning? Justify.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Definition of Machine Learning</h4>
+                    <p><strong>Machine Learning (ML)</strong> is a subfield of Artificial Intelligence that enables
+                        systems to automatically learn patterns from historical data and improve their predictive
+                        performance without being explicitly programmed with hard-coded rules. Formally (Tom Mitchell,
+                        1997): <em>"A computer program is said to learn from experience E with respect to some class of
+                            tasks T and performance measure P, if its performance at tasks in T, as measured by P,
+                            improves with experience E."</em></p>
+
+                    <h4>2. Three Types of Machine Learning</h4>
+                    <ul>
+                        <li><strong>Supervised Learning:</strong> Trains a model on a <em>labeled dataset</em> $(X, Y)$
+                            where input features $X$ are mapped to known ground-truth targets $Y$. Subdivided into
+                            <strong>Classification</strong> (discrete categories, e.g., Spam vs. Ham email) and
+                            <strong>Regression</strong> (continuous numeric values, e.g., House price prediction).</li>
+                        <li><strong>Unsupervised Learning:</strong> Discovers hidden structures, groupings, or
+                            compressed representations in <em>unlabeled data</em> $(X)$ without human-provided target
+                            labels. Examples: <strong>Clustering</strong> (customer segmentation via K-Means),
+                            <strong>Dimensionality Reduction</strong> (PCA), and <strong>Association Rules</strong>
+                            (Apriori market basket analysis).</li>
+                        <li><strong>Reinforcement Learning (RL):</strong> An autonomous <strong>Agent</strong> interacts
+                            with an <strong>Environment</strong> by taking <strong>Actions ($A_t$)</strong> across
+                            <strong>States ($S_t$)</strong> to maximize cumulative long-term <strong>Rewards
+                                ($R_t$)</strong> through trial-and-error exploration. Examples: Autonomous driving,
+                            game-playing AI (AlphaGo), and robotics control.</li>
+                    </ul>
+
+                    <h4>3. Comparison: Supervised vs. Unsupervised vs. Reinforcement Learning</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Basis</th>
+                                <th>Supervised Learning</th>
+                                <th>Unsupervised Learning</th>
+                                <th>Reinforcement Learning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Training Data</strong></td>
+                                <td>Labeled $(X, Y)$ pairs</td>
+                                <td>Unlabeled $(X)$ only</td>
+                                <td>No fixed dataset; interactive state-action-reward trajectories</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Feedback Mechanism</strong></td>
+                                <td>Direct error loss against ground truth</td>
+                                <td>No external feedback (internal similarity)</td>
+                                <td>Delayed scalar reward or penalty signal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Primary Tasks</strong></td>
+                                <td>Classification &amp; Regression</td>
+                                <td>Clustering, PCA, Association</td>
+                                <td>Sequential decision making &amp; control</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Algorithms</strong></td>
+                                <td>Linear Regression, SVM, Decision Tree, KNN</td>
+                                <td>K-Means, Hierarchical, PCA, Apriori</td>
+                                <td>Q-Learning, SARSA, Deep Q-Network (DQN)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>4. Machine Learning vs. Traditional Programming &amp; Twisted Scenarios</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Traditional Programming</th>
+                                <th>Machine Learning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Inputs &rarr; Output</strong></td>
+                                <td><code>Data + Explicit Program Rules &rarr; Output</code></td>
+                                <td><code>Data + Expected Outputs &rarr; Learned Program (Model)</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rule Creation</strong></td>
+                                <td>Manually coded by human engineers</td>
+                                <td>Automatically inferred statistically from data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adaptability</strong></td>
+                                <td>Rigid; requires manual code rewrite for new cases</td>
+                                <td>Adapts automatically when retrained on new data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li><strong>Can RL be solved via Supervised Learning? (Twisted Q2):</strong> <em>Generally
+                                No.</em> Supervised learning assumes independent and identically distributed (i.i.d.)
+                            samples with immediate exact ground-truth labels, whereas RL involves <strong>sequential
+                                decisions</strong> where current actions alter future states and rewards are delayed
+                            (credit assignment problem). Only when an expert provides optimal state-action
+                            demonstrations (<em>Imitation Learning / Behavioral Cloning</em>) can SL approximate RL.
+                        </li>
+                        <li><strong>When is Traditional Programming Preferred? (Twisted Q5):</strong> Preferred when
+                            rules are exact, deterministic, and legally auditable (e.g., tax calculation formulas,
+                            banking ledger arithmetic, safety-critical avionics interlocks), or when zero training data
+                            exists.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/types-of-machine-learning/" target="_blank"
+                        rel="noopener noreferrer">Types of Machine Learning - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important" data-marks="5">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.2</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-5">5 Marks</span>
+                </div>
+                <h3 class="q-title">Applications of Machine Learning (Healthcare, Finance, IoT &amp; General Domains)
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (2 Questions):</div>
+                    <ul>
+                        <li>General Unit-1 Q5: List any four applications of Machine Learning.</li>
+                        <li>IMP Unit-1 Q3: Explain the applications of Machine Learning in Healthcare, Finance, and IoT.
+                        </li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <ul>
+                        <li><strong>1. Healthcare:</strong> Medical image diagnosis (CNN detection of tumors in
+                            X-rays/MRIs), disease risk prediction (diabetes/sepsis early warning), drug discovery, and
+                            personalized treatment plans.</li>
+                        <li><strong>2. Finance &amp; Banking:</strong> Real-time credit card fraud detection (anomaly
+                            detection), algorithmic stock trading, credit risk scoring for loan approvals, and customer
+                            churn prediction.</li>
+                        <li><strong>3. Internet of Things (IoT):</strong> Predictive maintenance on industrial machinery
+                            (detecting motor failure from vibration/temperature sensors), smart home energy
+                            optimization, and autonomous vehicle sensor fusion.</li>
+                        <li><strong>4. E-Commerce &amp; Entertainment:</strong> Personalized product and movie
+                            recommendation engines (collaborative filtering on Amazon/Netflix) and dynamic pricing.</li>
+                        <li><strong>5. Natural Language Processing (NLP):</strong> Spam email filtering, sentiment
+                            analysis, machine translation, and virtual voice assistants.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/machine-learning-applications/"
+                        target="_blank" rel="noopener noreferrer">Applications of Machine Learning - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 1.3</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Data Preprocessing: Data Cleaning, Handling Missing Values &amp; Data Normalization
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (5 Questions):</div>
+                    <ul>
+                        <li>General Unit-1 Q6: What is data normalization?</li>
+                        <li>General Unit-1 Q7: What is meant by handling missing values in a dataset?</li>
+                        <li>IMP Unit-1 Q4: Explain the various data preprocessing steps: data cleaning, handling missing
+                            values, and normalization.</li>
+                        <li>Twisted Unit-1 Q1: Why is data preprocessing often considered more important than model
+                            selection in an ML pipeline? Justify.</li>
+                        <li>Twisted Unit-1 Q4: If a dataset column has a large percentage of missing values, would you
+                            drop the column or impute it? Justify with reasoning.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Why Data Preprocessing Outweighs Model Selection (Twisted Q1)</h4>
+                    <p>Following the principle of <strong>"Garbage In, Garbage Out"</strong>, real-world raw datasets
+                        contain missing entries, noise, duplicates, and unscaled features. Even the most advanced neural
+                        network or ensemble model will learn biased or erroneous boundaries on dirty data, whereas
+                        clean, well-scaled features allow even simple models to achieve high generalization accuracy.
+                    </p>
+
+                    <h4>2. Core Data Preprocessing Steps</h4>
+                    <ul>
+                        <li><strong>Step 1 – Data Cleaning:</strong> Removing duplicate rows, fixing structural
+                            typos/inconsistent formatting, and detecting/capping statistical outliers (via IQR or
+                            Z-score filtering).</li>
+                        <li><strong>Step 2 – Handling Missing Values:</strong> Addressing <code>NULL</code> /
+                            <code>NaN</code> entries so algorithms do not fail or bias estimates:
+                            <ul>
+                                <li><em>Deletion:</em> Listwise deletion (dropping rows) when missingness is &lt;5% and
+                                    Missing Completely at Random (MCAR), or dropping an entire feature column.</li>
+                                <li><em>Imputation:</em> Replacing missing values with <strong>Mean</strong> (normally
+                                    distributed numeric data), <strong>Median</strong> (skewed data with outliers),
+                                    <strong>Mode</strong> (categorical features), or model-based <strong>KNN / MICE
+                                        imputation</strong>.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 3 – Data Normalization (Feature Scaling):</strong> Rescaling numeric features
+                            onto a common range so large-magnitude features (e.g., Salary = 100,000) do not dominate
+                            distance-based algorithms (KNN, SVM, K-Means) or gradient descent convergence over
+                            small-magnitude features (e.g., Age = 25).
+                            <div class="formula-box">
+                                <strong>Min-Max Normalization:</strong> &nbsp; X<sub>norm</sub> = (X &minus;
+                                X<sub>min</sub>) / (X<sub>max</sub> &minus; X<sub>min</sub>) &isin; [0, 1]<br>
+                                <strong>Z-Score Standardization:</strong> &nbsp; X<sub>std</sub> = (X &minus; &mu;) /
+                                &sigma; &nbsp; (Mean = 0, Std Dev = 1)
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h4>3. Dropping vs. Imputing a Column with High Missingness (Twisted Q4)</h4>
+                    <p><strong>Decision:</strong> If a column has a very high percentage of missing values (e.g.,
+                        <strong>&gt; 60–70% missing</strong>), <strong>drop the column</strong> because imputing the
+                        majority of entries introduces severe synthetic bias and artificial variance.
+                        <em>Exception:</em> If domain knowledge indicates that <em>missingness itself carries predictive
+                            signal</em> (Missing Not at Random, e.g., an optional medical test only ordered for critical
+                        patients), retain a binary indicator flag (<code>is_missing = 1/0</code>) rather than
+                        fabricating numeric values.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/data-science/data-preprocessing-machine-learning-python/"
+                        target="_blank" rel="noopener noreferrer">Data Preprocessing in Machine Learning -
+                        GeeksforGeeks</a></div>
+            </article>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- UNIT 2: PROBABILITY AND STATISTICS FOUNDATION IN ML       -->
+        <!-- ========================================================= -->
+        <section id="unit-2" class="unit-section">
+            <div class="unit-header">
+                <h2>Unit 2: Probability and Statistics Foundation in ML</h2>
+                <span class="unit-count">11 Master Topics &bull; 64 Bank Questions Covered</span>
+            </div>
+
+            <div class="quick-rev-box">
+                <div class="qr-title">&#9889; Unit 2 Quick Revision Cheat Sheet</div>
+                <ul>
+                    <li><strong>Probability Laws:</strong> Addition Rule $P(A \cup B) = P(A) + P(B) - P(A \cap B)$;
+                        Conditional Probability $P(A|B) = P(A \cap B) / P(B)$.</li>
+                    <li><strong>Discrete Distributions:</strong> <em>Bernoulli</em> ($1$ trial, $p$), <em>Binomial</em>
+                        ($n$ trials, $\mu=np, \sigma^2=npq$), <em>Poisson</em> (rare events in interval $\lambda$,
+                        $\mu=\sigma^2=\lambda$).</li>
+                    <li><strong>Continuous Distributions:</strong> <em>Normal / Gaussian</em> $N(\mu, \sigma^2)$ (bell
+                        curve, 68-95-99.7 rule), <em>Uniform</em> $U(a,b)$ (constant density $\frac{1}{b-a}$).</li>
+                    <li><strong>Central Limit Theorem (CLT):</strong> Sample means $\bar{X}$ of size $n \ge 30$ follow
+                        $N(\mu, \sigma^2/n)$ regardless of population shape.</li>
+                    <li><strong>Validation &amp; Hypothesis Testing:</strong> K-Fold CV reduces variance over single
+                        Hold-Out. Type I Error ($\alpha$, False Positive) vs. Type II Error ($\beta$, False Negative —
+                        critical in medical diagnosis).</li>
+                </ul>
+            </div>
+
+            <article class="q-card" data-cats="general important" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Solved Probability Numericals (General Unit-2 Questions 1 to 13)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (14 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q1: Three unbiased coins are tossed. What is the probability that at most one
+                            head occurred?</li>
+                        <li>General Unit-2 Q2: Find the probability of getting a red card when a card is drawn from a
+                            well-shuffled pack of cards.</li>
+                        <li>General Unit-2 Q3: A bag contains 6 white and 4 black balls. Two balls are drawn at random
+                            from the bag. Find the probability that both the balls are of the same color.</li>
+                        <li>General Unit-2 Q4: An unbiased die is tossed. Find the probability of getting an even
+                            number.</li>
+                        <li>General Unit-2 Q5: From a bag containing red and blue balls, 10 each, 2 balls are drawn at
+                            random. Find the probability that one of them is red and the other is blue.</li>
+                        <li>General Unit-2 Q6: There are 30 students in a class, 15 are boys and 15 are girls. In the
+                            final exam, 5 boys and 4 girls made an A grade. If a student is chosen at random from the
+                            class, what is the probability of choosing a girl or an 'A-grade student?</li>
+                        <li>General Unit-2 Q7: One card is drawn from a deck of 52 cards, well-shuffled. Calculate the
+                            probability that the card will (i) be an ace, (ii) not be an ace.</li>
+                        <li>General Unit-2 Q8: A standard deck of 52 cards is shuffled. What is the probability of
+                            drawing a King or a Heart?</li>
+                        <li>General Unit-2 Q9: In a high school senior class, 60% of the students play sports, 40% are
+                            in the music club, and 20% do both. If a student is chosen at random, what is the
+                            probability that they play sports or are in the music club?</li>
+                        <li>General Unit-2 Q10: A bag contains 3 red marbles and 7 blue marbles. You pick two marbles
+                            without replacement. What is the probability that both are red?</li>
+                        <li>General Unit-2 Q11: A technician tests a batch of 10 microchips, knowing that exactly 3 of
+                            them are defective. The technician randomly selects 2 microchips from the batch, one after
+                            the other, without replacement. Calculate the probability that neither of the selected
+                            microchips is defective.</li>
+                        <li>General Unit-2 Q12: You roll a fair 6-sided die. Given that the number rolled is even, what
+                            is the probability that it is a 6?</li>
+                        <li>General Unit-2 Q13: A company tracks employee performance and attendance. The data shows
+                            that 15% of all employees arrive late and miss their daily targets. Overall, 25% of all
+                            employees arrive late on any given day. If an employee arrives late, what is the probability
+                            that they will also miss their daily target?</li>
+                        <li>IMP Unit-2 Q1: Explain the concept of probability and its role in Machine Learning.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>Role of Probability in Machine Learning (IMP Q1)</h4>
+                    <p>Probability quantifies uncertainty in noisy real-world data, underpins probabilistic classifiers
+                        (Naive Bayes, Logistic Regression), enables Maximum Likelihood Estimation (MLE) and Bayesian
+                        inference, and defines loss functions like Cross-Entropy.</p>
+
+                    <h4>Step-by-Step Solutions to All 13 Probability Problems</h4>
+                    <ol>
+                        <li><strong>Three Unbiased Coins — At Most One Head (Q1):</strong><br>
+                            Sample space $S = \{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT\}$, $n(S) = 8$.<br>
+                            Event $E$ (0 or 1 head) $= \{TTT, HTT, THT, TTH\}$, $n(E) = 4$.<br>
+                            <strong>$P(E) = 4 / 8 = 1 / 2 = 0.5$</strong>.
+                        </li>
+                        <li><strong>Red Card from 52-Card Deck (Q2):</strong><br>
+                            Total cards $= 52$; Red cards (26 Hearts + 26 Diamonds) $= 26$.<br>
+                            <strong>$P(\text{Red}) = 26 / 52 = 1 / 2 = 0.5$</strong>.
+                        </li>
+                        <li><strong>6 White &amp; 4 Black Balls — Both Same Color (Q3):</strong><br>
+                            Total balls $= 10$. Total ways to draw 2 balls $= \binom{10}{2} = \frac{10 \times 9}{2} =
+                            45$.<br>
+                            Ways for 2 White $= \binom{6}{2} = 15$; Ways for 2 Black $= \binom{4}{2} = 6$.<br>
+                            <strong>$P(\text{Same Color}) = \frac{15 + 6}{45} = \frac{21}{45} = \frac{7}{15} \approx
+                                0.4667$</strong>.
+                        </li>
+                        <li><strong>Unbiased Die — Even Number (Q4):</strong><br>
+                            $S = \{1,2,3,4,5,6\}$, Even outcomes $= \{2,4,6\}$.<br>
+                            <strong>$P(\text{Even}) = 3 / 6 = 1 / 2 = 0.5$</strong>.
+                        </li>
+                        <li><strong>10 Red &amp; 10 Blue Balls — One Red and One Blue (Q5):</strong><br>
+                            Total ways $= \binom{20}{2} = \frac{20 \times 19}{2} = 190$. Favorable ways $= \binom{10}{1}
+                            \times \binom{10}{1} = 10 \times 10 = 100$.<br>
+                            <strong>$P(1R, 1B) = 100 / 190 = 10 / 19 \approx 0.5263$</strong>.
+                        </li>
+                        <li><strong>30 Students (15 Boys, 15 Girls; 5 Boys &amp; 4 Girls A-Grade) — Girl or A-Grade
+                                (Q6):</strong><br>
+                            $P(G) = 15/30$, $P(A) = (5+4)/30 = 9/30$, $P(G \cap A) = 4/30$.<br>
+                            By Addition Rule: <strong>$P(G \cup A) = \frac{15}{30} + \frac{9}{30} - \frac{4}{30} =
+                                \frac{20}{30} = \frac{2}{3} \approx 0.6667$</strong>.</li>
+                        <li><strong>52 Cards — (i) Ace, (ii) Not an Ace (Q7):</strong><br>
+                            (i) There are 4 Aces: <strong>$P(\text{Ace}) = 4 / 52 = 1 / 13$</strong>.<br>
+                            (ii) Complement rule: <strong>$P(\text{Not Ace}) = 1 - \frac{1}{13} =
+                                \frac{12}{13}$</strong>.</li>
+                        <li><strong>52 Cards — King or Heart (Q8):</strong><br>
+                            $P(\text{King}) = 4/52$, $P(\text{Heart}) = 13/52$, $P(\text{King of Hearts}) = 1/52$.<br>
+                            <strong>$P(\text{King} \cup \text{Heart}) = \frac{4}{52} + \frac{13}{52} - \frac{1}{52} =
+                                \frac{16}{52} = \frac{4}{13} \approx 0.3077$</strong>.
+                        </li>
+                        <li><strong>Sports (60%), Music (40%), Both (20%) — Sports or Music (Q9):</strong><br>
+                            <strong>$P(S \cup M) = 0.60 + 0.40 - 0.20 = 0.80 \text{ (or } 80\%)$</strong>.
+                        </li>
+                        <li><strong>3 Red &amp; 7 Blue Marbles Without Replacement — Both Red (Q10):</strong><br>
+                            <strong>$P(R_1 \cap R_2) = \frac{3}{10} \times \frac{2}{9} = \frac{6}{90} = \frac{1}{15}
+                                \approx 0.0667$</strong>.
+                        </li>
+                        <li><strong>10 Microchips (3 Defective, 7 Good) Without Replacement — Neither Defective
+                                (Q11):</strong><br>
+                            <strong>$P(G_1 \cap G_2) = \frac{7}{10} \times \frac{6}{9} = \frac{42}{90} = \frac{7}{15}
+                                \approx 0.4667$</strong>.
+                        </li>
+                        <li><strong>6-Sided Die — Probability of 6 Given Even (Q12):</strong><br>
+                            Given Even $B = \{2, 4, 6\}$, $P(B) = 3/6$. Event $A = \{6\}$, $P(A \cap B) = 1/6$.<br>
+                            <strong>$P(6 \mid \text{Even}) = \frac{1/6}{3/6} = \frac{1}{3} \approx 0.3333$</strong>.
+                        </li>
+                        <li><strong>Employee Late (25%) &amp; Late + Miss Target (15%) — Conditional Probability
+                                (Q13):</strong><br>
+                            <strong>$P(\text{Miss Target} \mid \text{Late}) = \frac{P(\text{Late} \cap \text{Miss
+                                Target})}{P(\text{Late})} = \frac{0.15}{0.25} = 0.60 \text{ (or } 60\%)$</strong>.
+                        </li>
+                    </ol>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/engineering-mathematics/conditional-probability-and-independence/"
+                        target="_blank" rel="noopener noreferrer">Conditional Probability and Independence -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general" data-marks="5">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.2</span>
+                    <span class="badge badge-general">General</span>
+                    <span class="badge marks-5">5 Marks</span>
+                </div>
+                <h3 class="q-title">Descriptive Statistics Solved Numericals: Mean, Median, Mode &amp; Range</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (3 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q14: Find the mean, median, mode, and range for the given data: 190, 153,
+                            168, 179, 194, 153, 165, 187, 190, 170, 165, 189, 185, 153, 147, 161, 127, 180</li>
+                        <li>General Unit-2 Q15: The ascending order of given observations is, 127, 147, 153, 153, 153,
+                            161, 165, 165, 168, 170, 179, 180, 185, 187, 189, 190, 190, 194 Here, n=18</li>
+                        <li>General Unit-2 Q16: Find the Median of the data 25, 12, 5, 24, 15, 22, 23, 25</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Dataset A (General Q14 &amp; Q15, $n = 18$)</h4>
+                    <p><strong>Sorted Ascending Order ($n=18$):</strong> 127, 147, 153, 153, 153, 161, 165, 165,
+                        <strong>168, 170</strong>, 179, 180, 185, 187, 189, 190, 190, 194.</p>
+                    <ul>
+                        <li><strong>Mean ($\bar{x}$):</strong> $\frac{\sum x_i}{18} = \frac{3056}{18} \approx
+                            \mathbf{169.78}$</li>
+                        <li><strong>Median:</strong> Since $n=18$ (even), average of 9th and 10th terms $= \frac{168 +
+                            170}{2} = \mathbf{169}$</li>
+                        <li><strong>Mode:</strong> Most frequent observation $= \mathbf{153}$ (appears 3 times)</li>
+                        <li><strong>Range:</strong> $\text{Max} - \text{Min} = 194 - 127 = \mathbf{67}$</li>
+                    </ul>
+
+                    <h4>2. Dataset B Median Calculation (General Q16)</h4>
+                    <p><strong>Given:</strong> 25, 12, 5, 24, 15, 22, 23, 25 ($n = 8$).<br>
+                        <strong>Sorted Ascending Order:</strong> 5, 12, 15, <strong>22, 23</strong>, 24, 25, 25.<br>
+                        <strong>Median:</strong> Average of 4th and 5th values $= \frac{22 + 23}{2} = \mathbf{22.5}$.
+                    </p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/data-science/mean-median-and-mode/" target="_blank"
+                        rel="noopener noreferrer">Mean, Median, and Mode - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.3</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Random Variables (Discrete vs. Continuous) &amp; Probability Distributions</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (8 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q17: What is a random variable?</li>
+                        <li>General Unit-2 Q18 &amp; Q32: Differentiate between discrete and continuous random
+                            variables.</li>
+                        <li>General Unit-2 Q19 &amp; Q31: Define a random variable. Explain its types with suitable
+                            examples.</li>
+                        <li>General Unit-2 Q20: What is the probability distribution of a random variable?</li>
+                        <li>General Unit-2 Q21: State the properties of a random variable.</li>
+                        <li>General Unit-2 Q22: What is a discrete probability distribution?</li>
+                        <li>General Unit-2 Q27: What is a continuous probability distribution?</li>
+                        <li>General Unit-2 Q30: Compare discrete and continuous distributions.</li>
+                        <li>IMP Unit-2 Q2: Explain random variables and their types with examples.</li>
+                        <li>IMP Unit-2 Q3: Explain discrete and continuous probability distributions with examples.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Definition &amp; Properties of a Random Variable</h4>
+                    <p>A <strong>Random Variable ($X$)</strong> is a real-valued function $X: S \rightarrow \mathbb{R}$
+                        that assigns a numerical value to every possible outcome in the sample space $S$ of a random
+                        experiment. Key properties: (i) $0 \le P(X=x) \le 1$, (ii) Total probability sums/integrates to
+                        $1$ ($\sum P(x) = 1$ or $\int_{-\infty}^{\infty} f(x)\,dx = 1$), and (iii) Linear expectation
+                        $E[aX + b] = aE[X] + b$.</p>
+
+                    <h4>2. Discrete vs. Continuous Random Variables &amp; Distributions</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Discrete Random Variable / Distribution</th>
+                                <th>Continuous Random Variable / Distribution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Values Taken</strong></td>
+                                <td>Finite or countably infinite integers</td>
+                                <td>Uncountably infinite values over a continuous interval</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Probability Function</strong></td>
+                                <td><strong>PMF</strong> (Probability Mass Function): $p(x) = P(X=x)$</td>
+                                <td><strong>PDF</strong> (Probability Density Function): $P(a \le X \le b) = \int_a^b
+                                    f(x)\,dx$</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Point Probability</strong></td>
+                                <td>$P(X = c)$ can be strictly positive (&gt; 0)</td>
+                                <td>$P(X = c) = 0$ at any exact single point</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Examples</strong></td>
+                                <td>Number of spam emails, defective chips (Binomial, Poisson)</td>
+                                <td>Height, temperature, sensor voltage (Normal, Uniform)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/engineering-mathematics/random-variable/" target="_blank"
+                        rel="noopener noreferrer">Random Variables and Probability Distributions - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.4</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Key Distributions: Bernoulli, Binomial, Poisson, Normal (Gaussian) &amp; Uniform
+                    Distributions</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (10 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q23: Explain the Bernoulli distribution with an example.</li>
+                        <li>General Unit-2 Q24 &amp; Q33: Explain the Binomial distribution and its applications.</li>
+                        <li>General Unit-2 Q25 &amp; Q34: Describe the Poisson distribution and where it is used.</li>
+                        <li>General Unit-2 Q26: Compare Bernoulli, Binomial, and Poisson distributions.</li>
+                        <li>General Unit-2 Q28 &amp; Q35: Explain the Normal (Gaussian) distribution and its properties.
+                        </li>
+                        <li>General Unit-2 Q29: Explain Uniform distribution with an example.</li>
+                        <li>General Unit-2 Q36: Differentiate between Uniform Distribution and Normal Distribution.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Discrete Distributions (Bernoulli, Binomial, Poisson)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Distribution</th>
+                                <th>Formula (PMF)</th>
+                                <th>Mean &amp; Variance</th>
+                                <th>Applications &amp; Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Bernoulli($p$)</strong></td>
+                                <td>$P(X=x) = p^x(1-p)^{1-x}, \; x \in \{0,1\}$</td>
+                                <td>$\mu = p$, $\sigma^2 = p(1-p)$</td>
+                                <td>Single coin toss; binary click/no-click prediction.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Binomial($n, p$)</strong></td>
+                                <td>$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$</td>
+                                <td>$\mu = np$, $\sigma^2 = np(1-p)$</td>
+                                <td>Number of defective items in $n=20$ trials; A/B test conversions.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Poisson($\lambda$)</strong></td>
+                                <td>$P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}$</td>
+                                <td>$\mu = \lambda$, $\sigma^2 = \lambda$</td>
+                                <td>Rare events in fixed time/space: server requests/min, call arrivals.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>2. Continuous Distributions: Normal (Gaussian) vs. Uniform</h4>
+                    <ul>
+                        <li><strong>Normal (Gaussian) Distribution $N(\mu, \sigma^2)$:</strong> Symmetric, unimodal
+                            bell-shaped curve defined by PDF $f(x) = \frac{1}{\sigma\sqrt{2\pi}}
+                            e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$. Properties: Mean = Median = Mode =
+                            $\mu$; follows the <strong>68–95–99.7 Empirical Rule</strong> ($\pm 1\sigma, \pm 2\sigma,
+                            \pm 3\sigma$).</li>
+                        <li><strong>Uniform Distribution $U(a, b)$:</strong> Every outcome in $[a, b]$ has equal
+                            constant probability density $f(x) = \frac{1}{b-a}$, with $\mu = \frac{a+b}{2}$ and
+                            $\sigma^2 = \frac{(b-a)^2}{12}$. <em>Example:</em> Random weight initialization in neural
+                            networks.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/engineering-mathematics/normal-distribution/"
+                        target="_blank" rel="noopener noreferrer">Normal and Discrete Probability Distributions -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general" data-marks="5">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.5</span>
+                    <span class="badge badge-general">General</span>
+                    <span class="badge marks-5">5 Marks</span>
+                </div>
+                <h3 class="q-title">Joint Probability Distribution vs. Conditional Probability</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (2 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q37: Explain Joint Probability Distribution with an example.</li>
+                        <li>General Unit-2 Q38: Differentiate between Joint Probability and Conditional Probability.
+                        </li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <p><strong>Joint Probability Distribution</strong> gives the probability that two or more random
+                        variables occur simultaneously: $P(X=x, Y=y)$. <em>Example:</em> Probability that a patient both
+                        smokes ($X=1$) and has hypertension ($Y=1$).</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Basis</th>
+                                <th>Joint Probability $P(A \cap B)$</th>
+                                <th>Conditional Probability $P(A \mid B)$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Meaning</strong></td>
+                                <td>Probability that both events $A$ and $B$ happen together</td>
+                                <td>Probability that $A$ occurs <em>given</em> that $B$ has already occurred</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Formula</strong></td>
+                                <td>$P(A \cap B) = P(A \mid B) \cdot P(B)$</td>
+                                <td>$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \; P(B) &gt; 0$</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Symmetry</strong></td>
+                                <td>Symmetric: $P(A \cap B) = P(B \cap A)$</td>
+                                <td>Asymmetric: $P(A \mid B) \ne P(B \mid A)$ in general</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/data-science/joint-probability-distribution/"
+                        target="_blank" rel="noopener noreferrer">Joint Probability Distribution - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.6</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Central Limit Theorem (CLT), Sampling Distributions &amp; Sampling Techniques</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (6 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q39: State and explain the Central Limit Theorem with suitable examples.</li>
+                        <li>General Unit-2 Q40: Discuss the importance of the Central Limit Theorem in Machine Learning.
+                        </li>
+                        <li>General Unit-2 Q41: Define Sampling Distribution and explain its significance.</li>
+                        <li>General Unit-2 Q42: Explain different sampling techniques used in statistics.</li>
+                        <li>IMP Unit-2 Q4 &amp; Q5: Explain Central Limit Theorem and Sampling Distributions in Machine
+                            Learning.</li>
+                        <li>Twisted Unit-2 Q1: Why is the Central Limit Theorem important even when the underlying
+                            population distribution is not normal?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Central Limit Theorem (CLT) &amp; Why Non-Normal Populations Still Work (Twisted Q1)</h4>
+                    <p>The <strong>Central Limit Theorem</strong> states that if we draw sufficiently large random
+                        samples of size $n$ (typically $n \ge 30$) with replacement from <em>any</em> population with
+                        finite mean $\mu$ and variance $\sigma^2$, the sampling distribution of the sample mean
+                        $\bar{X}$ approaches a <strong>Normal Distribution</strong>:</p>
+                    <div class="formula-box">&Xmacr; &sim; N(&mu;, &sigma;&sup2; / n) &nbsp; as n &rarr; &infin;</div>
+                    <p><strong>Importance for Non-Normal Populations &amp; ML (Twisted Q1 &amp; General Q40):</strong>
+                        Real-world ML features (income, click rates, wait times) are heavily skewed. CLT guarantees that
+                        sample averages, gradient estimates in Mini-Batch SGD, confidence intervals, and A/B test
+                        metrics follow predictable Gaussian distributions, allowing parametric statistical inference
+                        without knowing the true population distribution.</p>
+
+                    <h4>2. Sampling Distribution &amp; Sampling Techniques</h4>
+                    <p>A <strong>Sampling Distribution</strong> is the probability distribution of a statistic (such as
+                        sample mean $\bar{X}$) computed across all possible samples of size $n$ drawn from a population.
+                        Common sampling techniques include: (1) <strong>Simple Random Sampling</strong> (equal selection
+                        probability), (2) <strong>Stratified Sampling</strong> (preserving class ratios in imbalanced ML
+                        datasets), (3) <strong>Systematic Sampling</strong> (every $k$-th record), and (4)
+                        <strong>Cluster Sampling</strong>.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/data-science/central-limit-theorem/" target="_blank"
+                        rel="noopener noreferrer">Central Limit Theorem - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.7</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Hypothesis Space, Inductive Bias &amp; Model Generalization</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q43: What is Hypothesis Space? Explain its importance in Machine Learning.
+                        </li>
+                        <li>General Unit-2 Q44: Define Inductive Bias and discuss its role in Machine Learning
+                            algorithms.</li>
+                        <li>IMP Unit-2 Q6: Explain Hypothesis Space and Inductive Bias in learning algorithms.</li>
+                        <li>Twisted Unit-2 Q2: How does inductive bias affect the generalization ability of a learning
+                            algorithm? Justify with an example.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Hypothesis Space ($\mathcal{H}$)</h4>
+                    <p>The <strong>Hypothesis Space ($\mathcal{H}$)</strong> is the complete set of all candidate
+                        functions $h: X \rightarrow Y$ that a learning algorithm is allowed to consider and search
+                        through to map inputs to outputs (e.g., all possible lines $y = wx + b$ in 2D Linear
+                        Regression).</p>
+
+                    <h4>2. Inductive Bias &amp; Effect on Generalization (Twisted Q2)</h4>
+                    <p><strong>Inductive Bias</strong> is the set of prior assumptions a learning algorithm makes to
+                        predict outputs for unseen test instances beyond the observed training examples. Without
+                        inductive bias, a learner cannot generalize beyond memorizing training points.</p>
+                    <ul>
+                        <li><strong>How It Affects Generalization:</strong> A <em>strong/restrictive bias</em> (e.g.,
+                            Linear Regression assuming linearity) prevents overfitting on small data (low variance) but
+                            causes underfitting if true data is curved (high bias). A <em>weak/flexible bias</em> (e.g.,
+                            unpruned Decision Trees) captures complex patterns but risks overfitting noise.</li>
+                        <li><strong>Examples:</strong> KNN assumes nearby points in Euclidean space share the same
+                            label; Decision Trees prefer shorter trees (Occam's Razor); Naive Bayes assumes conditional
+                            feature independence.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/inductive-bias-in-machine-learning/"
+                        target="_blank" rel="noopener noreferrer">Inductive Bias in Machine Learning - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.8</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Model Evaluation &amp; Cross-Validation (Hold-Out vs. K-Fold Cross-Validation)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (5 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q45: Explain K-Fold Cross-Validation with a neat diagram.</li>
+                        <li>General Unit-2 Q46: Differentiate between Hold-Out Validation and K-Fold Cross-Validation.
+                        </li>
+                        <li>IMP Unit-2 Q7: Explain the concept of Evaluation and Cross Validation in Machine Learning.
+                        </li>
+                        <li>Twisted Unit-2 Q3: Why is k-fold Cross Validation preferred over a simple train-test split?
+                            Justify.</li>
+                        <li>Twisted Unit-2 Q4: If a model performs well on training data but poorly during cross
+                            validation, what does it indicate? Justify.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Working of K-Fold Cross-Validation</h4>
+                    <p>In <strong>K-Fold Cross-Validation</strong>, the dataset is randomly partitioned into $K$
+                        equal-sized subsets (folds, typically $K=5$ or $10$). The model is trained $K$ times: in
+                        iteration $i$, Fold $i$ acts as the validation set while the remaining $K-1$ folds form the
+                        training set. Final performance is the average across all $K$ folds: $CV_{(K)} = \frac{1}{K}
+                        \sum_{i=1}^K \text{Metric}_i$.</p>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 740 135" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                            <g font-size="11" font-weight="bold" text-anchor="middle">
+                                <text x="55" y="30" fill="#1e293b">Fold 1:</text>
+                                <rect x="105" y="14" width="115" height="24" rx="4" fill="#f59e0b" /><text x="162"
+                                    y="30" fill="#fff">Validation</text>
+                                <rect x="225" y="14" width="115" height="24" rx="4" fill="#2563eb" /><text x="282"
+                                    y="30" fill="#fff">Train</text>
+                                <rect x="345" y="14" width="115" height="24" rx="4" fill="#2563eb" /><text x="402"
+                                    y="30" fill="#fff">Train</text>
+                                <rect x="465" y="14" width="115" height="24" rx="4" fill="#2563eb" /><text x="522"
+                                    y="30" fill="#fff">Train</text>
+                                <rect x="585" y="14" width="115" height="24" rx="4" fill="#2563eb" /><text x="642"
+                                    y="30" fill="#fff">Train</text>
+
+                                <text x="55" y="64" fill="#1e293b">Fold 2:</text>
+                                <rect x="105" y="48" width="115" height="24" rx="4" fill="#2563eb" /><text x="162"
+                                    y="64" fill="#fff">Train</text>
+                                <rect x="225" y="48" width="115" height="24" rx="4" fill="#f59e0b" /><text x="282"
+                                    y="64" fill="#fff">Validation</text>
+                                <rect x="345" y="48" width="115" height="24" rx="4" fill="#2563eb" /><text x="402"
+                                    y="64" fill="#fff">Train</text>
+                                <rect x="465" y="48" width="115" height="24" rx="4" fill="#2563eb" /><text x="522"
+                                    y="64" fill="#fff">Train</text>
+                                <rect x="585" y="48" width="115" height="24" rx="4" fill="#2563eb" /><text x="642"
+                                    y="64" fill="#fff">Train</text>
+
+                                <text x="55" y="98" fill="#1e293b">Fold K:</text>
+                                <rect x="105" y="82" width="115" height="24" rx="4" fill="#2563eb" /><text x="162"
+                                    y="98" fill="#fff">Train</text>
+                                <rect x="225" y="82" width="115" height="24" rx="4" fill="#2563eb" /><text x="282"
+                                    y="98" fill="#fff">Train</text>
+                                <rect x="345" y="82" width="115" height="24" rx="4" fill="#2563eb" /><text x="402"
+                                    y="98" fill="#fff">Train</text>
+                                <rect x="465" y="82" width="115" height="24" rx="4" fill="#2563eb" /><text x="522"
+                                    y="98" fill="#fff">Train</text>
+                                <rect x="585" y="82" width="115" height="24" rx="4" fill="#f59e0b" /><text x="642"
+                                    y="98" fill="#fff">Validation</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <h4>2. Hold-Out Validation vs. K-Fold Cross-Validation (Twisted Q3)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Hold-Out Validation (e.g., 80/20 Split)</th>
+                                <th>K-Fold Cross-Validation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Data Utilization</strong></td>
+                                <td>20% of data is never used for training</td>
+                                <td>Every sample is used for both training and validation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estimate Variance</strong></td>
+                                <td>High variance; depends heavily on lucky/unlucky split</td>
+                                <td>Low variance; averages across $K$ splits</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Computation Cost</strong></td>
+                                <td>Fast (trains model once)</td>
+                                <td>$K$ times slower (trains $K$ models)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Diagnosis of High Training Score + Poor CV Score (Twisted Q4):</strong> This indicates
+                        <strong>Overfitting (High Variance)</strong>—the model has memorized training noise rather than
+                        learning generalizable patterns. Fix using regularization, pruning, dropout, or more training
+                        data.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/cross-validation-machine-learning/"
+                        target="_blank" rel="noopener noreferrer">Cross Validation in Machine Learning -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.9</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Hypothesis Testing, Null vs. Alternative Hypothesis, Type-I &amp; Type-II Errors
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q47: Explain the steps involved in Hypothesis Testing.</li>
+                        <li>General Unit-2 Q48: Differentiate between Null Hypothesis and Alternative Hypothesis.
+                            Explain Type I and Type II errors.</li>
+                        <li>IMP Unit-2 Q8: Explain Hypothesis Testing with a suitable example.</li>
+                        <li>Twisted Unit-2 Q6: Compare Type-I and Type-II errors in hypothesis testing — which is more
+                            critical in a medical diagnosis system? Justify.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Steps in Hypothesis Testing &amp; Example</h4>
+                    <ol>
+                        <li><strong>Formulate Hypotheses:</strong> State <strong>Null Hypothesis ($H_0$)</strong> (no
+                            effect/status quo, e.g., $\mu_{\text{new}} = \mu_{\text{old}}$) and <strong>Alternative
+                                Hypothesis ($H_1$)</strong> (significant difference, $\mu_{\text{new}} &gt;
+                            \mu_{\text{old}}$).</li>
+                        <li><strong>Choose Significance Level ($\alpha$):</strong> Typically $\alpha = 0.05$ (5% risk of
+                            false positive).</li>
+                        <li><strong>Compute Test Statistic &amp; p-value:</strong> Calculate $z$, $t$, or $\chi^2$ score
+                            from sample data and obtain the $p$-value.</li>
+                        <li><strong>Make Decision:</strong> If $p\text{-value} \le \alpha$, reject $H_0$ in favor of
+                            $H_1$; otherwise, fail to reject $H_0$.</li>
+                    </ol>
+
+                    <h4>2. Type-I vs. Type-II Errors &amp; Medical Diagnosis Analysis (Twisted Q6)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Error Type</th>
+                                <th>Definition</th>
+                                <th>Probability</th>
+                                <th>Medical Diagnosis Meaning ($H_0$: Patient is Healthy)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Type-I Error (False Positive)</strong></td>
+                                <td>Rejecting a true $H_0$</td>
+                                <td>$\alpha$ (Significance level)</td>
+                                <td>Diagnosing a healthy patient as having cancer (causes anxiety/extra tests).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Type-II Error (False Negative)</strong></td>
+                                <td>Failing to reject a false $H_0$</td>
+                                <td>$\beta$ (Power $= 1 - \beta$)</td>
+                                <td>Telling a cancer patient they are healthy (delays life-saving treatment).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Which is More Critical in Medical Diagnosis? (Twisted Q6):</strong> <strong>Type-II Error
+                            (False Negative)</strong> is far more critical because missing a life-threatening disease
+                        leaves the patient untreated, risking severe progression or death, whereas a Type-I false alarm
+                        can be ruled out by secondary confirmatory screening.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/software-testing/type-i-and-type-ii-errors/" target="_blank"
+                        rel="noopener noreferrer">Type I and Type II Errors in Hypothesis Testing - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="5">
+                <div class="q-meta">
+                    <span class="q-num">Topic 2.10</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-5">5 Marks</span>
+                </div>
+                <h3 class="q-title">Monte Carlo Approximation: Working, Example &amp; ML Applications</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (3 Questions):</div>
+                    <ul>
+                        <li>General Unit-2 Q49: What is Monte Carlo Approximation? Explain its working with an example.
+                        </li>
+                        <li>IMP Unit-2 Q9: Explain Monte Carlo Approximation and its application in Machine Learning.
+                        </li>
+                        <li>Twisted Unit-2 Q5: Why is Monte Carlo Approximation useful when exact probability
+                            computation is infeasible?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <p><strong>Monte Carlo Approximation</strong> is a computational technique that estimates complex
+                        expectations, integrals, or probabilities by generating a large number of independent random
+                        samples and averaging the observed outcomes via the <strong>Law of Large Numbers</strong>:
+                        $E[f(X)] \approx \frac{1}{N} \sum_{i=1}^N f(x_i)$.</p>
+                    <ul>
+                        <li><strong>Classic Example (Estimating $\pi$):</strong> Generate $N$ random uniform points
+                            $(x,y) \in [-1,1]^2$. Count points $M$ inside the unit circle ($x^2 + y^2 \le 1$). Then $\pi
+                            \approx 4 \times \frac{M}{N}$.</li>
+                        <li><strong>Why Useful When Exact Computation is Infeasible (Twisted Q5):</strong> In
+                            high-dimensional Bayesian networks or continuous posterior integrals, analytical integration
+                            grows exponentially intractable (curse of dimensionality), whereas Monte Carlo convergence
+                            error $O(1/\sqrt{N})$ is <em>independent of dimensionality</em>.</li>
+                        <li><strong>ML Applications:</strong> MCMC Bayesian inference, Monte Carlo Dropout for
+                            uncertainty estimation, and Monte Carlo Tree Search (MCTS) in Reinforcement Learning.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/monte-carlo-methods-in-machine-learning/"
+                        target="_blank" rel="noopener noreferrer">Monte Carlo Methods in Machine Learning -
+                        GeeksforGeeks</a></div>
+            </article>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- UNIT 3: SUPERVISED LEARNING AND UNSUPERVISED LEARNING     -->
+        <!-- ========================================================= -->
+        <section id="unit-3" class="unit-section">
+            <div class="unit-header">
+                <h2>Unit 3: Supervised Learning and Unsupervised Learning</h2>
+                <span class="unit-count">9 Master Topics &bull; 39 Bank Questions Covered</span>
+            </div>
+
+            <div class="quick-rev-box">
+                <div class="qr-title">&#9889; Unit 3 Quick Revision Cheat Sheet</div>
+                <ul>
+                    <li><strong>Regression:</strong> Simple Linear $y = \beta_0 + \beta_1 x + \epsilon$; Multiple Linear
+                        $y = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p + \epsilon$ (minimizes MSE).</li>
+                    <li><strong>Classifiers:</strong> <em>SVM</em> (maximizes margin $\frac{2}{\|w\|}$ using support
+                        vectors &amp; Kernel Trick); <em>Decision Tree</em> (Information Gain / Gini Impurity splits);
+                        <em>KNN</em> (lazy learner using Euclidean distance &amp; majority vote of $K$ neighbors);
+                        <em>Naive Bayes</em> ($P(y|X) \propto P(y)\prod P(x_i|y)$).</li>
+                    <li><strong>Evaluation Metrics:</strong> $\text{Accuracy} = \frac{TP+TN}{\text{Total}}$,
+                        $\text{Precision} = \frac{TP}{TP+FP}$, $\text{Recall} = \frac{TP}{TP+FN}$, $F_1 =
+                        \frac{2PR}{P+R}$.</li>
+                    <li><strong>Overfitting vs. Underfitting:</strong> Overfitting = Low Bias, High Variance;
+                        Underfitting = High Bias, Low Variance.</li>
+                    <li><strong>Unsupervised:</strong> <em>K-Means</em> (assign centroids &rarr; recompute means);
+                        <em>Hierarchical</em> (Agglomerative bottom-up vs. Divisive top-down); <em>PCA</em>
+                        (eigenvectors of covariance matrix maximizing variance); <em>Apriori</em> (Support &amp;
+                        Confidence pruning).</li>
+                </ul>
+            </div>
+
+            <article class="q-card" data-cats="general important" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.1</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-important">Important</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Linear Regression and Multiple Regression (Formulas, Examples &amp; Differences)
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q1: What is Linear Regression?</li>
+                        <li>General Unit-3 Q2: What is Multiple Regression?</li>
+                        <li>General Unit-3 Q15: Outline the primary differences between Linear Regression and Multiple
+                            Regression.</li>
+                        <li>IMP Unit-3 Q1: Explain Linear Regression and Multiple Regression with suitable examples.
+                        </li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Simple Linear Regression &amp; Multiple Linear Regression</h4>
+                    <ul>
+                        <li><strong>Simple Linear Regression:</strong> Models the linear relationship between a single
+                            independent predictor $X$ and a continuous dependent target $Y$:
+                            <div class="formula-box">Y = &beta;<sub>0</sub> + &beta;<sub>1</sub>X + &epsilon;</div>
+                            where $\beta_0$ is the intercept, $\beta_1$ is the slope, and $\epsilon$ is random error.
+                            Parameters are estimated via Ordinary Least Squares (OLS) by minimizing Mean Squared Error:
+                            $MSE = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2$.<br>
+                            <em>Example:</em> Predicting salary ($Y$) solely from years of experience ($X$).
+                        </li>
+                        <li><strong>Multiple Linear Regression:</strong> Extends linear regression to model the
+                            relationship between $p$ multiple independent variables ($X_1, X_2, \dots, X_p$) and a
+                            continuous target $Y$:
+                            <div class="formula-box">Y = &beta;<sub>0</sub> + &beta;<sub>1</sub>X<sub>1</sub> +
+                                &beta;<sub>2</sub>X<sub>2</sub> + &hellip; + &beta;<sub>p</sub>X<sub>p</sub> + &epsilon;
+                            </div>
+                            <em>Example:</em> Predicting house price ($Y$) using square footage ($X_1$), bedrooms
+                            ($X_2$), and distance to city center ($X_3$).
+                        </li>
+                    </ul>
+
+                    <h4>2. Primary Differences</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Simple Linear Regression</th>
+                                <th>Multiple Linear Regression</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Number of Predictors</strong></td>
+                                <td>Exactly one independent variable ($X$)</td>
+                                <td>Two or more independent variables ($X_1, \dots, X_p$)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Geometric Fit</strong></td>
+                                <td>2D straight line</td>
+                                <td>$(p+1)$-dimensional hyperplane</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Multicollinearity Risk</strong></td>
+                                <td>Not applicable</td>
+                                <td>Requires checking VIF for correlated features</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Evaluation Metric</strong></td>
+                                <td>$R^2$ (Coefficient of Determination)</td>
+                                <td>Adjusted $R^2$ (penalizes irrelevant predictors)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/" target="_blank"
+                        rel="noopener noreferrer">Linear Regression in Machine Learning - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.2</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Support Vector Machine (SVM) &amp; Decision Trees: Architecture, Comparison &amp;
+                    High-Dimensional Data</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (5 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q3: What is SVM?</li>
+                        <li>General Unit-3 Q4: What is a Decision Tree?</li>
+                        <li>General Unit-3 Q17: Define Classification. Compare the working mechanisms, advantages, and
+                            limitations of Support Vector Machines (SVM) and Decision Trees.</li>
+                        <li>IMP Unit-3 Q2 &amp; Q3: Explain the working of SVM with a diagram; Explain the working of
+                            Decision Tree algorithm with an example.</li>
+                        <li>Twisted Unit-3 Q1: Why does SVM work well with high-dimensional data compared to other
+                            classifiers? Justify.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Support Vector Machine (SVM) &amp; High-Dimensional Performance (Twisted Q1)</h4>
+                    <p><strong>SVM</strong> is a supervised classifier that finds the optimal separating hyperplane $w^T
+                        x + b = 0$ maximizing the geometric margin $\frac{2}{\|w\|}$ between classes. Only the closest
+                        boundary points—called <strong>Support Vectors</strong>—determine the hyperplane. For non-linear
+                        data, the <strong>Kernel Trick</strong> (RBF, Polynomial) maps inputs into higher dimensions
+                        without explicitly computing coordinates.</p>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 640 165" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="180" y1="145" x2="340" y2="15" stroke="#1e3a8a" stroke-width="2.5" />
+                            <line x1="145" y1="145" x2="305" y2="15" stroke="#3b82f6" stroke-width="1.5"
+                                stroke-dasharray="5,4" />
+                            <line x1="215" y1="145" x2="375" y2="15" stroke="#3b82f6" stroke-width="1.5"
+                                stroke-dasharray="5,4" />
+                            <circle cx="150" cy="70" r="6" fill="#2563eb" />
+                            <circle cx="185" cy="112" r="7" fill="#2563eb" stroke="#0f172a" stroke-width="2" />
+                            <circle cx="245" cy="63" r="7" fill="#2563eb" stroke="#0f172a" stroke-width="2" />
+                            <circle cx="130" cy="115" r="6" fill="#2563eb" />
+                            <rect x="275" y="90" width="12" height="12" fill="#dc2626" stroke="#0f172a"
+                                stroke-width="2" />
+                            <rect x="330" y="45" width="12" height="12" fill="#dc2626" stroke="#0f172a"
+                                stroke-width="2" />
+                            <rect x="360" y="105" width="11" height="11" fill="#dc2626" />
+                            <rect x="395" y="65" width="11" height="11" fill="#dc2626" />
+                            <text x="495" y="45" font-size="11.5" font-weight="bold" fill="#1e3a8a">Optimal Hyperplane
+                                (w&middot;x + b = 0)</text>
+                            <text x="495" y="68" font-size="10.5" fill="#334155">Dashed Lines = Margin Boundaries</text>
+                            <text x="495" y="88" font-size="10.5" fill="#334155">Outlined Points = Support
+                                Vectors</text>
+                            <text x="495" y="108" font-size="10.5" fill="#334155">Max Margin Width = 2 / ||w||</text>
+                        </svg>
+                    </div>
+                    <p><strong>Why SVM Excels in High Dimensions (Twisted Q1):</strong> SVM's decision boundary depends
+                        <em>only on the support vectors</em> rather than the number of features $d$, and margin
+                        maximization acts as built-in L2 regularization, preventing overfitting even when features
+                        exceed samples ($d &gt; n$, e.g., text/gene classification).</p>
+
+                    <h4>2. Decision Tree Algorithm &amp; Comparison with SVM</h4>
+                    <p>A <strong>Decision Tree</strong> recursively partitions feature space into axis-aligned regions
+                        using greedy splitting criteria: <strong>Gini Impurity</strong> ($1 - \sum p_i^2$) or
+                        <strong>Information Gain</strong> ($\text{Entropy}(S) - \sum
+                        \frac{|S_v|}{|S|}\text{Entropy}(S_v)$). <em>Example:</em> Root node splits on
+                        <code>Outlook</code> &rarr; branches split on <code>Humidity</code>/<code>Wind</code> &rarr;
+                        leaves output <code>Play Tennis: Yes/No</code>.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Support Vector Machine (SVM)</th>
+                                <th>Decision Tree</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mechanism</strong></td>
+                                <td>Finds maximum-margin hyperplane via optimization</td>
+                                <td>Recursive greedy feature splitting (if-else rules)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Interpretability</strong></td>
+                                <td>Low ("black-box" especially with RBF kernel)</td>
+                                <td>High (white-box human-readable rules)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Feature Scaling</strong></td>
+                                <td>Strictly required (distance/dot-product sensitive)</td>
+                                <td>Not required (invariant to monotonic scaling)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Limitations</strong></td>
+                                <td>Slow $O(n^2)$–$O(n^3)$ training on huge datasets</td>
+                                <td>Prone to overfitting unless pruned</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/support-vector-machine-algorithm/"
+                        target="_blank" rel="noopener noreferrer">Support Vector Machine &amp; Decision Trees -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.3</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">K-Nearest Neighbors (KNN): Working, Significance of 'K' &amp; Lazy Learner Analysis
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q5: What is KNN?</li>
+                        <li>General Unit-3 Q13: Discuss the significance of the 'K' parameter in the K-Nearest Neighbors
+                            (KNN) algorithm.</li>
+                        <li>IMP Unit-3 Q4: Explain the K-Nearest Neighbors (KNN) algorithm with an example.</li>
+                        <li>Twisted Unit-3 Q2: KNN is called a lazy learner — why? What are its advantages and
+                            disadvantages?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Working &amp; Example</h4>
+                    <p><strong>KNN</strong> is a non-parametric, instance-based supervised learning algorithm. To
+                        classify a query point $x_q$: (1) compute Euclidean distance $d(x_q, x_i) = \sqrt{\sum (x_{qj} -
+                        x_{ij})^2}$ to all training points, (2) select the $K$ closest neighbors, and (3) assign the
+                        majority class label (or average target value in regression). <em>Example:</em> With $K=3$, if a
+                        new fruit's closest 3 neighbors are 2 Apples and 1 Orange, it is classified as an Apple.</p>
+
+                    <h4>2. Significance of 'K' &amp; Lazy Learner Analysis (General Q13 &amp; Twisted Q2)</h4>
+                    <ul>
+                        <li><strong>Significance of $K$:</strong> A very small $K$ (e.g., $K=1$) creates jagged
+                            boundaries sensitive to noise (<strong>overfitting</strong>); a very large $K$ over-smooths
+                            boundaries and ignores local structure (<strong>underfitting</strong>). Odd $K$ values are
+                            preferred in binary classification to avoid ties.</li>
+                        <li><strong>Why KNN is a "Lazy Learner" (Twisted Q2):</strong> KNN performs zero model
+                            training—it simply memorizes the dataset and defers all distance computation until
+                            prediction/inference time. <em>Advantages:</em> Instant $O(1)$ training, naturally handles
+                            multi-class and non-linear boundaries. <em>Disadvantages:</em> Slow $O(nd)$ inference on
+                            large datasets, high memory usage, and vulnerability to the curse of dimensionality.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/" target="_blank"
+                        rel="noopener noreferrer">K-Nearest Neighbors (KNN) Algorithm - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.4</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Naive Bayes Classifier, Bayes' Theorem &amp; Evaluation of Independence Assumption
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q6: What is Naive Bayes?</li>
+                        <li>General Unit-3 Q20: State Bayes' Theorem. Explain the working principle of the Naive Bayes
+                            classifier and justify why its underlying assumption is termed "naive".</li>
+                        <li>IMP Unit-3 Q5: Explain the Naive Bayes classifier and its working principle.</li>
+                        <li>Twisted Unit-3 Q3: Naive Bayes assumes feature independence — is this assumption realistic?
+                            Justify your answer.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Bayes' Theorem &amp; Naive Bayes Working Principle</h4>
+                    <div class="formula-box">P(y | X) = [ P(X | y) &middot; P(y) ] / P(X) &prop; P(y)
+                        &prod;<sub>i=1..n</sub> P(x<sub>i</sub> | y)</div>
+                    <p>Given feature vector $X = (x_1, x_2, \dots, x_n)$, Naive Bayes computes the posterior probability
+                        $P(y_k | X)$ for each class $y_k$ using prior $P(y_k)$ and class-conditional likelihoods $P(x_i
+                        | y_k)$ (with Laplace smoothing for zero counts) and predicts $\hat{y} = \arg\max_y
+                        P(y)\prod_{i=1}^n P(x_i | y)$.</p>
+
+                    <h4>2. Why "Naive" &amp; Is the Assumption Realistic? (General Q20 &amp; Twisted Q3)</h4>
+                    <p><strong>Justification:</strong> The assumption that all features are conditionally independent
+                        given the class label is <strong>not realistic</strong> in real-world data—for instance, in spam
+                        detection, words like <em>"free"</em> and <em>"winner"</em> strongly co-occur. However, Naive
+                        Bayes still achieves remarkably high classification accuracy because classification only
+                        requires the correct class to have the <em>highest relative score</em> (rank order), even if
+                        exact probability estimates are slightly distorted.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/" target="_blank"
+                        rel="noopener noreferrer">Naive Bayes Classifiers - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.5</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Model Evaluation Metrics (Accuracy, Precision, Recall, F1-Score) &amp; Imbalanced
+                    Datasets</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (3 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q16: Evaluate the importance of Model Evaluation metrics. Explain why
+                            Precision, Recall, and F1-score are often better indicators of performance than standard
+                            Accuracy when classifying highly imbalanced datasets (such as in fraud detection scenarios).
+                        </li>
+                        <li>IMP Unit-3 Q6: Explain model evaluation metrics: Accuracy, Precision, Recall, and F1-score.
+                        </li>
+                        <li>Twisted Unit-3 Q4: Precision and Recall often trade off against each other — explain why,
+                            and when you would prioritize one over the other.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Confusion Matrix &amp; Core Metrics</h4>
+                    <div class="formula-box">
+                        <strong>Accuracy</strong> = (TP + TN) / (TP + TN + FP + FN)<br>
+                        <strong>Precision</strong> = TP / (TP + FP) &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Recall
+                            (Sensitivity)</strong> = TP / (TP + FN)<br>
+                        <strong>F1-Score</strong> = 2 &middot; (Precision &middot; Recall) / (Precision + Recall)
+                    </div>
+
+                    <h4>2. Why Accuracy Fails on Imbalanced Datasets (General Q16)</h4>
+                    <p>In credit card fraud detection where <strong>99.9%</strong> of transactions are legitimate and
+                        <strong>0.1%</strong> are fraudulent, a dummy classifier predicting "Not Fraud" for every
+                        transaction achieves <strong>99.9% Accuracy</strong> while catching <strong>0% of fraud</strong>
+                        (Recall = 0). Precision, Recall, and F1-Score focus strictly on the minority positive class.</p>
+
+                    <h4>3. Precision-Recall Trade-off (Twisted Q4)</h4>
+                    <p>Lowering the classification probability threshold catches more positives (increasing
+                        <strong>Recall</strong>) but introduces more false alarms (decreasing
+                        <strong>Precision</strong>), and vice versa. <strong>Prioritize Recall</strong> in cancer
+                        screening or fraud detection (missing a positive is catastrophic); <strong>prioritize
+                            Precision</strong> in spam filtering or YouTube kids content recommendations (false
+                        positives ruin user trust).</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/precision-recall-curve-in-ml/"
+                        target="_blank" rel="noopener noreferrer">Accuracy, Precision, Recall, and F1-Score -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.6</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Overfitting, Underfitting &amp; The Bias-Variance Tradeoff</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q7: What is Overfitting and Underfitting?</li>
+                        <li>General Unit-3 Q12: Explain the concepts of Overfitting and Underfitting in model training.
+                            How do they impact model generalization?</li>
+                        <li>IMP Unit-3 Q7: Explain overfitting and underfitting with suitable examples and remedies.
+                        </li>
+                        <li>Twisted Unit-3 Q8: Explain the bias-variance tradeoff with reference to overfitting and
+                            underfitting.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <p>Total generalization error decomposes into: $\text{Error} = \text{Bias}^2 + \text{Variance} +
+                        \text{Irreducible Noise}$.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Underfitting (High Bias)</th>
+                                <th>Good Fit (Optimal Balance)</th>
+                                <th>Overfitting (High Variance)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Cause</strong></td>
+                                <td>Model too simple to capture underlying trend (e.g., fitting a straight line to
+                                    curved data)</td>
+                                <td>Model complexity matches true data pattern</td>
+                                <td>Model overly complex; memorizes random noise &amp; outliers (e.g., degree-15
+                                    polynomial on 10 points)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Train vs. Test Error</strong></td>
+                                <td>High training error &amp; high test error</td>
+                                <td>Low training error &amp; low test error</td>
+                                <td>Near-zero training error, but high test error</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Remedies</strong></td>
+                                <td>Increase model complexity, add informative features, reduce regularization</td>
+                                <td>Cross-validation tuning</td>
+                                <td>L1/L2 Regularization, Pruning, Dropout, Early Stopping, more training data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/underfitting-and-overfitting-in-machine-learning/"
+                        target="_blank" rel="noopener noreferrer">Underfitting, Overfitting &amp; Bias-Variance Tradeoff
+                        - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.7</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Clustering: K-Means Algorithm, Hierarchical Clustering &amp; Choosing 'K' (KNN vs.
+                    K-Means)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (5 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q8 &amp; Q11: What is K-Means Clustering? Differentiate Supervised and
+                            Unsupervised Learning.</li>
+                        <li>General Unit-3 Q18: What is the objective of Clustering? Contrast K-Means Clustering with
+                            Hierarchical Clustering and provide the step-by-step algorithmic approach for K-Means.</li>
+                        <li>IMP Unit-3 Q8 &amp; Q9: Explain K-Means Clustering with step-by-step example; Explain
+                            Hierarchical Clustering (agglomerative and divisive).</li>
+                        <li>Twisted Unit-3 Q5: Why is choosing the right value of 'K' critical in both KNN and K-Means?
+                            Compare the two contexts.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. K-Means Algorithm Steps &amp; Example</h4>
+                    <p><strong>Objective:</strong> Partition unlabeled data into $K$ disjoint clusters minimizing
+                        Within-Cluster Sum of Squares (WCSS): $J = \sum_{j=1}^K \sum_{x_i \in C_j} \|x_i - \mu_j\|^2$.
+                    </p>
+                    <ol>
+                        <li><strong>Initialize:</strong> Choose $K$ and randomly select $K$ initial cluster centroids
+                            $\mu_1, \dots, \mu_K$.</li>
+                        <li><strong>Assignment Step:</strong> Assign each data point $x_i$ to its nearest centroid using
+                            Euclidean distance.</li>
+                        <li><strong>Update Step:</strong> Recompute each centroid $\mu_j$ as the arithmetic mean of all
+                            points assigned to cluster $j$.</li>
+                        <li><strong>Repeat:</strong> Iterate Steps 2–3 until centroids stop moving. <em>Example:</em>
+                            Grouping points $\{2, 4, 10, 12\}$ with $K=2$ yields clusters $\{2,4\}$ ($\mu_1=3$) and
+                            $\{10,12\}$ ($\mu_2=11$).</li>
+                    </ol>
+
+                    <h4>2. K-Means vs. Hierarchical Clustering &amp; Role of 'K' (Twisted Q5)</h4>
+                    <ul>
+                        <li><strong>Hierarchical Clustering:</strong> Builds a tree-like <strong>Dendrogram</strong>
+                            without requiring $K$ upfront. <em>Agglomerative (Bottom-Up):</em> Starts with $N$
+                            individual points and merges closest pairs; <em>Divisive (Top-Down):</em> Starts with one
+                            cluster and recursively splits it.</li>
+                        <li><strong>Comparing 'K' in KNN vs. K-Means (Twisted Q5):</strong> In <strong>KNN</strong>
+                            (supervised), $K$ is the number of <em>labeled neighbors</em> voting on a class (controls
+                            bias-variance smoothing). In <strong>K-Means</strong> (unsupervised), $K$ is the number of
+                            <em>output clusters/centroids</em> discovered in the data (selected via the <strong>Elbow
+                                Method</strong> or Silhouette Score).</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/k-means-clustering-introduction/"
+                        target="_blank" rel="noopener noreferrer">K-Means and Hierarchical Clustering -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.8</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Dimensionality Reduction &amp; Principal Component Analysis (PCA)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q9: What is PCA?</li>
+                        <li>General Unit-3 Q19: Discuss the need for Dimensionality Reduction in machine learning.
+                            Detail the mathematical and conceptual process of Principal Component Analysis (PCA).</li>
+                        <li>IMP Unit-3 Q10: Explain Principal Component Analysis (PCA) for dimensionality reduction.
+                        </li>
+                        <li>Twisted Unit-3 Q6: How does PCA reduce dimensionality without significant loss of
+                            information? Justify conceptually.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Need for Dimensionality Reduction</h4>
+                    <p>High-dimensional datasets suffer from the <strong>Curse of Dimensionality</strong> (data
+                        sparsity, exponential distance inflation, collinearity, slow training, and overfitting).
+                        Dimensionality reduction compresses $d$ features into $k \ll d$ features while preserving
+                        essential structure.</p>
+
+                    <h4>2. Step-by-Step Mathematical Process of PCA</h4>
+                    <ol>
+                        <li><strong>Standardize Data:</strong> Center each feature to mean $0$ and unit variance ($Z$).
+                        </li>
+                        <li><strong>Compute Covariance Matrix:</strong> $\Sigma = \frac{1}{n-1} Z^T Z$ ($d \times d$
+                            symmetric matrix capturing pairwise feature correlations).</li>
+                        <li><strong>Eigen-Decomposition:</strong> Solve $\Sigma v_i = \lambda_i v_i$ to obtain
+                            eigenvalues $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_d$ and orthogonal eigenvectors
+                            $v_i$.</li>
+                        <li><strong>Select Top-$k$ Components &amp; Project:</strong> Form projection matrix $W_k =
+                            [v_1, \dots, v_k]$ capturing $\ge 95\%$ of total variance ($\frac{\sum_{i=1}^k
+                            \lambda_i}{\sum_{j=1}^d \lambda_j}$) and project $Z_{\text{new}} = Z W_k$.</li>
+                    </ol>
+                    <p><strong>How PCA Preserves Information (Twisted Q6):</strong> Real-world features contain heavy
+                        redundancy (correlation). PCA rotates axes along the orthogonal directions of <strong>maximum
+                            variance</strong> (signal) and discards low-variance axes (mostly random noise), retaining
+                        maximum statistical information in fewer dimensions.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/data-analysis/principal-component-analysis-pca/"
+                        target="_blank" rel="noopener noreferrer">Principal Component Analysis (PCA) - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 3.9</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Association Rule Learning &amp; Apriori Algorithm (Working, Example &amp;
+                    Scalability Fixes)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (4 Questions):</div>
+                    <ul>
+                        <li>General Unit-3 Q10: What is the Apriori Algorithm?</li>
+                        <li>General Unit-3 Q14: What is Association Rule Learning? Briefly explain the purpose of the
+                            Apriori algorithm.</li>
+                        <li>IMP Unit-3 Q11: Explain the Apriori algorithm for Association Rule Learning with an example.
+                        </li>
+                        <li>Twisted Unit-3 Q7: Why does the Apriori algorithm suffer from performance issues on large
+                            datasets? How can this be addressed?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Association Rule Learning &amp; Key Metrics</h4>
+                    <p><strong>Association Rule Learning</strong> discovers frequent co-occurrence patterns $\{A\}
+                        \Rightarrow \{B\}$ in transactional databases (Market Basket Analysis). The <strong>Apriori
+                            Algorithm</strong> uses the <em>Apriori Property</em> ("every subset of a frequent itemset
+                        must also be frequent") to prune infrequent candidates level-by-level.</p>
+                    <div class="formula-box">
+                        <strong>Support(A &rarr; B)</strong> = P(A &cup; B) &nbsp;|&nbsp; <strong>Confidence(A &rarr;
+                            B)</strong> = Support(A &cup; B) / Support(A) &nbsp;|&nbsp; <strong>Lift</strong> =
+                        Confidence(A &rarr; B) / Support(B)
+                    </div>
+                    <p><em>Example:</em> If 60% of customers buy <code>{Bread, Milk}</code> and 80% buy
+                        <code>{Bread}</code>, then $\text{Confidence}(\text{Bread} \Rightarrow \text{Milk}) = 0.60/0.80
+                        = 75\%$.</p>
+
+                    <h4>2. Performance Bottlenecks &amp; Solutions (Twisted Q7)</h4>
+                    <p><strong>Bottlenecks:</strong> Apriori generates an exponential number of candidate itemsets ($2^m
+                        - 1$) and requires <strong>multiple full database scans</strong> (one per itemset size $k$),
+                        causing severe disk I/O latency. <strong>Solutions:</strong> Use <strong>FP-Growth (Frequent
+                            Pattern Tree)</strong> which compresses transactions into a prefix tree in just 2 scans
+                        without candidate generation, or use Eclat (vertical tid-list intersection).</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/apriori-algorithm/" target="_blank"
+                        rel="noopener noreferrer">Apriori Algorithm in Machine Learning - GeeksforGeeks</a></div>
+            </article>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- UNIT 4: NEURAL NETWORKS & DEEP LEARNING                   -->
+        <!-- ========================================================= -->
+        <section id="unit-4" class="unit-section">
+            <div class="unit-header">
+                <h2>Unit 4: Neural Networks &amp; Deep Learning</h2>
+                <span class="unit-count">6 Master Topics &bull; 38 Bank Questions Covered</span>
+            </div>
+
+            <div class="quick-rev-box">
+                <div class="qr-title">&#9889; Unit 4 Quick Revision Cheat Sheet</div>
+                <ul>
+                    <li><strong>Perceptron Rule:</strong> $y = f(\sum w_i x_i + b)$, Weight update $\Delta w_i = \eta
+                        (y_{\text{true}} - \hat{y}) x_i$. Cannot solve non-linearly separable problems like
+                        <strong>XOR</strong>.</li>
+                    <li><strong>Activation Functions:</strong> <em>Sigmoid</em> $\frac{1}{1+e^{-x}} \in (0,1)$,
+                        <em>Tanh</em> $\frac{e^x - e^{-x}}{e^x + e^{-x}} \in (-1,1)$, <em>ReLU</em> $\max(0, x)$ (solves
+                        vanishing gradient for $x &gt; 0$).</li>
+                    <li><strong>CNN Architecture:</strong> Input &rarr; Conv Layer (Filters, Strides, Padding, Parameter
+                        Sharing) &rarr; ReLU &rarr; Max Pooling &rarr; Flatten &rarr; Fully Connected Layer.</li>
+                    <li><strong>RNN &amp; LSTM:</strong> RNN has recurrent hidden state $h_t = \tanh(W_{hh}h_{t-1} +
+                        W_{xh}x_t)$ but suffers from vanishing gradients over long sequences via BPTT.
+                        <strong>LSTM</strong> uses a linear <strong>Cell State ($C_t$)</strong> highway controlled by
+                        <em>Forget, Input, and Output Gates</em>.</li>
+                </ul>
+            </div>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.1</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Artificial Neural Networks, Perceptron Model, Delta Weight Update Rule &amp; XOR
+                    Limitation</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (6 Questions):</div>
+                    <ul>
+                        <li>General Unit-4 Q1: What is a Neural Network?</li>
+                        <li>General Unit-4 Q2 &amp; Q8: Define a Perceptron. What are its main limitations?</li>
+                        <li>General Unit-4 Q16: Explain the Perceptron Model in detail with a neat diagram. Derive the
+                            weight update rule (delta rule) used for its training.</li>
+                        <li>IMP Unit-4 Q1 &amp; Q2: Explain basic structure of a Neural Network with diagram; Explain
+                            Perceptron Model and its learning algorithm.</li>
+                        <li>Twisted Unit-4 Q2: Can a single-layer Perceptron solve a non-linearly separable problem like
+                            XOR? Justify your answer.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Neural Network &amp; Perceptron Architecture</h4>
+                    <p>An <strong>Artificial Neural Network (ANN)</strong> is a layered network of interconnected
+                        computational nodes (neurons) organized into Input, Hidden, and Output layers. A
+                        <strong>Perceptron</strong> (Rosenblatt, 1958) is the simplest single-layer binary classifier
+                        computing weighted sum $z = \sum_{i=1}^n w_i x_i + b$ followed by a step activation $\hat{y} = 1
+                        \text{ if } z \ge 0 \text{ else } 0$.</p>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 680 155" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                            <g font-size="11" font-weight="bold" text-anchor="middle">
+                                <circle cx="90" cy="30" r="18" fill="#dbeafe" stroke="#2563eb" /><text x="90" y="34"
+                                    fill="#1e3a8a">x1</text>
+                                <circle cx="90" cy="80" r="18" fill="#dbeafe" stroke="#2563eb" /><text x="90" y="84"
+                                    fill="#1e3a8a">x2</text>
+                                <circle cx="90" cy="130" r="18" fill="#fef3c7" stroke="#d97706" /><text x="90" y="134"
+                                    fill="#92400e">+1</text>
+                                <circle cx="310" cy="80" r="30" fill="#1e3a8a" /><text x="310" y="84"
+                                    fill="#fff">&Sigma; w_i x_i + b</text>
+                                <rect x="420" y="55" width="110" height="50" rx="6" fill="#059669" /><text x="475"
+                                    y="84" fill="#fff">Step / f(z)</text>
+                                <circle cx="610" cy="80" r="20" fill="#dcfce7" stroke="#16a34a" /><text x="610" y="84"
+                                    fill="#14532d">&ycirc;</text>
+                            </g>
+                            <g stroke="#475569" stroke-width="1.8">
+                                <line x1="108" y1="30" x2="280" y2="72" />
+                                <line x1="108" y1="80" x2="280" y2="80" />
+                                <line x1="108" y1="130" x2="280" y2="88" />
+                                <line x1="340" y1="80" x2="420" y2="80" />
+                                <line x1="530" y1="80" x2="590" y2="80" />
+                            </g>
+                            <text x="190" y="42" font-size="10.5" fill="#1e293b">w1</text>
+                            <text x="190" y="75" font-size="10.5" fill="#1e293b">w2</text>
+                            <text x="190" y="122" font-size="10.5" fill="#1e293b">b (bias)</text>
+                        </svg>
+                    </div>
+
+                    <h4>2. Derivation of Delta Weight Update Rule</h4>
+                    <p>Define squared error loss for a single training sample $(x, y)$: $E(w) = \frac{1}{2}(y -
+                        \hat{y})^2$ where $\hat{y} = w^T x + b$. Taking partial derivative with respect to weight $w_i$:
+                    </p>
+                    <div class="formula-box">
+                        &part;E / &part;w<sub>i</sub> = &minus;(y &minus; &ycirc;) &middot; x<sub>i</sub>
+                        &nbsp;&rArr;&nbsp; w<sub>i</sub><sup>(new)</sup> = w<sub>i</sub><sup>(old)</sup> + &eta;(y
+                        &minus; &ycirc;)x<sub>i</sub>
+                    </div>
+
+                    <h4>3. Limitations &amp; Why Single-Layer Perceptron Cannot Solve XOR (Twisted Q2)</h4>
+                    <p><strong>Justification:</strong> A single-layer Perceptron defines a single linear hyperplane $w_1
+                        x_1 + w_2 x_2 + b = 0$. In the <strong>XOR</strong> truth table, points $(0,0), (1,1)
+                        \rightarrow 0$ and $(0,1), (1,0) \rightarrow 1$ lie on opposite diagonals of the 2D plane—no
+                        single straight line can separate them. Solving XOR requires a <strong>Multi-Layer Perceptron
+                            (MLP)</strong> with at least one hidden layer and non-linear activation.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/what-is-perceptron-the-simplest-artificial-neural-network/"
+                        target="_blank" rel="noopener noreferrer">Perceptron and Weight Update Rule - GeeksforGeeks</a>
+                </div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.2</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Activation Functions (Sigmoid, Tanh, ReLU): Formulas, Non-Linearity &amp; Vanishing
+                    Gradient</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (7 Questions):</div>
+                    <ul>
+                        <li>General Unit-4 Q3 &amp; Q9: What is an Activation Function? State mathematical formulas for
+                            Sigmoid, Tanh, and ReLU.</li>
+                        <li>General Unit-4 Q10: Why do we need non-linear activation functions in a neural network? What
+                            would happen if we used only linear functions?</li>
+                        <li>General Unit-4 Q11: What is the "Vanishing Gradient" problem? Which activation functions are
+                            most susceptible to it?</li>
+                        <li>General Unit-4 Q12: What is the main advantage of ReLU over Sigmoid and Tanh?</li>
+                        <li>General Unit-4 Q17 &amp; IMP Unit-4 Q3: Compare and contrast Sigmoid, Tanh, and ReLU
+                            activation functions with graphs and use cases.</li>
+                        <li>Twisted Unit-4 Q1: Why is ReLU preferred over Sigmoid in deep neural networks? Justify with
+                            reference to the vanishing gradient problem.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Why Non-Linearity is Essential (General Q10)</h4>
+                    <p>If a neural network used only linear activations $f(z) = cz$, any $L$-layer deep network would
+                        collapse mathematically into a single linear transformation $W_L \cdots W_2 W_1 x =
+                        W_{\text{eff}} x$, making hidden layers completely useless for learning curved decision
+                        boundaries.</p>
+
+                    <h4>2. Comparison of Sigmoid, Tanh, and ReLU</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Formula</th>
+                                <th>Output Range</th>
+                                <th>Pros, Cons &amp; Best Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sigmoid ($\sigma$)</strong></td>
+                                <td>$\sigma(x) = \frac{1}{1 + e^{-x}}$</td>
+                                <td>$(0, 1)$</td>
+                                <td>Max derivative is $0.25$ &rarr; severe <strong>vanishing gradient</strong>; non-zero
+                                    centered. Used only in binary output layers.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tanh</strong></td>
+                                <td>$\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$</td>
+                                <td>$(-1, 1)$</td>
+                                <td>Zero-centered (faster convergence than Sigmoid), but still saturates and vanishes at
+                                    extremes. Used in RNN/LSTM gates.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ReLU</strong></td>
+                                <td>$f(x) = \max(0, x)$</td>
+                                <td>$[0, \infty)$</td>
+                                <td>Constant gradient $= 1$ for $x &gt; 0$ (no vanishing gradient), fast computation.
+                                    Minor con: "Dying ReLU" for $x \le 0$. Default for CNN/MLP hidden layers.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>3. Vanishing Gradient &amp; ReLU Advantage (General Q11, Q12 &amp; Twisted Q1)</h4>
+                    <p>During backpropagation, gradients are multiplied across layers via the Chain Rule. Because
+                        Sigmoid's derivative $\sigma'(x) \le 0.25$, multiplying across 10 layers shrinks the gradient by
+                        $(0.25)^{10} \approx 10^{-6}$, freezing early-layer weights (<strong>Vanishing Gradient
+                            Problem</strong>). <strong>ReLU</strong> maintains a constant gradient of $1$ for all
+                        positive activations, allowing deep networks to train rapidly without gradient decay.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/activation-functions-neural-networks/"
+                        target="_blank" rel="noopener noreferrer">Activation Functions in Neural Networks -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.3</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Deep Learning, Hierarchical Feature Learning &amp; Impact of Network Depth</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (5 Questions):</div>
+                    <ul>
+                        <li>General Unit-4 Q4 &amp; Q13: Define "Deep Learning." How does it differ from traditional
+                            Shallow Neural Networks?</li>
+                        <li>General Unit-4 Q18: What is Deep Learning? Explain the concept of "Hierarchical Feature
+                            Learning" and discuss why depth in networks is beneficial for complex tasks like image
+                            recognition.</li>
+                        <li>IMP Unit-4 Q4: Explain the concept of Deep Learning and how it differs from traditional
+                            Neural Networks.</li>
+                        <li>Twisted Unit-4 Q6: Why does increasing the depth of a neural network not always improve
+                            accuracy? Discuss with reference to overfitting and vanishing gradients.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Deep Learning vs. Shallow Neural Networks &amp; Hierarchical Feature Learning</h4>
+                    <p><strong>Deep Learning</strong> uses multi-layered neural networks (many hidden layers) to
+                        automatically learn representations directly from raw unstructured data without manual feature
+                        engineering. Through <strong>Hierarchical Feature Learning</strong> (e.g., in image
+                        recognition), Layer 1 detects low-level edges/gradients &rarr; Layer 2 combines edges into
+                        corners/textures &rarr; Layer 3 forms object parts (eyes, wheels) &rarr; Final layers recognize
+                        full objects (faces, cars).</p>
+
+                    <h4>2. Why Deeper Networks Do Not Always Improve Accuracy (Twisted Q6)</h4>
+                    <ul>
+                        <li><strong>Vanishing / Exploding Gradients:</strong> Signals attenuate or blow up across dozens
+                            of layers, causing early layers to fail to converge (mitigated via ReLU, Batch
+                            Normalization, and ResNet skip connections).</li>
+                        <li><strong>Overfitting on Limited Data:</strong> Adding layers exponentially increases
+                            trainable parameters; on small datasets, the network memorizes training noise and degrades
+                            test accuracy.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/deep-learning/introduction-deep-learning/" target="_blank"
+                        rel="noopener noreferrer">Introduction to Deep Learning - GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.4</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Convolutional Neural Networks (CNN): Layers, Filters, Strides, Padding &amp; Pooling
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (7 Questions):</div>
+                    <ul>
+                        <li>General Unit-4 Q5: What is a CNN?</li>
+                        <li>General Unit-4 Q14 &amp; Q15: What is a "Filter" (or Kernel) in CNNs? What is the purpose of
+                            the Pooling layer (e.g., Max Pooling)?</li>
+                        <li>General Unit-4 Q19: Describe the architecture of a Convolutional Neural Network (CNN) in
+                            detail. Explain the working of the Convolutional Layer, Activation Layer (ReLU), Pooling
+                            Layer, and Fully Connected Layer with a suitable block diagram.</li>
+                        <li>General Unit-4 Q20: How does a Convolution operation work? Explain the concept of Strides,
+                            Padding, and Parameter Sharing. Why do these mechanisms make CNNs computationally efficient?
+                        </li>
+                        <li>IMP Unit-4 Q5: Explain the architecture of a Convolutional Neural Network (CNN) with its
+                            layers.</li>
+                        <li>Twisted Unit-4 Q3: Why do CNNs use pooling layers? What would happen if pooling layers were
+                            removed?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. CNN Architecture Block Diagram &amp; Layers</h4>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 760 110" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                            <g text-anchor="middle" font-size="10.5" font-weight="bold">
+                                <rect x="10" y="25" width="105" height="60" rx="5" fill="#f1f5f9" stroke="#475569" />
+                                <text x="62" y="52" fill="#0f172a">Input Image</text><text x="62" y="68" fill="#475569"
+                                    font-size="9">(H&times;W&times;3)</text>
+                                <rect x="135" y="25" width="115" height="60" rx="5" fill="#dbeafe" stroke="#2563eb" />
+                                <text x="192" y="52" fill="#1e3a8a">Conv Layer</text><text x="192" y="68" fill="#1e40af"
+                                    font-size="9">Filters / Kernels</text>
+                                <rect x="270" y="25" width="95" height="60" rx="5" fill="#fef3c7" stroke="#d97706" />
+                                <text x="317" y="52" fill="#92400e">ReLU</text><text x="317" y="68" fill="#78350f"
+                                    font-size="9">Non-Linearity</text>
+                                <rect x="385" y="25" width="110" height="60" rx="5" fill="#dcfce7" stroke="#16a34a" />
+                                <text x="440" y="52" fill="#14532d">Max Pooling</text><text x="440" y="68"
+                                    fill="#166534" font-size="9">Downsampling</text>
+                                <rect x="515" y="25" width="110" height="60" rx="5" fill="#fae8ff" stroke="#9333ea" />
+                                <text x="570" y="52" fill="#581c87">Flatten + FC</text><text x="570" y="68"
+                                    fill="#6b21a8" font-size="9">Dense Layers</text>
+                                <rect x="645" y="25" width="105" height="60" rx="5" fill="#1e3a8a" /><text x="697"
+                                    y="52" fill="#fff">Softmax</text><text x="697" y="68" fill="#dbeafe"
+                                    font-size="9">Class Output</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <ul>
+                        <li><strong>Convolutional Layer &amp; Filter (Kernel):</strong> A small learnable weight matrix
+                            (e.g., $3 \times 3$) slides across the image computing element-wise dot products to produce
+                            a <strong>Feature Map</strong>.</li>
+                        <li><strong>Strides, Padding &amp; Parameter Sharing:</strong> <em>Stride ($S$)</em> is the step
+                            size of filter movement; <em>Padding ($P$)</em> adds zero-borders to preserve spatial
+                            dimensions ($O = \frac{W - K + 2P}{S} + 1$); <em>Parameter Sharing</em> reuses the same
+                            filter weights across every spatial position, drastically cutting parameters compared to
+                            dense layers.</li>
+                        <li><strong>Activation (ReLU) &amp; Fully Connected (FC) Layer:</strong> ReLU removes negative
+                            activations; Flatten + FC layers combine spatial features for final Softmax classification.
+                        </li>
+                    </ul>
+
+                    <h4>2. Role of Pooling Layers &amp; Effect of Removing Them (General Q15 &amp; Twisted Q3)</h4>
+                    <p><strong>Max Pooling</strong> takes the maximum value in each $2 \times 2$ window to downsample
+                        feature maps, providing <strong>spatial translation invariance</strong> and reducing
+                        computation. <strong>If Pooling Were Removed (Twisted Q3):</strong> Feature maps would retain
+                        huge spatial dimensions into the Fully Connected layer, causing an explosion in parameters, high
+                        memory/compute cost, overfitting, and sensitivity to slight pixel shifts.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/deep-learning/convolutional-neural-network-cnn-in-machine-learning/"
+                        target="_blank" rel="noopener noreferrer">Convolutional Neural Network (CNN) Architecture -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.5</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Recurrent Neural Networks (RNN), BPTT &amp; Long Short-Term Memory (LSTM)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (7 Questions):</div>
+                    <ul>
+                        <li>General Unit-4 Q6 &amp; Q7: What is an RNN? What is LSTM?</li>
+                        <li>General Unit-4 Q21: Explain the architecture of a Recurrent Neural Network (RNN) with a neat
+                            diagram (including the unrolled version over time). How does an RNN maintain a "memory" of
+                            previous inputs?</li>
+                        <li>General Unit-4 Q22: What is Backpropagation Through Time (BPTT)? Explain how and why BPTT
+                            leads to the Vanishing/Exploding gradient problem in standard RNNs.</li>
+                        <li>General Unit-4 Q23: Explain the LSTM (Long Short-Term Memory) architecture in detail. Draw
+                            the internal cell structure and explain the mathematical functioning of the Forget Gate,
+                            Input Gate, and Output Gate. How does this architecture effectively solve the vanishing
+                            gradient problem of RNNs?</li>
+                        <li>IMP Unit-4 Q6 &amp; Q7: Explain RNN architecture &amp; applications; Explain LSTM and how it
+                            overcomes RNN limitations.</li>
+                        <li>Twisted Unit-4 Q4: Why is a simple RNN not effective for learning long-term dependencies,
+                            and how does LSTM address this issue?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. RNN Architecture &amp; Backpropagation Through Time (BPTT)</h4>
+                    <p>An <strong>RNN</strong> processes sequential data by maintaining a recurrent <strong>Hidden State
+                            ($h_t$)</strong> acting as working memory: $h_t = \tanh(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$.
+                        When unrolled over $T$ time steps, <strong>BPTT</strong> backpropagates gradients backward
+                        across time, multiplying by $W_{hh}^T$. If the largest eigenvalue of $W_{hh}$ is $&lt; 1$,
+                        gradients decay exponentially (<strong>Vanishing Gradient</strong>, forgetting long-term
+                        context); if $&gt; 1$, gradients blow up (<strong>Exploding Gradient</strong>).</p>
+
+                    <h4>2. LSTM Architecture &amp; Three Gates (General Q23 &amp; Twisted Q4)</h4>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 740 165" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Cell State Highway -->
+                            <line x1="40" y1="30" x2="700" y2="30" stroke="#1e3a8a" stroke-width="3" />
+                            <text x="370" y="20" font-size="11" font-weight="bold" fill="#1e3a8a"
+                                text-anchor="middle">Cell State Highway C_t (Additive Linear Gradient Flow)</text>
+                            <circle cx="190" cy="30" r="12" fill="#dc2626" /><text x="190" y="34" fill="#fff"
+                                font-size="11" font-weight="bold" text-anchor="middle">&times;</text>
+                            <circle cx="380" cy="30" r="12" fill="#16a34a" /><text x="380" y="34" fill="#fff"
+                                font-size="11" font-weight="bold" text-anchor="middle">+</text>
+
+                            <!-- Gates -->
+                            <rect x="145" y="75" width="90" height="36" rx="5" fill="#fee2e2" stroke="#dc2626" /><text
+                                x="190" y="97" font-size="10.5" font-weight="bold" fill="#991b1b"
+                                text-anchor="middle">Forget Gate (f_t)</text>
+                            <rect x="285" y="75" width="90" height="36" rx="5" fill="#dcfce7" stroke="#16a34a" /><text
+                                x="330" y="97" font-size="10.5" font-weight="bold" fill="#14532d"
+                                text-anchor="middle">Input Gate (i_t)</text>
+                            <rect x="395" y="75" width="90" height="36" rx="5" fill="#dbeafe" stroke="#2563eb" /><text
+                                x="440" y="97" font-size="10.5" font-weight="bold" fill="#1e3a8a"
+                                text-anchor="middle">Candidate (C~_t)</text>
+                            <rect x="530" y="75" width="95" height="36" rx="5" fill="#fef3c7" stroke="#d97706" /><text
+                                x="577" y="97" font-size="10.5" font-weight="bold" fill="#92400e"
+                                text-anchor="middle">Output Gate (o_t)</text>
+
+                            <line x1="190" y1="75" x2="190" y2="42" stroke="#dc2626" stroke-width="1.8" />
+                            <line x1="380" y1="75" x2="380" y2="42" stroke="#16a34a" stroke-width="1.8" />
+                            <text x="80" y="145" font-size="11" font-weight="bold" fill="#334155">Inputs: [h_{t-1},
+                                x_t]</text>
+                            <text x="665" y="145" font-size="11" font-weight="bold" fill="#1e3a8a">Output: h_t</text>
+                        </svg>
+                    </div>
+                    <div class="formula-box">
+                        <strong>1. Forget Gate:</strong> f<sub>t</sub> = &sigma;(W<sub>f</sub>[h<sub>t&minus;1</sub>,
+                        x<sub>t</sub>] + b<sub>f</sub>) &nbsp;(decides what to discard from C<sub>t&minus;1</sub>)<br>
+                        <strong>2. Input Gate &amp; Candidate:</strong> i<sub>t</sub> =
+                        &sigma;(W<sub>i</sub>[h<sub>t&minus;1</sub>, x<sub>t</sub>] + b<sub>i</sub>), &nbsp;
+                        C&#771;<sub>t</sub> = tanh(W<sub>C</sub>[h<sub>t&minus;1</sub>, x<sub>t</sub>] +
+                        b<sub>C</sub>)<br>
+                        <strong>3. Cell State Update:</strong> C<sub>t</sub> = f<sub>t</sub> &odot;
+                        C<sub>t&minus;1</sub> + i<sub>t</sub> &odot; C&#771;<sub>t</sub><br>
+                        <strong>4. Output Gate:</strong> o<sub>t</sub> = &sigma;(W<sub>o</sub>[h<sub>t&minus;1</sub>,
+                        x<sub>t</sub>] + b<sub>o</sub>), &nbsp; h<sub>t</sub> = o<sub>t</sub> &odot; tanh(C<sub>t</sub>)
+                    </div>
+                    <p><strong>How LSTM Solves Vanishing Gradients:</strong> The Cell State $C_t$ updates via
+                        <em>addition</em> ($+ i_t \odot \tilde{C}_t$) rather than repeated matrix multiplication,
+                        creating an uninterrupted "Constant Error Carousel" gradient highway across hundreds of time
+                        steps.</p>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/deep-learning/deep-learning-introduction-to-long-short-term-memory/"
+                        target="_blank" rel="noopener noreferrer">Long Short-Term Memory (LSTM) Networks -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 4.6</span>
+                    <span class="badge badge-general">General</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Comparisons (CNN vs. RNN, Vanilla RNN vs. LSTM) &amp; Deep Learning Applications
+                </h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (3 Questions):</div>
+                    <ul>
+                        <li>General Unit-4 Q24: Differentiate between: (a) CNN vs. RNN (data type &amp; architecture),
+                            (b) Vanilla RNN vs. LSTM (memory handling).</li>
+                        <li>General Unit-4 Q25: Write a detailed note on the applications of Deep Learning. Provide
+                            specific examples of where CNNs are used vs. where RNNs/LSTMs are used.</li>
+                        <li>Twisted Unit-4 Q5: Compare CNN and RNN with respect to the type of data each is best suited
+                            for.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>(a) CNN vs. RNN (General Q24a &amp; Twisted Q5)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Convolutional Neural Network (CNN)</th>
+                                <th>Recurrent Neural Network (RNN)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Best-Suited Data Type</strong></td>
+                                <td>Grid-like spatial data (2D images, video frames, spectrograms)</td>
+                                <td>Sequential / time-series data (text, speech, stock prices, ECG)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Architecture</strong></td>
+                                <td>Feed-forward convolutional filters &amp; pooling layers</td>
+                                <td>Directed cyclic loops passing hidden state $h_t$ across time steps</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Specific Applications</strong></td>
+                                <td>Face recognition, autonomous lane detection, X-ray tumor detection</td>
+                                <td>Machine translation, speech-to-text, sentiment analysis, weather forecasting</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>(b) Vanilla RNN vs. LSTM (General Q24b)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Vanilla RNN</th>
+                                <th>LSTM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Memory Mechanism</strong></td>
+                                <td>Single short-term hidden state $h_t$ overwritten every step</td>
+                                <td>Dual memory: Long-term Cell State $C_t$ + short-term Hidden State $h_t$</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Long-Term Dependencies</strong></td>
+                                <td>Fails beyond ~10–20 steps due to vanishing gradients</td>
+                                <td>Captures dependencies across hundreds of steps via Forget/Input/Output gates</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/deep-learning/difference-between-cnn-and-rnn/"
+                        target="_blank" rel="noopener noreferrer">Difference between CNN and RNN - GeeksforGeeks</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- UNIT 5: PRACTICAL MACHINE LEARNING                        -->
+        <!-- ========================================================= -->
+        <section id="unit-5" class="unit-section">
+            <div class="unit-header">
+                <h2>Unit 5: Practical Machine Learning</h2>
+                <span class="unit-count">3 Master Topics &bull; 13 Bank Questions Covered</span>
+            </div>
+
+            <div class="quick-rev-box">
+                <div class="qr-title">&#9889; Unit 5 Quick Revision Cheat Sheet</div>
+                <ul>
+                    <li><strong>Python ML Stack:</strong> <em>NumPy</em> (fast C-backed N-dimensional arrays &amp;
+                        linear algebra), <em>Pandas</em> (DataFrames for tabular cleaning, joins, missing values),
+                        <em>Scikit-learn</em> (consistent
+                        <code>fit()</code>/<code>predict()</code>/<code>Pipeline</code> API for classical ML).</li>
+                    <li><strong>ML Lifecycle Steps:</strong> Problem Definition &rarr; Data Collection &rarr; Data
+                        Preprocessing &rarr; Train/Test Split &rarr; Model Training &rarr; Evaluation &rarr; Deployment
+                        &amp; Continuous Monitoring (Drift Retraining).</li>
+                    <li><strong>Data Leakage Prevention:</strong> Always split Train/Test <em>before</em> fitting
+                        scalers or imputers so test statistics never leak into training.</li>
+                </ul>
+            </div>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.1</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">Python ML Ecosystem: NumPy, Pandas &amp; Scikit-Learn (Roles &amp; Practical
+                    Justifications)</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (7 Questions):</div>
+                    <ul>
+                        <li>General Unit-5 Q1, Q2, Q3: What is NumPy? What is Pandas? What is Scikit-learn?</li>
+                        <li>IMP Unit-5 Q1 &amp; Q4: Explain the role of Python libraries NumPy, Pandas, and Scikit-learn
+                            in Machine Learning; Explain how Scikit-learn simplifies the implementation of ML
+                            algorithms.</li>
+                        <li>Twisted Unit-5 Q2: Why do practitioners prefer Pandas over plain Python data structures for
+                            handling ML datasets?</li>
+                        <li>Twisted Unit-5 Q4: Why is Scikit-learn commonly used for classical ML but not preferred for
+                            deep learning tasks like CNN/RNN?</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Roles of NumPy, Pandas &amp; Scikit-Learn</h4>
+                    <ul>
+                        <li><strong>NumPy (Numerical Python):</strong> Core scientific computing library providing
+                            contiguous C-backed multi-dimensional array objects (<code>ndarray</code>), broadcasting,
+                            and vectorized matrix/linear algebra routines.</li>
+                        <li><strong>Pandas:</strong> High-level tabular data manipulation library offering
+                            <code>Series</code> and <code>DataFrame</code> structures for loading CSV/SQL/JSON files,
+                            handling missing values (<code>fillna</code>), filtering, grouping, and time-series
+                            indexing.</li>
+                        <li><strong>Scikit-learn (sklearn):</strong> Industry-standard classical ML library providing
+                            unified estimator APIs (<code>fit()</code>, <code>predict()</code>,
+                            <code>transform()</code>), <code>Pipeline</code> chaining, <code>GridSearchCV</code>
+                            hyperparameter tuning, and built-in algorithms (SVM, Random Forest, K-Means, PCA).</li>
+                    </ul>
+
+                    <h4>2. Practical Justifications (Twisted Q2 &amp; Q4)</h4>
+                    <ul>
+                        <li><strong>Why Pandas Over Plain Python Lists/Dicts (Twisted Q2):</strong> Plain Python lists
+                            store boxed objects scattered in memory and require slow interpreted loops. Pandas uses
+                            vectorized C/Cython column operations, handles heterogeneous types + <code>NaN</code> nulls
+                            natively, and supports SQL-style joins/aggregations in one line.</li>
+                        <li><strong>Why Scikit-learn is Not Preferred for Deep Learning (Twisted Q4):</strong>
+                            Scikit-learn runs strictly on <strong>CPU</strong> (lacking native CUDA GPU acceleration),
+                            lacks automatic differentiation (autograd) engines, and does not provide modular tensor
+                            layers for deep CNN/RNN/Transformer architectures—where <strong>PyTorch</strong> and
+                            <strong>TensorFlow</strong> excel.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/best-python-libraries-for-machine-learning/"
+                        target="_blank" rel="noopener noreferrer">NumPy, Pandas, and Scikit-learn in ML -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="general important twisted" data-marks="10">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.2</span>
+                    <span class="badge badge-general">General</span><span
+                        class="badge badge-important">Important</span><span class="badge badge-twisted">Twisted</span>
+                    <span class="badge marks-10">10 Marks</span>
+                </div>
+                <h3 class="q-title">End-to-End Machine Learning Pipeline: Data Collection, Splitting, Training, Testing
+                    &amp; Drift Retraining</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (5 Questions):</div>
+                    <ul>
+                        <li>General Unit-5 Q4 &amp; Q5: List the steps involved in building a Machine Learning model;
+                            What is meant by data collection in an ML pipeline?</li>
+                        <li>IMP Unit-5 Q2: Explain the various steps involved in building a Machine Learning model: data
+                            collection, training, and testing.</li>
+                        <li>Twisted Unit-5 Q1: Why is splitting data into training and testing sets essential before
+                            building a model? What happens if this step is skipped?</li>
+                        <li>Twisted Unit-5 Q3: In a real-world ML pipeline, why is model training rarely a one-time
+                            process? Justify with reference to model drift and retraining.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <h4>1. Seven Steps in Building a Machine Learning Model</h4>
+                    <ol>
+                        <li><strong>Problem Formulation:</strong> Define business objective, target variable, and
+                            success metric.</li>
+                        <li><strong>Data Collection:</strong> Gathering raw data from databases, APIs, logs, sensors, or
+                            public repositories while verifying data quality and representativeness.</li>
+                        <li><strong>Data Preprocessing &amp; Feature Engineering:</strong> Cleaning nulls, encoding
+                            categorical variables, and scaling numeric features.</li>
+                        <li><strong>Train-Test Splitting:</strong> Partitioning data (e.g., 80% Train, 20% Test) prior
+                            to fitting transformations.</li>
+                        <li><strong>Model Selection &amp; Training:</strong> Fitting candidate algorithms on the
+                            training set via optimization/cross-validation.</li>
+                        <li><strong>Model Evaluation (Testing):</strong> Measuring unbiased generalization performance
+                            on the unseen test set.</li>
+                        <li><strong>Deployment &amp; Continuous Monitoring:</strong> Serving predictions via REST APIs
+                            and monitoring live accuracy.</li>
+                    </ol>
+
+                    <h4>2. Why Train-Test Splitting is Essential &amp; Model Drift Retraining (Twisted Q1 &amp; Q3)</h4>
+                    <ul>
+                        <li><strong>What Happens if Train-Test Split is Skipped (Twisted Q1):</strong> Evaluating a
+                            model on the same data it trained on rewards memorization (<strong>overfitting</strong>) and
+                            causes <strong>data leakage</strong>, giving an artificially inflated accuracy score while
+                            failing completely on unseen real-world inputs.</li>
+                        <li><strong>Why Training is Continuous — Model Drift (Twisted Q3):</strong> Real-world
+                            environments change over time. <strong>Data Drift</strong> occurs when input feature
+                            distributions shift (e.g., inflation changing customer spending), and <strong>Concept
+                                Drift</strong> occurs when the relationship between inputs and target changes (e.g., new
+                            fraud patterns). Continuous MLOps pipelines monitor drift metrics and trigger automated
+                            retraining on fresh data.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/steps-to-build-a-machine-learning-model/"
+                        target="_blank" rel="noopener noreferrer">Steps to Build a Machine Learning Model -
+                        GeeksforGeeks</a></div>
+            </article>
+
+            <article class="q-card" data-cats="important" data-marks="5">
+                <div class="q-meta">
+                    <span class="q-num">Topic 5.3</span>
+                    <span class="badge badge-important">Important</span>
+                    <span class="badge marks-5">5 Marks</span>
+                </div>
+                <h3 class="q-title">Significance of Case Studies in Understanding Practical Machine Learning
+                    Applications</h3>
+                <div class="q-originals">
+                    <div class="orig-label">Original Question Bank Mapping (1 Question):</div>
+                    <ul>
+                        <li>IMP Unit-5 Q3: Explain the significance of case studies in understanding practical ML
+                            applications.</li>
+                    </ul>
+                </div>
+                <div class="q-answer">
+                    <p>Studying real-world <strong>Machine Learning Case Studies</strong> bridges the gap between
+                        textbook mathematical formulas and messy production engineering:</p>
+                    <ul>
+                        <li><strong>1. Problem Framing &amp; Metric Alignment:</strong> Demonstrates how business goals
+                            translate into ML tasks (e.g., Netflix framing recommendations as ranking + collaborative
+                            filtering).</li>
+                        <li><strong>2. Handling Real-World Data Imperfections:</strong> Illustrates practical strategies
+                            for class imbalance (fraud detection), noisy sensors (IoT), and feature engineering.</li>
+                        <li><strong>3. Latency, Scalability &amp; Trade-off Decisions:</strong> Shows why production
+                            systems balance accuracy against inference latency, interpretability, and compute cost.</li>
+                        <li><strong>4. Ethical, Privacy &amp; Compliance Awareness:</strong> Highlights real-world
+                            lessons in algorithmic fairness, bias mitigation, and data governance.</li>
+                    </ul>
+                </div>
+                <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
+                        href="https://www.geeksforgeeks.org/machine-learning/machine-learning-projects/" target="_blank"
+                        rel="noopener noreferrer">Practical Machine Learning Case Studies &amp; Projects -
+                        GeeksforGeeks</a></div>
+            </article>
+
+    </main>
+
+    <footer>
+        Machine Learning (BETCE17335) Exam Study Guide &bull; Gyanmanjari Innovative University (Sem-7) &bull; Complete
+        Coverage of General, IMP &amp; Twisted Banks
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const catFilter = document.getElementById('catFilter');
+        const marksFilter = document.getElementById('marksFilter');
+        const cards = document.querySelectorAll('.q-card');
+
+        function filterCards() {
+            const query = searchInput.value.toLowerCase().trim();
+            const cat = catFilter.value;
+            const marks = marksFilter.value;
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                const cardCats = card.getAttribute('data-cats');
+                const cardMarks = card.getAttribute('data-marks');
+
+                const matchesQuery = !query || text.includes(query);
+                const matchesCat = cat === 'all' || cardCats.includes(cat);
+                const matchesMarks = marks === 'all' || cardMarks === marks;
+
+                if (matchesQuery && matchesCat && matchesMarks) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterCards);
+        catFilter.addEventListener('change', filterCards);
+        marksFilter.addEventListener('change', filterCards);
+    </script>
+</body>
+
+</html>
