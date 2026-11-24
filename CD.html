@@ -228,6 +228,82 @@
         .unit-section { page-break-before: always; break-before: page; }
         .unit-section:first-of-type { page-break-before: avoid; break-before: avoid; }
     }
+
+/* ==========================================================================
+   Responsive enhancements
+   Phones <=480px | Tablets 481-768px | Laptops 769-1200px | Desktop 1201px+
+   All narrow-screen rules are screen-only so the A4 print layout is untouched.
+   ========================================================================== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-wrap: break-word; }
+img, video { max-width: 100%; height: auto; }
+
+.hero h1 { font-size: clamp(1.35rem, 1.1rem + 1.6vw, 1.85rem); }
+.unit-header h2 { font-size: clamp(1.15rem, 1rem + 1vw, 1.45rem); }
+.unit-section { scroll-margin-top: 7rem; } /* keep #unit-N headings clear of the sticky bar */
+
+/* Wide content scrolls inside its own box instead of widening the page */
+.table-wrap {
+    max-width: 100%;
+    margin: 0.85rem 0 1rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.table-wrap > table { margin: 0; }
+.svg-container { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.svg-container svg { height: auto; }
+.formula-box { max-width: 100%; overflow-x: auto; }
+
+@media screen and (min-width: 769px) and (max-width: 999px) {
+    .unit-section { scroll-margin-top: 9.5rem; } /* sticky bar is taller when it wraps */
+}
+
+/* Tablets and below */
+@media screen and (max-width: 768px) {
+    .controls-bar { position: static; padding: 0.75rem 1rem; }
+    .controls-inner { flex-direction: column; align-items: stretch; }
+    .filter-group { display: grid; grid-template-columns: 1fr 1fr; }
+    .filter-group input[type="search"] { grid-column: 1 / -1; width: 100%; min-width: 0; }
+    .filter-group select { width: 100%; min-width: 0; }
+    .filter-group button.print-btn { grid-column: 1 / -1; width: 100%; }
+    input[type="search"], select { font-size: 1rem; } /* stops iOS zoom-on-focus */
+    .unit-section { scroll-margin-top: 1rem; }
+    .unit-header { gap: 0.5rem 1rem; }
+    .svg-container svg { min-width: 600px; } /* keep diagram text legible; scrolls in its box */
+}
+
+/* Touch-friendly hit areas */
+@media screen and (max-width: 768px), screen and (pointer: coarse) {
+    .nav-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.32rem 0.85rem; }
+    input[type="search"], select, button.print-btn { min-height: 44px; }
+}
+
+/* Print: scroll boxes must not change how pages break */
+@media print {
+    .table-wrap, .svg-container, .formula-box { overflow: visible; }
+}
+
+/* Short landscape phones: a pinned bar would eat the viewport */
+@media screen and (max-height: 500px) {
+    .controls-bar { position: static; }
+}
+
+/* Phones */
+@media screen and (max-width: 600px) {
+    .table-wrap > table:has(tr > :nth-child(3)) { min-width: 460px; }
+    .table-wrap > table:has(tr > :nth-child(5)) { min-width: 600px; }
+}
+@media screen and (max-width: 480px) {
+    header.hero { padding: 1.25rem 1rem; }
+    .stat-pill { font-size: 0.78rem; }
+    main { margin-top: 1rem; padding: 0 0.85rem; }
+    .filter-group { grid-template-columns: 1fr; }
+    .quick-rev-box { padding: 0.85rem 1rem; }
+    .q-card { padding: 1rem; }
+    .q-originals { padding: 0.65rem 0.8rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .svg-container { padding: 0.4rem; }
+}
 </style>
 </head>
 <body>
@@ -307,7 +383,7 @@
         <p>A <strong>Compiler</strong> translates a high-level source program into an equivalent low-level target machine program while reporting syntax and semantic errors. It consists of <strong>six sequential phases</strong> supported by two cross-cutting modules—the <strong>Symbol Table Manager</strong> and <strong>Error Handler</strong>—divided into a language-dependent <strong>Front-End (Analysis)</strong> and a machine-dependent <strong>Back-End (Synthesis)</strong>.</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 215" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 215" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g text-anchor="middle" font-size="10.5" font-weight="bold">
                     <rect x="10" y="75" width="85" height="50" rx="5" fill="#f1f5f9" stroke="#475569"/><text x="52" y="98" fill="#0f172a">Source</text><text x="52" y="113" fill="#475569" font-size="9">position=init+rate*60</text>
                     <rect x="115" y="75" width="85" height="50" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="157" y="98" fill="#1e3a8a">1. Lexical</text><text x="157" y="113" fill="#1e40af" font-size="9">Analyzer</text>
@@ -375,7 +451,7 @@
         <p>The Parser calls <code>getNextToken()</code>; the Lexer reads characters using a <strong>Two-Buffer Scheme</strong> (each buffer of size $N = 4096$ bytes terminated by an <code>eof</code> <strong>sentinel</strong>) with two pointers: <code>lexemeBegin</code> and <code>forward</code>. Using sentinels reduces end-of-buffer checks from two tests per character to one, avoiding the lookahead truncation problem of a single buffer (IMP 5M Q5).</p>
 
         <h4>3. Compiler vs. Interpreter (C vs. Python)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>Compiler (e.g., C / GCC)</th><th>Interpreter (e.g., CPython)</th></tr>
             </thead>
@@ -384,7 +460,7 @@
                 <tr><td><strong>Execution Speed</strong></td><td>Very fast native execution; slower initial build</td><td>Slower runtime execution; immediate startup</td></tr>
                 <tr><td><strong>Error Reporting</strong></td><td>Lists all compile-time errors together before execution</td><td>Stops immediately at the first runtime/syntax error encountered</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -624,7 +700,7 @@
         <p>For every pair of distinct productions $A \rightarrow \alpha \mid \beta$: (1) $\text{FIRST}(\alpha) \cap \text{FIRST}(\beta) = \emptyset$; (2) at most one of $\alpha, \beta$ can derive $\epsilon$; and (3) if $\beta \Rightarrow^* \epsilon$, then $\text{FIRST}(\alpha) \cap \text{FOLLOW}(A) = \emptyset$.</p>
 
         <h4>3. LL(1) Parsing Table Example ($E \rightarrow TE', E' \rightarrow +TE' \mid \epsilon, T \rightarrow FT', T' \rightarrow *FT' \mid \epsilon, F \rightarrow (E) \mid \text{id}$)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Non-Terminal</th><th><code>id</code></th><th><code>+</code></th><th><code>*</code></th><th><code>(</code></th><th><code>)</code></th><th><code>$</code></th></tr>
             </thead>
@@ -635,11 +711,11 @@
                 <tr><td><strong>$T'$</strong></td><td>&mdash;</td><td>$T' \rightarrow \epsilon$</td><td>$T' \rightarrow *FT'$</td><td>&mdash;</td><td>$T' \rightarrow \epsilon$</td><td>$T' \rightarrow \epsilon$</td></tr>
                 <tr><td><strong>$F$</strong></td><td>$F \rightarrow \text{id}$</td><td>&mdash;</td><td>&mdash;</td><td>$F \rightarrow (E)$</td><td>&mdash;</td><td>&mdash;</td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><em>Note (Twisted 5M Q20):</em> Reaching an empty cell $M[A, a] = \text{error}$ immediately signals a <strong>syntax error</strong>.</p>
 
         <h4>4. Top-Down vs. Bottom-Up Parsing (General 10M Q15 &amp; IMP 5M Q19)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>Top-Down Parsing (LL)</th><th>Bottom-Up Parsing (LR)</th></tr>
             </thead>
@@ -649,7 +725,7 @@
                 <tr><td><strong>Left Recursion</strong></td><td>Cannot handle left-recursive grammars</td><td>Handles left-recursive grammars naturally</td></tr>
                 <tr><td><strong>Grammar Power</strong></td><td>Smaller class ($LL(1) \subset LR(1)$)</td><td>Handles almost all deterministic CFGs</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -715,7 +791,7 @@
         <p>An <strong>LR(0) Item</strong> is a production with a dot (<code>&bull;</code>) indicating how much of the RHS has been seen (e.g., $A \rightarrow X \cdot YZ$). Using <code>CLOSURE(I)</code> and <code>GOTO(I, X)</code> on the augmented grammar $S' \rightarrow S$, we construct the <strong>Canonical Collection of LR(0) Item Sets</strong> (DFA of viable prefixes).</p>
 
         <h4>2. Comparison of SLR(1), Canonical LR(1), and LALR(1) Parsers</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>SLR(1)</th><th>Canonical LR(1) / CLR</th><th>LALR(1)</th></tr>
             </thead>
@@ -725,7 +801,7 @@
                 <tr><td><strong>Parsing Power</strong></td><td>Least powerful ($SLR(1) \subset LALR(1)$)</td><td>Most powerful deterministic LR parser</td><td>Intermediate ($LALR(1) \subset CLR(1)$); handles nearly all real languages</td></tr>
                 <tr><td><strong>Conflicts</strong></td><td>May suffer Shift-Reduce / Reduce-Reduce conflicts</td><td>No false reduce conflicts</td><td>Never introduces Shift-Reduce conflicts (rare Reduce-Reduce only)</td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><strong>Why Modern Parser Generators (Yacc/Bison) Use LALR(1) (Twisted 10M Q10, Q11, Q15):</strong> SLR places reductions on <em>all</em> symbols in $\text{FOLLOW}(A)$ even when a specific state cannot legally precede that lookahead, causing spurious conflicts. CLR fixes this using exact 1-token lookaheads, and <strong>LALR(1)</strong> merges CLR states with identical cores—preserving almost full CLR parsing power at a fraction of the memory footprint.</p>
         
             </div>
@@ -800,7 +876,7 @@
         </ul>
 
         <h4>2. S-Attributed vs. L-Attributed Definitions (General 10M Q5–Q6, Twisted 10M Q4, 5M Q3, Q19)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>S-Attributed Definition</th><th>L-Attributed Definition</th></tr>
             </thead>
@@ -810,7 +886,7 @@
                 <tr><td><strong>Best Parsing Match</strong></td><td>Ideal for <strong>Bottom-Up (LR)</strong> parsers via value stack</td><td>Ideal for <strong>Top-Down (LL)</strong> parsers</td></tr>
                 <tr><td><strong>Expressive Power</strong></td><td>Strict subset ($\text{S-Attributed} \subset \text{L-Attributed}$)</td><td>More powerful (supports context propagation like types &amp; labels)</td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><strong>Twisted Checks:</strong> If all attributes are inherited, it is <strong>NOT S-attributed</strong> (Twisted 5M Q3). Cyclic dependencies in general SDDs prevent single-pass left-to-right evaluation (Twisted 5M Q2). An <strong>SDTS (Syntax-Directed Translation Scheme)</strong> embeds executable semantic actions <code>{ ... }</code> directly inside grammar RHS positions, whereas an SDD specifies declarative equations (Twisted 5M Q4).</p>
         
             </div>
@@ -876,7 +952,7 @@
             <div class="q-answer">
                 
         <h4>1. Storage Allocation Strategies: Static, Stack &amp; Heap (Twisted 10M Q9 &amp; 5M Q9–Q10, Q16)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Strategy</th><th>Allocation Time</th><th>Supports Recursion?</th><th>Dynamic Size / Lifetime?</th><th>Efficiency</th></tr>
             </thead>
@@ -885,11 +961,11 @@
                 <tr><td><strong>Stack Allocation</strong></td><td>Runtime (LIFO push/pop on call/return)</td><td><strong>Yes</strong> (new frame per recursive call)</td><td>LIFO lifetime bound to function call</td><td>Very fast (pointer bump); prevents memory leaks</td></tr>
                 <tr><td><strong>Heap Allocation</strong></td><td>Runtime (<code>malloc</code>/<code>new</code> &amp; <code>free</code>/GC)</td><td>Yes</td><td><strong>Yes</strong> (arbitrary out-of-order lifetimes)</td><td>Slower (fragmentation &amp; GC overhead)</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>2. Activation Record (Stack Frame) &amp; Access Links (General 10M Q15–Q16 &amp; Twisted 10M Q10–Q11)</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 640 165" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 640 165" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g font-size="10.5" font-weight="bold" text-anchor="middle">
                     <rect x="180" y="10" width="280" height="22" fill="#dbeafe" stroke="#2563eb"/><text x="320" y="25" fill="#1e3a8a">Returned Value &amp; Actual Parameters</text>
                     <rect x="180" y="32" width="280" height="22" fill="#fef3c7" stroke="#d97706"/><text x="320" y="47" fill="#92400e">Optional Control Link (Dynamic Link to Caller Frame)</text>
@@ -903,7 +979,7 @@
         <p><strong>Accessing Non-Local Names (Twisted 10M Q11):</strong> In block-structured languages with nested procedures, <strong>Access Links (Static Links)</strong> point directly to the activation record of the lexically enclosing parent procedure (chasing $n_p - n_x$ links for nesting depth difference), or a <strong>Display</strong> array caches frame pointers by nesting level for $O(1)$ access.</p>
 
         <h4>3. Parameter Passing Mechanisms (General 10M Q17–Q18 &amp; Twisted 10M Q12, 5M Q13–Q14)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Mechanism</th><th>How It Works</th><th>Effect on Caller's Actual Argument</th></tr>
             </thead>
@@ -913,7 +989,7 @@
                 <tr><td><strong>Call-by-Result (Copy-Out)</strong></td><td>Formal parameter initialized uninitialized; copied back on return</td><td>Overwritten with final formal value upon function exit</td></tr>
                 <tr><td><strong>Call-by-Name</strong></td><td>Textual macro-like substitution re-evaluated on every use</td><td>Evaluated dynamically in caller's environment each time referenced</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -958,7 +1034,7 @@
 
         <h4>2. Tabular Representations for <code>x = (a + b) * (c + d) - (a + b)</code> (General 10M Q2 &amp; IMP 10M Q1)</h4>
         <p>TAC: <code>(0) t1 = a + b</code> &rarr; <code>(1) t2 = c + d</code> &rarr; <code>(2) t3 = t1 * t2</code> &rarr; <code>(3) t4 = t3 - t1</code> &rarr; <code>(4) x = t4</code>.</p>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>#</th><th>Quadruples (op, arg1, arg2, result)</th><th>Triples (op, arg1, arg2)</th><th>Indirect Triples (Pointer &rarr; Triple)</th></tr>
             </thead>
@@ -969,7 +1045,7 @@
                 <tr><td><strong>(3)</strong></td><td><code>(-, t3, t1, t4)</code></td><td><code>(-, (2), (0))</code></td><td><code>Ptr[3] &rarr; (3)</code></td></tr>
                 <tr><td><strong>(4)</strong></td><td><code>(=, t4, &mdash;, x)</code></td><td><code>(=, x, (3))</code></td><td><code>Ptr[4] &rarr; (4)</code></td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><strong>Comparison &amp; Twisted Insight (Twisted 10M Q5 &amp; 5M Q2):</strong> <em>Triples</em> avoid generating temporary variable names by referencing instruction indices <code>(0), (1)</code> directly (proving Twisted 10M Q5 is possible without temps!). However, reordering instructions during optimization breaks positional indices in Triples—which <strong>Indirect Triples</strong> solve by reordering the lightweight pointer array while keeping triple indices fixed.</p>
         
             </div>
@@ -1148,7 +1224,7 @@
 
             <div class="q-answer">
                 
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Analysis Problem</th><th>Direction &amp; Meet ($\wedge$)</th><th>Boundary &amp; Transfer Equations</th><th>Compiler Application</th></tr>
             </thead>
@@ -1157,7 +1233,7 @@
                 <tr><td><strong>Live Variable Analysis</strong></td><td>Backward ($\cup$ Union)</td><td>$IN[Exit] = \emptyset$<br>$OUT[B] = igcup_{S \in succ(B)} IN[S]$<br>$IN[B] = use_B \cup (OUT[B] - def_B)$</td><td>Dead code elimination &amp; register allocation</td></tr>
                 <tr><td><strong>Available Expressions</strong></td><td>Forward ($\cap$ Intersection)</td><td>$OUT[Entry] = \emptyset$<br>$IN[B] = igcap_{P \in pred(B)} OUT[P]$<br>$OUT[B] = e\_gen_B \cup (IN[B] - e\_kill_B)$</td><td>Global Common Subexpression Elimination (GCSE)</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 

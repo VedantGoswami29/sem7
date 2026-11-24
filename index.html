@@ -199,6 +199,39 @@
     color: var(--muted);
   }
   .hidden { display: none !important; }
+
+  /* ==========================================================================
+     Responsive enhancements
+     Phones <=480px | Tablets 481-768px | Laptops 769-1200px | Desktop 1201px+
+     ========================================================================== */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { overflow-wrap: break-word; min-height: 100dvh; }
+  header h1 { font-size: clamp(1.5rem, 1.2rem + 2vw, 2.2rem); }
+  .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); } /* never wider than the screen */
+  .badge-row { flex-wrap: wrap; gap: 0.4rem 0.75rem; }
+  .btn-group { flex-wrap: wrap; }
+  .btn { flex: 1 1 8rem; }
+
+  @media (max-width: 768px), (pointer: coarse) {
+    .btn { display: flex; align-items: center; justify-content: center; min-height: 44px; }
+    .search-wrap input { min-height: 44px; }
+  }
+  @media (max-width: 768px) {
+    .search-wrap input { font-size: 1rem; } /* stops iOS zoom-on-focus */
+  }
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem; }
+    header .container { padding: 0; }
+    main.container { padding-left: 1rem; padding-right: 1rem; }
+    main { padding-top: 1.75rem; padding-bottom: 2.5rem; }
+    .grid { gap: 1.25rem; }
+    .card { padding: 1.25rem; }
+    .setup-note { padding: 1rem; }
+  }
+  @media (max-width: 480px) {
+    .btn-group { flex-direction: column; }
+    .btn { flex: 0 0 auto; } /* in a column, flex-basis would become the button's height */
+  }
 </style>
 </head>
 <body>
@@ -286,15 +319,7 @@
     </article>
 
   </div>
-
-  <div class="setup-note">
-    <strong>Website Folder Setup:</strong> Place <code>index.html</code> in the same directory alongside <code>CC.html</code>, <code>ML.html</code>, and <code>CD.html</code>. You can host this folder directly on GitHub Pages, Netlify, Vercel, or open <code>index.html</code> locally offline.
-  </div>
 </main>
-
-<footer>
-  B.Tech Computer Engineering (Semester 7) &bull; Offline-Ready Static Study Portal
-</footer>
 
 <script>
   const filterInput = document.getElementById('subjectFilter');

@@ -438,6 +438,82 @@
                 break-before: avoid;
             }
         }
+
+        /* ==========================================================================
+           Responsive enhancements
+           Phones <=480px | Tablets 481-768px | Laptops 769-1200px | Desktop 1201px+
+           All narrow-screen rules are screen-only so the A4 print layout is untouched.
+           ========================================================================== */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body { overflow-wrap: break-word; }
+        img, video { max-width: 100%; height: auto; }
+
+        .hero h1 { font-size: clamp(1.35rem, 1.1rem + 1.6vw, 1.85rem); }
+        .unit-header h2 { font-size: clamp(1.15rem, 1rem + 1vw, 1.45rem); }
+        .unit-section { scroll-margin-top: 7rem; } /* keep #unit-N headings clear of the sticky bar */
+
+        /* Wide content scrolls inside its own box instead of widening the page */
+        .table-wrap {
+            max-width: 100%;
+            margin: 0.85rem 0 1rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-wrap > table { margin: 0; }
+        .svg-container { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .svg-container svg { height: auto; }
+        .formula-box { max-width: 100%; overflow-x: auto; }
+
+        @media screen and (min-width: 769px) and (max-width: 999px) {
+            .unit-section { scroll-margin-top: 9.5rem; } /* sticky bar is taller when it wraps */
+        }
+
+        /* Tablets and below */
+        @media screen and (max-width: 768px) {
+            .controls-bar { position: static; padding: 0.75rem 1rem; }
+            .controls-inner { flex-direction: column; align-items: stretch; }
+            .filter-group { display: grid; grid-template-columns: 1fr 1fr; }
+            .filter-group input[type="search"] { grid-column: 1 / -1; width: 100%; min-width: 0; }
+            .filter-group select { width: 100%; min-width: 0; }
+            .filter-group button.print-btn { grid-column: 1 / -1; width: 100%; }
+            input[type="search"], select { font-size: 1rem; } /* stops iOS zoom-on-focus */
+            .unit-section { scroll-margin-top: 1rem; }
+            .unit-header { gap: 0.5rem 1rem; }
+            .svg-container svg { min-width: 600px; } /* keep diagram text legible; scrolls in its box */
+        }
+
+        /* Touch-friendly hit areas */
+        @media screen and (max-width: 768px), screen and (pointer: coarse) {
+            .nav-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.32rem 0.85rem; }
+            input[type="search"], select, button.print-btn { min-height: 44px; }
+        }
+
+        /* Print: scroll boxes must not change how pages break */
+        @media print {
+            .table-wrap, .svg-container, .formula-box { overflow: visible; }
+        }
+
+        /* Short landscape phones: a pinned bar would eat the viewport */
+        @media screen and (max-height: 500px) {
+            .controls-bar { position: static; }
+        }
+
+        /* Phones */
+        @media screen and (max-width: 600px) {
+            .table-wrap > table:has(tr > :nth-child(3)) { min-width: 460px; }
+            .table-wrap > table:has(tr > :nth-child(5)) { min-width: 600px; }
+        }
+        @media screen and (max-width: 480px) {
+            header.hero { padding: 1.25rem 1rem; }
+            .stat-pill { font-size: 0.78rem; }
+            main { margin-top: 1rem; padding: 0 0.85rem; }
+            .filter-group { grid-template-columns: 1fr; }
+            .quick-rev-box { padding: 0.85rem 1rem; }
+            .q-card { padding: 1rem; }
+            .q-originals { padding: 0.65rem 0.8rem; }
+            th, td { padding: 0.45rem 0.55rem; }
+            .svg-container { padding: 0.4rem; }
+        }
     </style>
 </head>
 
@@ -570,7 +646,7 @@
                     </ul>
 
                     <h4>3. Comparison: Supervised vs. Unsupervised vs. Reinforcement Learning</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Basis</th>
@@ -605,10 +681,10 @@
                                 <td>Q-Learning, SARSA, Deep Q-Network (DQN)</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
 
                     <h4>4. Machine Learning vs. Traditional Programming &amp; Twisted Scenarios</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Parameter</th>
@@ -633,7 +709,7 @@
                                 <td>Adapts automatically when retrained on new data</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                     <ul>
                         <li><strong>Can RL be solved via Supervised Learning? (Twisted Q2):</strong> <em>Generally
                                 No.</em> Supervised learning assumes independent and identically distributed (i.i.d.)
@@ -989,7 +1065,7 @@
                         $E[aX + b] = aE[X] + b$.</p>
 
                     <h4>2. Discrete vs. Continuous Random Variables &amp; Distributions</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Feature</th>
@@ -1020,7 +1096,7 @@
                                 <td>Height, temperature, sensor voltage (Normal, Uniform)</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
                         href="https://www.geeksforgeeks.org/engineering-mathematics/random-variable/" target="_blank"
@@ -1051,7 +1127,7 @@
                 </div>
                 <div class="q-answer">
                     <h4>1. Discrete Distributions (Bernoulli, Binomial, Poisson)</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Distribution</th>
@@ -1080,7 +1156,7 @@
                                 <td>Rare events in fixed time/space: server requests/min, call arrivals.</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
 
                     <h4>2. Continuous Distributions: Normal (Gaussian) vs. Uniform</h4>
                     <ul>
@@ -1120,7 +1196,7 @@
                     <p><strong>Joint Probability Distribution</strong> gives the probability that two or more random
                         variables occur simultaneously: $P(X=x, Y=y)$. <em>Example:</em> Probability that a patient both
                         smokes ($X=1$) and has hypertension ($Y=1$).</p>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Basis</th>
@@ -1145,7 +1221,7 @@
                                 <td>Asymmetric: $P(A \mid B) \ne P(B \mid A)$ in general</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
                         href="https://www.geeksforgeeks.org/data-science/joint-probability-distribution/"
@@ -1278,7 +1354,7 @@
                         training set. Final performance is the average across all $K$ folds: $CV_{(K)} = \frac{1}{K}
                         \sum_{i=1}^K \text{Metric}_i$.</p>
                     <div class="svg-container">
-                        <svg viewBox="0 0 740 135" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 740 135" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <g font-size="11" font-weight="bold" text-anchor="middle">
                                 <text x="55" y="30" fill="#1e293b">Fold 1:</text>
                                 <rect x="105" y="14" width="115" height="24" rx="4" fill="#f59e0b" /><text x="162"
@@ -1320,7 +1396,7 @@
                     </div>
 
                     <h4>2. Hold-Out Validation vs. K-Fold Cross-Validation (Twisted Q3)</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Criteria</th>
@@ -1345,7 +1421,7 @@
                                 <td>$K$ times slower (trains $K$ models)</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                     <p><strong>Diagnosis of High Training Score + Poor CV Score (Twisted Q4):</strong> This indicates
                         <strong>Overfitting (High Variance)</strong>—the model has memorized training noise rather than
                         learning generalizable patterns. Fix using regularization, pruning, dropout, or more training
@@ -1393,7 +1469,7 @@
                     </ol>
 
                     <h4>2. Type-I vs. Type-II Errors &amp; Medical Diagnosis Analysis (Twisted Q6)</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Error Type</th>
@@ -1416,7 +1492,7 @@
                                 <td>Telling a cancer patient they are healthy (delays life-saving treatment).</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                     <p><strong>Which is More Critical in Medical Diagnosis? (Twisted Q6):</strong> <strong>Type-II Error
                             (False Negative)</strong> is far more critical because missing a life-threatening disease
                         leaves the patient untreated, risking severe progression or death, whereas a Type-I false alarm
@@ -1543,7 +1619,7 @@
                     </ul>
 
                     <h4>2. Primary Differences</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Aspect</th>
@@ -1573,7 +1649,7 @@
                                 <td>Adjusted $R^2$ (penalizes irrelevant predictors)</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
                         href="https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/" target="_blank"
@@ -1610,7 +1686,7 @@
                         data, the <strong>Kernel Trick</strong> (RBF, Polynomial) maps inputs into higher dimensions
                         without explicitly computing coordinates.</p>
                     <div class="svg-container">
-                        <svg viewBox="0 0 640 165" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 640 165" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <line x1="180" y1="145" x2="340" y2="15" stroke="#1e3a8a" stroke-width="2.5" />
                             <line x1="145" y1="145" x2="305" y2="15" stroke="#3b82f6" stroke-width="1.5"
                                 stroke-dasharray="5,4" />
@@ -1646,7 +1722,7 @@
                         \frac{|S_v|}{|S|}\text{Entropy}(S_v)$). <em>Example:</em> Root node splits on
                         <code>Outlook</code> &rarr; branches split on <code>Humidity</code>/<code>Wind</code> &rarr;
                         leaves output <code>Play Tennis: Yes/No</code>.</p>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Parameter</th>
@@ -1676,7 +1752,7 @@
                                 <td>Prone to overfitting unless pruned</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
                         href="https://www.geeksforgeeks.org/machine-learning/support-vector-machine-algorithm/"
@@ -1846,7 +1922,7 @@
                 <div class="q-answer">
                     <p>Total generalization error decomposes into: $\text{Error} = \text{Bias}^2 + \text{Variance} +
                         \text{Irreducible Noise}$.</p>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Aspect</th>
@@ -1877,7 +1953,7 @@
                                 <td>L1/L2 Regularization, Pruning, Dropout, Early Stopping, more training data</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
                         href="https://www.geeksforgeeks.org/machine-learning/underfitting-and-overfitting-in-machine-learning/"
@@ -2100,7 +2176,7 @@
                         computing weighted sum $z = \sum_{i=1}^n w_i x_i + b$ followed by a step activation $\hat{y} = 1
                         \text{ if } z \ge 0 \text{ else } 0$.</p>
                     <div class="svg-container">
-                        <svg viewBox="0 0 680 155" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 680 155" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <g font-size="11" font-weight="bold" text-anchor="middle">
                                 <circle cx="90" cy="30" r="18" fill="#dbeafe" stroke="#2563eb" /><text x="90" y="34"
                                     fill="#1e3a8a">x1</text>
@@ -2184,7 +2260,7 @@
                         boundaries.</p>
 
                     <h4>2. Comparison of Sigmoid, Tanh, and ReLU</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Function</th>
@@ -2216,7 +2292,7 @@
                                     Minor con: "Dying ReLU" for $x \le 0$. Default for CNN/MLP hidden layers.</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
 
                     <h4>3. Vanishing Gradient &amp; ReLU Advantage (General Q11, Q12 &amp; Twisted Q1)</h4>
                     <p>During backpropagation, gradients are multiplied across layers via the Chain Rule. Because
@@ -2307,7 +2383,7 @@
                 <div class="q-answer">
                     <h4>1. CNN Architecture Block Diagram &amp; Layers</h4>
                     <div class="svg-container">
-                        <svg viewBox="0 0 760 110" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 760 110" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <g text-anchor="middle" font-size="10.5" font-weight="bold">
                                 <rect x="10" y="25" width="105" height="60" rx="5" fill="#f1f5f9" stroke="#475569" />
                                 <text x="62" y="52" fill="#0f172a">Input Image</text><text x="62" y="68" fill="#475569"
@@ -2395,7 +2471,7 @@
 
                     <h4>2. LSTM Architecture &amp; Three Gates (General Q23 &amp; Twisted Q4)</h4>
                     <div class="svg-container">
-                        <svg viewBox="0 0 740 165" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 740 165" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <!-- Cell State Highway -->
                             <line x1="40" y1="30" x2="700" y2="30" stroke="#1e3a8a" stroke-width="3" />
                             <text x="370" y="20" font-size="11" font-weight="bold" fill="#1e3a8a"
@@ -2470,7 +2546,7 @@
                 </div>
                 <div class="q-answer">
                     <h4>(a) CNN vs. RNN (General Q24a &amp; Twisted Q5)</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Parameter</th>
@@ -2495,10 +2571,10 @@
                                 <td>Machine translation, speech-to-text, sentiment analysis, weather forecasting</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
 
                     <h4>(b) Vanilla RNN vs. LSTM (General Q24b)</h4>
-                    <table>
+                    <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
                         <thead>
                             <tr>
                                 <th>Parameter</th>
@@ -2518,7 +2594,7 @@
                                 <td>Captures dependencies across hundreds of steps via Forget/Input/Output gates</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 <div class="gfg-ref"><strong>Primary Reference (GeeksforGeeks):</strong> <a
                         href="https://www.geeksforgeeks.org/deep-learning/difference-between-cnn-and-rnn/"

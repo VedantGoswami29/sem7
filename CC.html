@@ -380,6 +380,82 @@
             break-before: avoid;
         }
     }
+
+/* ==========================================================================
+   Responsive enhancements
+   Phones <=480px | Tablets 481-768px | Laptops 769-1200px | Desktop 1201px+
+   All narrow-screen rules are screen-only so the A4 print layout is untouched.
+   ========================================================================== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-wrap: break-word; }
+img, video { max-width: 100%; height: auto; }
+
+.hero h1 { font-size: clamp(1.35rem, 1.1rem + 1.6vw, 1.85rem); }
+.unit-header h2 { font-size: clamp(1.15rem, 1rem + 1vw, 1.45rem); }
+.unit-section { scroll-margin-top: 7rem; } /* keep #unit-N headings clear of the sticky bar */
+
+/* Wide content scrolls inside its own box instead of widening the page */
+.table-wrap {
+    max-width: 100%;
+    margin: 0.85rem 0 1rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.table-wrap > table { margin: 0; }
+.svg-container { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.svg-container svg { height: auto; }
+.formula-box { max-width: 100%; overflow-x: auto; }
+
+@media screen and (min-width: 769px) and (max-width: 999px) {
+    .unit-section { scroll-margin-top: 9.5rem; } /* sticky bar is taller when it wraps */
+}
+
+/* Tablets and below */
+@media screen and (max-width: 768px) {
+    .controls-bar { position: static; padding: 0.75rem 1rem; }
+    .controls-inner { flex-direction: column; align-items: stretch; }
+    .filter-group { display: grid; grid-template-columns: 1fr 1fr; }
+    .filter-group input[type="search"] { grid-column: 1 / -1; width: 100%; min-width: 0; }
+    .filter-group select { width: 100%; min-width: 0; }
+    .filter-group button.print-btn { grid-column: 1 / -1; width: 100%; }
+    input[type="search"], select { font-size: 1rem; } /* stops iOS zoom-on-focus */
+    .unit-section { scroll-margin-top: 1rem; }
+    .unit-header { gap: 0.5rem 1rem; }
+    .svg-container svg { min-width: 600px; } /* keep diagram text legible; scrolls in its box */
+}
+
+/* Touch-friendly hit areas */
+@media screen and (max-width: 768px), screen and (pointer: coarse) {
+    .nav-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.32rem 0.85rem; }
+    input[type="search"], select, button.print-btn { min-height: 44px; }
+}
+
+/* Print: scroll boxes must not change how pages break */
+@media print {
+    .table-wrap, .svg-container, .formula-box { overflow: visible; }
+}
+
+/* Short landscape phones: a pinned bar would eat the viewport */
+@media screen and (max-height: 500px) {
+    .controls-bar { position: static; }
+}
+
+/* Phones */
+@media screen and (max-width: 600px) {
+    .table-wrap > table:has(tr > :nth-child(3)) { min-width: 460px; }
+    .table-wrap > table:has(tr > :nth-child(5)) { min-width: 600px; }
+}
+@media screen and (max-width: 480px) {
+    header.hero { padding: 1.25rem 1rem; }
+    .stat-pill { font-size: 0.78rem; }
+    main { margin-top: 1rem; padding: 0 0.85rem; }
+    .filter-group { grid-template-columns: 1fr; }
+    .quick-rev-box { padding: 0.85rem 1rem; }
+    .q-card { padding: 1rem; }
+    .q-originals { padding: 0.65rem 0.8rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .svg-container { padding: 0.4rem; }
+}
 </style>
 </head>
 <body>
@@ -461,7 +537,7 @@
 
         <h4>2. Five Essential Characteristics of Cloud Computing</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 210" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 210" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <rect x="260" y="15" width="240" height="44" rx="8" fill="#1e3a8a" />
                 <text x="380" y="42" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">NIST Cloud Characteristics</text>
                 <line x1="380" y1="59" x2="380" y2="85" stroke="#1e3a8a" stroke-width="2"/>
@@ -524,7 +600,7 @@
         <p>Cloud computing did not emerge overnight; it evolved gradually over several decades from foundational computing paradigms aimed at sharing hardware, improving fault tolerance, and lowering operational costs.</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 120" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 120" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#f1f5f9" stroke="#3b82f6" stroke-width="1.5">
                     <rect x="10" y="25" width="125" height="65" rx="6"/>
                     <rect x="160" y="25" width="125" height="65" rx="6"/>
@@ -559,7 +635,7 @@
         </ul>
 
         <h4>3. Summary Comparison Table</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Paradigm</th><th>Coupling &amp; Location</th><th>Resource Type</th><th>Billing / Access Model</th></tr>
             </thead>
@@ -569,7 +645,7 @@
                 <tr><td><strong>Utility Computing</strong></td><td>Centralized or distributed</td><td>Metered IT infrastructure</td><td>Pay-per-use utility metering</td></tr>
                 <tr><td><strong>Cloud Computing</strong></td><td>Virtual pools over Internet</td><td>Elastic virtualized resources</td><td>On-demand self-service + Pay-as-you-go</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -682,7 +758,7 @@
         <p>Cloud computing services are primarily categorized into three foundational delivery models—<strong>Infrastructure as a Service (IaaS)</strong>, <strong>Platform as a Service (PaaS)</strong>, and <strong>Software as a Service (SaaS)</strong>—differentiated by how much of the IT stack is managed by the provider versus the customer.</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 220" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <text x="140" y="22" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">On-Premises</text>
                 <text x="300" y="22" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">IaaS</text>
                 <text x="460" y="22" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">PaaS</text>
@@ -745,7 +821,7 @@
         </ul>
 
         <h4>3. Comparison Between IaaS, PaaS, and SaaS</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Parameter</th><th>IaaS</th><th>PaaS</th><th>SaaS</th></tr>
             </thead>
@@ -756,7 +832,7 @@
                 <tr><td><strong>Provider Manages</strong></td><td>Hardware, storage, network, hypervisor</td><td>Hardware, OS, middleware, runtime</td><td>Entire stack (Infrastructure to App)</td></tr>
                 <tr><td><strong>Examples</strong></td><td>AWS EC2, DigitalOcean</td><td>Google App Engine, Heroku</td><td>Gmail, Zoom, Salesforce</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -797,7 +873,7 @@
         </ul>
 
         <h4>2. Difference Between Public Cloud and Private Cloud</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>Public Cloud</th><th>Private Cloud</th></tr>
             </thead>
@@ -808,7 +884,7 @@
                 <tr><td><strong>Scalability</strong></td><td>Virtually unlimited, instant elasticity</td><td>Limited by internal hardware capacity</td></tr>
                 <tr><td><strong>Maintenance</strong></td><td>Managed entirely by Cloud Provider</td><td>Managed by internal IT team</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -837,7 +913,7 @@
         <p><strong>Cloud Computing Architecture</strong> refers to the hardware and software components and sub-components required for cloud computing. It is broadly divided into two parts: the <strong>Front-End</strong> (client side) and the <strong>Back-End</strong> (cloud provider side), connected via a network (typically the Internet).</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 250" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <!-- Front End -->
                 <rect x="20" y="35" width="170" height="180" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
                 <text x="105" y="58" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">FRONT-END (Client)</text>
@@ -911,7 +987,7 @@
 
             <div class="q-answer">
                 
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Factor</th><th>Cloud Computing</th><th>Traditional (On-Premises) Computing</th></tr>
             </thead>
@@ -923,7 +999,7 @@
                 <tr><td><strong>Maintenance</strong></td><td>Handled by Cloud Service Provider's engineering team</td><td>Requires dedicated in-house IT administrators</td></tr>
                 <tr><td><strong>Deployment Speed</strong></td><td>Minutes (automated provisioning)</td><td>Weeks to months (procurement and setup)</td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><strong>Context for a Rapidly Growing Online Business (Twisted Q7):</strong> For a fast-scaling startup, <strong>Cloud Computing</strong> is vastly superior because it avoids cash-draining CapEx, scales automatically during viral traffic spikes, and enables global deployment via CDNs without hiring a large hardware operations team.</p>
         
             </div>
@@ -956,7 +1032,7 @@
         </ul>
 
         <h4>2. Scenario 2: Healthcare Organization Comparison (Private vs. Hybrid Cloud) (Twisted Q4)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Criteria</th><th>Private Cloud</th><th>Hybrid Cloud</th></tr>
             </thead>
@@ -966,7 +1042,7 @@
                 <tr><td><strong>Control</strong></td><td>100% control over hardware, network, and policies.</td><td>Full control over core data; shared responsibility on public workloads.</td></tr>
                 <tr><td><strong>Scalability</strong></td><td>Limited to internal server capacity.</td><td>High elasticity for analytics, telemedicine video, and seasonal spikes.</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>3. Situation Where Public Cloud is Unsuitable (Twisted Q10)</h4>
         <p><strong>Situation:</strong> Defense intelligence systems, core banking ledgers, or ultra-low-latency industrial robotics requiring air-gapped security and strict data sovereignty. <strong>Alternative:</strong> On-premises <strong>Private Cloud</strong> (or <strong>Community Cloud</strong> for multi-agency government collaboration).</p>
@@ -1100,7 +1176,7 @@
         </ul>
 
         <h4>3. Comparison: Server Virtualization vs. Storage Virtualization (Twisted Ch.2 Q5)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>Server Virtualization</th><th>Storage Virtualization</th></tr>
             </thead>
@@ -1109,7 +1185,7 @@
                 <tr><td><strong>Core Mechanism</strong></td><td>Hypervisor slices hardware into VMs</td><td>Storage controller/software pools LUNs/volumes</td></tr>
                 <tr><td><strong>Primary Benefit</strong></td><td>Server consolidation &amp; workload isolation</td><td>Unified storage management, thin provisioning &amp; replication</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -1138,7 +1214,7 @@
         <p>A <strong>Hypervisor</strong> is a firmware, hardware, or software layer that creates, executes, and manages Virtual Machines (VMs). It abstracts the underlying physical host hardware and dynamically allocates CPU cycles, memory, disk I/O, and network bandwidth to each guest VM while maintaining strict isolation.</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 215" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 215" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <!-- Type 1 -->
                 <text x="190" y="22" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Type-1 (Bare-Metal) Hypervisor</text>
                 <rect x="40" y="160" width="300" height="35" rx="4" fill="#1e293b"/><text x="190" y="182" fill="#fff" font-size="11.5" font-weight="bold" text-anchor="middle">Physical Server Hardware</text>
@@ -1158,7 +1234,7 @@
         </div>
 
         <h4>2. Comparison: Type-1 vs. Type-2 Hypervisor</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>Type-1 (Bare-Metal) Hypervisor</th><th>Type-2 (Hosted) Hypervisor</th></tr>
             </thead>
@@ -1168,7 +1244,7 @@
                 <tr><td><strong>Security &amp; Stability</strong></td><td>Very high; crash in one VM does not affect others</td><td>Dependent on Host OS stability and security</td></tr>
                 <tr><td><strong>Examples</strong></td><td>VMware ESXi, KVM, Microsoft Hyper-V, Xen</td><td>Oracle VirtualBox, VMware Workstation, Parallels</td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><strong>Production Data Center Choice (Twisted Ch.2 Q3):</strong> <strong>Type-1 (Bare-Metal) Hypervisor</strong> is strictly chosen for production cloud data centers because eliminating the Host OS removes a major single point of failure, reduces attack surface, and delivers near-native hardware throughput.</p>
 
         <h4>3. Virtual Machine (VM) and Its Components</h4>
@@ -1248,7 +1324,7 @@
         <p><strong>Virtual Machines (VMs)</strong> virtualize at the <em>hardware layer</em> using a Hypervisor, meaning every VM bundles a full <strong>Guest Operating System</strong> (gigabytes in size). <strong>Containers</strong> (e.g., Docker) virtualize at the <em>Operating System layer</em> using a Container Engine, sharing the <strong>Host OS Kernel</strong> while isolating processes via Linux <em>namespaces</em> and <em>cgroups</em> (megabytes in size).</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 215" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 215" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <!-- VMs -->
                 <text x="190" y="20" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Virtual Machines (Hardware Virtualization)</text>
                 <rect x="40" y="170" width="300" height="28" rx="4" fill="#1e293b"/><text x="190" y="188" fill="#fff" font-size="11" text-anchor="middle">Physical Infrastructure</text>
@@ -1277,7 +1353,7 @@
         </div>
 
         <h4>2. Parameter-by-Parameter Comparison (IMP Unit-2 Q5)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Parameter</th><th>Virtual Machines (VMs)</th><th>Containers</th></tr>
             </thead>
@@ -1289,7 +1365,7 @@
                 <tr><td><strong>Portability</strong></td><td>Moderate; tied to hypervisor image formats.</td><td>Extremely high ("Build once, run anywhere" via OCI images).</td></tr>
                 <tr><td><strong>Use Cases</strong></td><td>Running mixed OS (Windows + Linux), legacy monoliths, multi-tenant high-security isolation.</td><td>Microservices, CI/CD pipelines, auto-scaling cloud-native apps.</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>3. Scenario Decisions (Twisted Ch.2 Q2 &amp; Q7)</h4>
         <ul>
@@ -1402,7 +1478,7 @@
         <p>A <strong>Cloud Data Center</strong> is a large-scale facility housing thousands of interconnected servers, high-speed switches, and enterprise storage arrays organized in a hierarchical multi-tier topology (Core, Aggregation/Spine, and Access/Leaf layers) to deliver fault-tolerant cloud services.</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 265" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 265" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <!-- Orchestration -->
                 <rect x="30" y="12" width="700" height="32" rx="5" fill="#1e3a8a"/><text x="380" y="33" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">Cloud Management, Orchestration &amp; Monitoring Layer (OpenStack / Kubernetes / vCenter)</text>
                 <!-- Virtual Workloads -->
@@ -1480,7 +1556,7 @@
         </ul>
 
         <h4>2. Comparison of Cloud Storage Architectures</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Storage Type</th><th>Data Abstraction</th><th>Access Protocol</th><th>Primary Cloud Use Case</th></tr>
             </thead>
@@ -1490,7 +1566,7 @@
                 <tr><td><strong>SAN / Block</strong></td><td>Fixed-size raw blocks</td><td>Fibre Channel, iSCSI</td><td>OS boot volumes, SQL/NoSQL databases</td></tr>
                 <tr><td><strong>Object Storage</strong></td><td>Objects (Data + Metadata + ID)</td><td>HTTP/HTTPS REST API</td><td>Images, videos, backups, Big Data lakes</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>3. Essential Cloud Storage Requirements (General Q18)</h4>
         <ul>
@@ -1531,7 +1607,7 @@
 
         <h4>2. Six Steps in Pre-Copy Live VM Migration (IMP Unit-2 Q6)</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 110" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 110" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#eff6ff" stroke="#2563eb" stroke-width="1.5">
                     <rect x="8" y="22" width="112" height="65" rx="5"/>
                     <rect x="134" y="22" width="112" height="65" rx="5"/>
@@ -1636,7 +1712,7 @@
             <div class="q-answer">
                 
         <h4>1. Major Cloud Service Providers &amp; Offerings (General Q1)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Provider</th><th>Compute</th><th>Storage</th><th>Database</th><th>Networking &amp; AI</th></tr>
             </thead>
@@ -1645,7 +1721,7 @@
                 <tr><td><strong>Microsoft Azure</strong></td><td>Azure VMs, Functions, AKS</td><td>Blob Storage, Azure Disks</td><td>Azure SQL, Cosmos DB</td><td>Azure VNet, Front Door, OpenAI</td></tr>
                 <tr><td><strong>Google Cloud Platform (GCP)</strong></td><td>Compute Engine, Cloud Run, GKE</td><td>Cloud Storage, Persistent Disk</td><td>Cloud SQL, BigQuery, Spanner</td><td>Cloud VPC, Cloud CDN, Vertex AI</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>2. Core Cloud Service Pillars (General Q2, Q3, Q4)</h4>
         <ul>
@@ -1687,7 +1763,7 @@
         </ul>
 
         <h4>2. Comparison: Cloud APIs vs. Cloud SDKs</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Feature</th><th>Cloud API</th><th>Cloud SDK</th></tr>
             </thead>
@@ -1697,7 +1773,7 @@
                 <tr><td><strong>Developer Effort</strong></td><td>Higher (must manually craft HTTP headers, auth signing, parsing)</td><td>Lower (simple native function calls with built-in auth/retries)</td></tr>
                 <tr><td><strong>Example</strong></td><td><code>POST https://ec2.amazonaws.com/?Action=RunInstances</code></td><td><code>ec2_client.run_instances(...)</code> in Python Boto3</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>3. How an Application Communicates via REST API (IMP Unit-3 Q4 &amp; Twisted Q2)</h4>
         <ol>
@@ -1741,7 +1817,7 @@
 
         <h4>2. Serverless Architecture &amp; Real-World Example</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 120" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 120" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" text-anchor="middle" font-size="11">
                     <rect x="15" y="25" width="145" height="65" rx="6"/><text x="87" y="52" font-weight="bold" fill="#1e3a8a">Event Source</text><text x="87" y="70" fill="#334155" font-size="9.5">S3 Upload / HTTP / IoT</text>
                     <rect x="195" y="25" width="145" height="65" rx="6"/><text x="267" y="52" font-weight="bold" fill="#1e3a8a">API Gateway / Trigger</text><text x="267" y="70" fill="#334155" font-size="9.5">Auth, Routing &amp; Throttling</text>
@@ -1762,7 +1838,7 @@
         </ul>
 
         <h4>4. Comparison: IaaS-Based Deployment vs. Serverless Deployment (IMP Unit-3 Q5)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Basis</th><th>IaaS-Based Deployment (e.g., EC2)</th><th>Serverless Deployment (e.g., AWS Lambda)</th></tr>
             </thead>
@@ -1773,7 +1849,7 @@
                 <tr><td><strong>Maintenance</strong></td><td>Customer manages OS patches, security updates, scaling rules.</td><td>Zero server maintenance; fully managed by provider.</td></tr>
                 <tr><td><strong>Suitable Use Cases</strong></td><td>Long-running monoliths, custom kernels, steady 24/7 workloads.</td><td>Unpredictable/spiky APIs, event triggers, cron jobs, webhooks (Twisted Q1 &amp; Q9).</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -1804,7 +1880,7 @@
 
         <h4>2. Kubernetes Architecture: Master Node (Control Plane) &amp; Worker Nodes</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 220" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <!-- Master Node -->
                 <rect x="20" y="20" width="330" height="180" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
                 <text x="185" y="42" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">MASTER NODE (Control Plane)</text>
@@ -1882,7 +1958,7 @@
 
         <h4>2. CI/CD Pipeline Stages (Source Commit to Production)</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 110" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 110" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" text-anchor="middle" font-size="10.5">
                     <rect x="8" y="22" width="110" height="64" rx="5"/><text x="63" y="47" font-weight="bold" fill="#1e3a8a">1. Source</text><text x="63" y="65" fill="#475569" font-size="9.5">Git Push / PR</text>
                     <rect x="134" y="22" width="110" height="64" rx="5"/><text x="189" y="47" font-weight="bold" fill="#1e3a8a">2. Build</text><text x="189" y="65" fill="#475569" font-size="9.5">Compile &amp; Docker</text>
@@ -1934,7 +2010,7 @@
                 
         <h4>1. Deployment Architecture of a Scalable Cloud Web Application (IMP Unit-3 Q6)</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 220" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <rect x="15" y="80" width="90" height="55" rx="6" fill="#eff6ff" stroke="#2563eb"/><text x="60" y="105" font-size="11" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Users</text><text x="60" y="121" font-size="9.5" fill="#475569" text-anchor="middle">Route 53 DNS</text>
                 <rect x="135" y="30" width="105" height="45" rx="6" fill="#fef3c7" stroke="#d97706"/><text x="187" y="50" font-size="10.5" font-weight="bold" fill="#92400e" text-anchor="middle">CloudFront CDN</text><text x="187" y="65" font-size="9" fill="#78350f" text-anchor="middle">Static Assets</text>
                 <rect x="135" y="105" width="105" height="55" rx="6" fill="#dbeafe" stroke="#1d4ed8"/><text x="187" y="130" font-size="10.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Application</text><text x="187" y="145" font-size="10.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Load Balancer</text>
@@ -2104,7 +2180,7 @@
         </ul>
 
         <h4>2. Comparison: Data at Rest vs. Data in Transit (General Q9)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Aspect</th><th>Data at Rest</th><th>Data in Transit</th></tr>
             </thead>
@@ -2113,10 +2189,10 @@
                 <tr><td><strong>Primary Threats</strong></td><td>Physical disk theft, unauthorized bucket exposure, snapshot leaks</td><td>Man-in-the-Middle (MitM) interception, packet sniffing</td></tr>
                 <tr><td><strong>Encryption Standard</strong></td><td>AES-256, RSA-2048/4096 envelope encryption</td><td>TLS 1.3, HTTPS, IPsec, SSH</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>3. Symmetric vs. Asymmetric Key Encryption in Cloud (IMP Unit-4 Q6 &amp; Twisted Q5)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Parameter</th><th>Symmetric Key Encryption (e.g., AES-256)</th><th>Asymmetric Key Encryption (e.g., RSA, ECC)</th></tr>
             </thead>
@@ -2126,7 +2202,7 @@
                 <tr><td><strong>Security</strong></td><td>Very strong (AES-256), but compromised if shared key leaks.</td><td>Eliminates secret-key sharing risk; enables digital signatures.</td></tr>
                 <tr><td><strong>Suitability in Cloud</strong></td><td>Bulk data encryption (S3 objects, EBS volumes, database storage).</td><td>TLS handshakes, SSH key pairs, digital signatures, and encrypting symmetric data keys (<strong>Envelope Encryption</strong>).</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -2248,7 +2324,7 @@
         <p>Cloud security is a shared obligation between the Cloud Service Provider (CSP) and the Customer: the <strong>CSP is responsible for Security <em>OF</em> the Cloud</strong> (physical data centers, hardware, hypervisor, global network), while the <strong>Customer is responsible for Security <em>IN</em> the Cloud</strong> (customer data, IAM, OS/app patching, firewall rules, encryption keys).</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 220" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <text x="380" y="20" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Defense-in-Depth Cloud Security Architecture &amp; Shared Responsibility</text>
                 <!-- Governance & Monitoring -->
                 <rect x="20" y="32" width="720" height="32" rx="5" fill="#fef3c7" stroke="#d97706"/><text x="380" y="52" font-size="11" font-weight="bold" fill="#92400e" text-anchor="middle">Governance, Compliance &amp; Continuous Monitoring (CloudTrail, GuardDuty, SIEM, CSPM)</text>
@@ -2351,7 +2427,7 @@
         <p>Billions of resource-constrained IoT sensors lack local storage and compute power. <strong>Cloud Computing</strong> acts as the centralized brain for IoT—providing scalable MQTT/HTTP device ingestion, long-term time-series storage, fleet management, and AI/ML analytics.</p>
 
         <div class="svg-container">
-            <svg viewBox="0 0 760 155" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 155" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g text-anchor="middle" font-size="11">
                     <rect x="15" y="25" width="160" height="100" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
                     <text x="95" y="52" font-weight="bold" fill="#92400e">1. Perception / IoT Layer</text>
@@ -2387,7 +2463,7 @@
         </ul>
 
         <h4>3. Comparison: Cloud vs. Fog vs. Edge Computing (General Q5, Twisted Q1, Q3, Q9)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Parameter</th><th>Cloud Computing</th><th>Fog Computing</th><th>Edge Computing</th></tr>
             </thead>
@@ -2397,7 +2473,7 @@
                 <tr><td><strong>Bandwidth Usage</strong></td><td>High (sends all raw data over WAN)</td><td>Moderate (aggregates &amp; filters locally)</td><td>Minimal (sends only summaries/alerts)</td></tr>
                 <tr><td><strong>Compute &amp; Storage</strong></td><td>Virtually unlimited</td><td>Moderate (local servers/gateways)</td><td>Limited (embedded CPU/NPU)</td></tr>
             </tbody>
-        </table>
+        </table></div>
         <p><strong>Low-Latency Decision (Twisted Q1 &amp; Q9):</strong> For ultra-low-latency, time-critical systems (e.g., collision avoidance or robotic shutoff), <strong>Edge Computing</strong> is most appropriate because round-trip WAN latency to a centralized cloud could cause catastrophic delay or fail during internet outages.</p>
         
             </div>
@@ -2441,7 +2517,7 @@
         <p><strong>How It Improves Both Performance &amp; Cost (Twisted Q10):</strong> During sudden traffic surges, Auto Scaling <em>scales out</em> new instances to maintain low latency and prevent crashes (performance); during off-peak night hours, it <em>scales in</em> and terminates unneeded VMs so the organization pays zero idle compute charges (cost efficiency).</p>
 
         <h4>3. Difference Between Horizontal Scaling and Vertical Scaling (General Q10 &amp; IMP Unit-5 Q6)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Parameter</th><th>Horizontal Scaling (Scale Out / Scale In)</th><th>Vertical Scaling (Scale Up / Scale Down)</th></tr>
             </thead>
@@ -2452,7 +2528,7 @@
                 <tr><td><strong>Fault Tolerance</strong></td><td>High (no single point of failure)</td><td>Low (single server remains a single point of failure)</td></tr>
                 <tr><td><strong>Best Fit</strong></td><td>Stateless web tiers, microservices, distributed NoSQL</td><td>Monolithic relational databases requiring large single-node RAM</td></tr>
             </tbody>
-        </table>
+        </table></div>
         
             </div>
 
@@ -2519,7 +2595,7 @@
         <p><strong>Cloud Migration</strong> is the process of moving digital assets—applications, databases, IT workloads, and infrastructure—from on-premises data centers to a cloud environment (or between clouds) to reduce CapEx, modernize legacy systems, gain global scalability, and improve disaster recovery.</p>
 
         <h4>2. The 6 Rs Cloud Migration Strategies with Examples (IMP Unit-5 Q4)</h4>
-        <table>
+        <div class="table-wrap" role="region" aria-label="Scrollable table" tabindex="0"><table>
             <thead>
                 <tr><th>Strategy</th><th>Description</th><th>Real-World Example</th></tr>
             </thead>
@@ -2531,7 +2607,7 @@
                 <tr><td><strong>5. Retire</strong></td><td>Decommission obsolete, redundant, or unused legacy applications discovered during portfolio assessment.</td><td>Shutting down an unused legacy reporting portal, saving 15% of migration budget immediately.</td></tr>
                 <tr><td><strong>6. Retain ("Revisit")</strong></td><td>Keep critical or compliance-bound workloads on-premises for now and connect via Hybrid Cloud.</td><td>Retaining a mainframe core banking ledger on-premises due to strict latency or regulatory rules.</td></tr>
             </tbody>
-        </table>
+        </table></div>
 
         <h4>3. Major Challenges &amp; Legacy Low-Disruption Strategy (General Q16 &amp; Twisted Q5)</h4>
         <ul>
@@ -2572,7 +2648,7 @@
 
         <h4>2. Integrated Case Study: Industrial IoT (IIoT) Smart Factory Architecture (General Q19, Q20 &amp; Twisted Q8)</h4>
         <div class="svg-container">
-            <svg viewBox="0 0 760 155" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 760 155" width="100%" xmlns="http://www.w3.org/2000/svg">
                 <g text-anchor="middle" font-size="10.5">
                     <rect x="10" y="25" width="155" height="100" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
                     <text x="87" y="50" font-weight="bold" fill="#92400e">Factory Floor (Edge)</text>
